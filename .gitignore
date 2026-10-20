@@ -1,5 +1,6 @@
 # FinanceBench is CC BY-NC 4.0: downloaded questions, evidence and PDFs are never committed.
 data/raw/
+data/processed/
 
 # Secrets and local configuration
 .env
