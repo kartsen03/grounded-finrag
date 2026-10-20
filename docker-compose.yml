@@ -4,7 +4,7 @@ name: grounded-finrag
 
 services:
   postgres:
-    image: pgvector/pgvector:0.8.7-pg17-bookworm
+    image: pgvector/pgvector:0.8.7-pg17-bookworm@sha256:ac08538c6f8b9904c33c8224c5e5706dbe760aca29db1d096972b4052c22a75d
     environment:
       POSTGRES_DB: finrag
       POSTGRES_USER: finrag
@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
 
   redis:
-    image: redis:7.2.16-alpine
+    image: redis:7.2.16-alpine@sha256:29e8589c3f9ba699b5f7aa4b3c7733c58852a3626439e619aa0ee78de08c6ca0
     environment:
       REDIS_PASSWORD: ${REDIS_PASSWORD:-finrag-dev}
     command:
