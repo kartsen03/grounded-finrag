@@ -13,6 +13,7 @@ def test_doc_meta_periods():
     assert (q.fiscal_year, q.fiscal_quarter, q.doc_type) == (2023, 2, "10-Q")
     k8 = doc_meta_from_row(_row("ACME_2022_8K_dated-2022-07-01", "8k"))
     assert k8.filing_date == "2022-07-01" and k8.doc_type == "8-K"
+    assert doc_meta_from_row(_row("ACME_2022_8K_dated_2022-08-19", "8k")).filing_date == "2022-08-19"
     assert doc_meta_from_row(_row("ACME_2023Q4_EARNINGS", "Earnings", 2023)).header == "Acme Earnings release FY2023 Q4"
 
 

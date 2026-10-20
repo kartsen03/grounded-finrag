@@ -13,7 +13,7 @@ from finrag import config
 DOC_TYPE_LABELS = {"10k": "10-K", "10k_annualreport": "10-K", "10q": "10-Q", "8k": "8-K",
                    "earnings": "Earnings release"}
 _QUARTER = re.compile(r"_(\d{4})Q([1-4])_")
-_DATED = re.compile(r"dated-(\d{4}-\d{2}-\d{2})")
+_DATED = re.compile(r"dated[-_](\d{4}-\d{2}-\d{2})")  # upstream names use both separators
 
 
 @dataclass(frozen=True)
