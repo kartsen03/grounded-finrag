@@ -22,9 +22,13 @@ def _run(cmd: list[str]) -> str | None:
     return out.stdout.strip() if out.returncode == 0 else None
 
 
+CODE_PATHS = ["rag-service/src", "llm-gateway/src", "model-server", "scripts"]
+
+
 def git_state() -> dict:
+    """HEAD plus whether any code (tracked or not) differs from it. Data and results don't count."""
     commit = _run(["git", "rev-parse", "HEAD"])
-    dirty = _run(["git", "status", "--porcelain", "--untracked-files=no"])
+    dirty = _run(["git", "status", "--porcelain", "--", *CODE_PATHS])
     return {"commit": commit, "dirty": bool(dirty)}
 
 

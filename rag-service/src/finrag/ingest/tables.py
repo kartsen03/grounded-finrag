@@ -187,7 +187,7 @@ def build_table(lines: list[Line], cells: list[list[Cell]], kinds: list[str], st
         label = " ".join(c.text for c in row_cells[: len(row_cells) - n_num])
         if pending_label:
             # A label line followed by a row whose label continues it in lowercase is one wrapped label.
-            if label[:1].islower() or not label:
+            if label[:1].islower() or label[:1] in "$(" or not label:
                 label = f"{pending_label} {label}".strip()
             else:
                 body.append([pending_label] + [""] * n_cols)

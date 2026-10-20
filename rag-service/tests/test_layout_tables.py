@@ -58,5 +58,8 @@ def test_wrapped_label_lines_are_joined():
     words += line_words(95, (10, "Adjustments to reconcile net income"))
     words += line_words(110, (10, "provided by operations"), (305, "1,488"), (365, "1,544"))
     words += line_words(125, (10, "Other"), (305, "1"), (365, "2"))
+    words += line_words(140, (10, "Property, net of depreciation of"))
+    words += line_words(155, (10, "$13,663 and $12,995"), (305, "15,742"), (365, "15,337"))
     md = detect_tables(group_lines(words), page_width=612)[0].markdown
     assert "| Adjustments to reconcile net income provided by operations | 1,488 | 1,544 |" in md
+    assert "| Property, net of depreciation of $13,663 and $12,995 | 15,742 | 15,337 |" in md
