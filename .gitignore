@@ -1,0 +1,36 @@
+# FinanceBench is CC BY-NC 4.0: downloaded questions, evidence and PDFs are never committed.
+data/raw/
+
+# Secrets and local configuration
+.env
+*.env.local
+
+# Kept out of the repo on purpose
+INTERVIEW_NOTES.md
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Java
+llm-gateway/target/
+*.class
+
+# Large run outputs; the small summaries under results/ are committed
+runs/
+logs/
+
+# Editors and OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
