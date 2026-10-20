@@ -189,7 +189,7 @@ def main(argv: list[str] | None = None) -> int:
             "files": dict(sorted(known.items())),
         }
         args.manifest.parent.mkdir(parents=True, exist_ok=True)
-        args.manifest.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+        args.manifest.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8", newline="\n")
 
     statuses: dict[str, int] = {}
     for *_, status in results:

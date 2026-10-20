@@ -113,7 +113,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"{OUT.relative_to(ROOT)} matches")
         return 0
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(text, encoding="utf-8")
+    OUT.write_text(text, encoding="utf-8", newline="\n")
     split = json.loads(text)
     print(json.dumps({"counts": split["counts"], "overlap": split["overlap"]}, indent=2))
     return 0
