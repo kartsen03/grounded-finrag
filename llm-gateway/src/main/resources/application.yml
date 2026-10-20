@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: llm-gateway
+
+server:
+  address: ${GATEWAY_BIND_ADDRESS:127.0.0.1}
+  port: ${GATEWAY_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: never
+
+logging:
+  pattern:
+    level: "%5p [%X{requestId:-}]"
+
+gateway:
+  clients:
+    # Only SHA-256 hashes of API keys live in config. The default is the hash of the local
+    # development key "dev-rag-service-key"; set RAG_SERVICE_KEY_SHA256 for anything else.
+    - id: rag-service
+      key-sha256: ${RAG_SERVICE_KEY_SHA256:3ba18319a2ad80604249578a621bb2eb761c09e23bf7895434dc43dadff51915}
+  providers:
+    ollama:
+      type: ollama
+      base-url: ${OLLAMA_BASE_URL:http://127.0.0.1:11434}
+      connect-timeout: 2s
+      read-timeout: 300s
+      context-length: 8192
+    local-models:
+      type: model_server
+      base-url: ${MODEL_SERVER_URL:http://127.0.0.1:8090}
+      connect-timeout: 2s
+      read-timeout: 120s
+    openai:
+      type: openai
+      base-url: ${OPENAI_BASE_URL:https://api.openai.com}
+      api-key: ${OPENAI_API_KEY:}
+      connect-timeout: 5s
+      read-timeout: 120s
+  models:
+    "[local-chat]":
+      kind: chat
+      provider: ollama
+      upstream: qwen2.5:7b-instruct-q4_K_M
+    "[bge-base-en-v1.5]":
+      kind: embedding
+      provider: local-models
+      upstream: bge-base-en-v1.5
+    "[bge-reranker-base]":
+      kind: rerank
+      provider: local-models
+      upstream: bge-reranker-base
