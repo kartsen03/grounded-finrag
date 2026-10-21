@@ -8,6 +8,7 @@ is sent to the LLM gateway on every model call made while serving the request.
 
 from __future__ import annotations
 
+import json
 import re
 import uuid
 from contextlib import asynccontextmanager
@@ -16,6 +17,8 @@ from typing import Literal
 from fastapi import FastAPI, Request
 from pydantic import BaseModel, Field
 
+from finrag import config
+from finrag.answer.pipeline import AnswerConfig, Answerer
 from finrag.gateway_client import GatewayClient
 from finrag.retrieval.pipeline import RetrievalConfig, Retriever
 from finrag.retrieval.store import VectorStore
@@ -26,7 +29,10 @@ state: dict = {}
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
-    state["retriever"] = Retriever(GatewayClient(), VectorStore())
+    gateway = GatewayClient()
+    state["retriever"] = Retriever(gateway, VectorStore())
+    state["answerer"] = Answerer(gateway, state["retriever"])
+    state["answer_config"] = final_answer_config()
     yield
     state.clear()
 
@@ -89,3 +95,44 @@ def retrieve(body: RetrieveRequest, request: Request) -> RetrieveResponse:
         chunks=[RetrievedChunk(chunk_id=h.chunk["chunk_id"], doc_name=h.chunk["doc_name"],
                                page=h.chunk["page_idx"] + 1, section=h.chunk["section"], score=h.score,
                                text=h.chunk["text"]) for h in res.hits])
+
+
+def final_answer_config() -> AnswerConfig:
+    """The selected retrieval configuration plus the abstention threshold tuned on dev (if tuned yet)."""
+    selected = json.loads((config.RESULTS_DIR / "retrieval" / "selected.json").read_text(encoding="utf-8"))
+    retrieval = RetrievalConfig(**{**selected["test_configs"][1], "top_k": 5})
+    threshold_file = config.RESULTS_DIR / "answers" / "abstention_threshold.json"
+    threshold = json.loads(threshold_file.read_text(encoding="utf-8"))["threshold"] if threshold_file.exists() else None
+    return AnswerConfig("best", retrieval, mode="auto", abstain_threshold=threshold)
+
+
+class AnswerRequest(BaseModel):
+    question: str = Field(min_length=3, max_length=2000)
+
+
+class Citation(BaseModel):
+    doc_name: str
+    page: int = Field(description="1-based PDF page number")
+
+
+class AnswerResponse(BaseModel):
+    request_id: str
+    answer: str
+    abstained: bool
+    abstain_reason: str | None = None
+    mode: str = Field(description="grounded (cited claims) or extract (extract-then-compute)")
+    citations: list[Citation]
+    computation: dict | None = None
+    support: float | None = Field(default=None, description="best cross-encoder relevance among sources")
+    timings_ms: dict[str, float]
+
+
+@app.post("/answer", response_model=AnswerResponse)
+def answer(body: AnswerRequest, request: Request) -> AnswerResponse:
+    rid = request.state.request_id
+    rec = state["answerer"].answer(body.question, state["answer_config"], request_id=rid)
+    return AnswerResponse(request_id=rid, answer=rec["answer"], abstained=rec["abstained"],
+                          abstain_reason=rec.get("abstain_reason"), mode=rec["mode"],
+                          citations=[Citation(doc_name=d, page=p) for d, p in rec.get("citations") or []],
+                          computation=rec.get("computation"), support=rec.get("support"),
+                          timings_ms=rec["timings_ms"])
