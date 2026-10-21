@@ -1,0 +1,24 @@
+{
+  "selection_rule": "max mrr@10, then max hit@5, then min p50 total latency (dev split)",
+  "selected": "structure/dense/routed/norerank",
+  "selected_at": "2026-10-21T16:07:56+00:00",
+  "commit": "e599901edb02ef4c7635e9b05d2ffc26b8f5fdfb",
+  "test_configs": [
+    {
+      "strategy": "fixed",
+      "retriever": "dense",
+      "routing": false,
+      "rerank": false,
+      "candidates": 50,
+      "top_k": 20
+    },
+    {
+      "strategy": "structure",
+      "retriever": "dense",
+      "routing": true,
+      "rerank": false,
+      "candidates": 50,
+      "top_k": 20
+    }
+  ]
+}

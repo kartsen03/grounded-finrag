@@ -1,0 +1,1640 @@
+{
+  "created_utc": "2026-10-21T16:07:56+00:00",
+  "git": {
+    "commit": "e599901edb02ef4c7635e9b05d2ffc26b8f5fdfb",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {
+    "psycopg": "3.3.6",
+    "pgvector": "0.5.1",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "step": "retrieval_eval_dev",
+  "split": "dev",
+  "n_questions": 75,
+  "top_k_chunks": 20,
+  "embed_model": "BAAI/bge-base-en-v1.5@a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "rerank_model": "BAAI/bge-reranker-base@2cfc18c9415c912f9d8155881c133215df768a70",
+  "selection_rule": "max mrr@10, then max hit@5, then min p50 total latency (dev split)",
+  "selected": "structure/dense/routed/norerank",
+  "hnsw": {
+    "recall@50": {
+      "fixed": 0.9787,
+      "structure": 0.9637
+    }
+  },
+  "results": [
+    {
+      "config": {
+        "strategy": "fixed",
+        "retriever": "dense",
+        "routing": false,
+        "rerank": false,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "fixed/dense/unrouted/norerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.12,
+        "hit@3": 0.2533,
+        "hit@5": 0.28,
+        "hit@10": 0.44,
+        "mrr@10": 0.2122
+      },
+      "ci95": {
+        "hit@5": [
+          0.1733,
+          0.3867
+        ],
+        "mrr@10": [
+          0.1396,
+          0.2922
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.28,
+          "mrr@10": 0.2307
+        },
+        "metrics-generated": {
+          "hit@5": 0.2,
+          "mrr@10": 0.1168
+        },
+        "novel-generated": {
+          "hit@5": 0.36,
+          "mrr@10": 0.289
+        }
+      },
+      "latency_ms": {
+        "dense_search": {
+          "p50": 10.43,
+          "p95": 25.23
+        },
+        "embed_query": {
+          "p50": 41.23,
+          "p95": 51.91
+        },
+        "route": {
+          "p50": 0.0,
+          "p95": 0.0
+        },
+        "total": {
+          "p50": 54.05,
+          "p95": 69.73
+        }
+      },
+      "routing": null
+    },
+    {
+      "config": {
+        "strategy": "fixed",
+        "retriever": "dense",
+        "routing": false,
+        "rerank": true,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "fixed/dense/unrouted/rerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1867,
+        "hit@3": 0.3733,
+        "hit@5": 0.4667,
+        "hit@10": 0.6133,
+        "mrr@10": 0.3113
+      },
+      "ci95": {
+        "hit@5": [
+          0.3467,
+          0.5733
+        ],
+        "mrr@10": [
+          0.231,
+          0.3957
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.36,
+          "mrr@10": 0.2368
+        },
+        "metrics-generated": {
+          "hit@5": 0.56,
+          "mrr@10": 0.2838
+        },
+        "novel-generated": {
+          "hit@5": 0.48,
+          "mrr@10": 0.4134
+        }
+      },
+      "latency_ms": {
+        "dense_search": {
+          "p50": 8.98,
+          "p95": 15.88
+        },
+        "embed_query": {
+          "p50": 42.29,
+          "p95": 47.89
+        },
+        "rerank": {
+          "p50": 318.3,
+          "p95": 352.01
+        },
+        "route": {
+          "p50": 0.0,
+          "p95": 0.0
+        },
+        "total": {
+          "p50": 371.95,
+          "p95": 404.88
+        }
+      },
+      "routing": null
+    },
+    {
+      "config": {
+        "strategy": "fixed",
+        "retriever": "dense",
+        "routing": true,
+        "rerank": false,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "fixed/dense/routed/norerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1733,
+        "hit@3": 0.32,
+        "hit@5": 0.4533,
+        "hit@10": 0.6133,
+        "mrr@10": 0.2919
+      },
+      "ci95": {
+        "hit@5": [
+          0.3333,
+          0.56
+        ],
+        "mrr@10": [
+          0.2138,
+          0.3755
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.4,
+          "mrr@10": 0.2747
+        },
+        "metrics-generated": {
+          "hit@5": 0.52,
+          "mrr@10": 0.2923
+        },
+        "novel-generated": {
+          "hit@5": 0.44,
+          "mrr@10": 0.3087
+        }
+      },
+      "latency_ms": {
+        "dense_search": {
+          "p50": 10.41,
+          "p95": 19.13
+        },
+        "embed_query": {
+          "p50": 39.15,
+          "p95": 46.45
+        },
+        "route": {
+          "p50": 0.36,
+          "p95": 0.9
+        },
+        "total": {
+          "p50": 51.91,
+          "p95": 66.42
+        }
+      },
+      "routing": {
+        "filtered": 72,
+        "gold_doc_in_filter": 72
+      }
+    },
+    {
+      "config": {
+        "strategy": "fixed",
+        "retriever": "dense",
+        "routing": true,
+        "rerank": true,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "fixed/dense/routed/rerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1733,
+        "hit@3": 0.3467,
+        "hit@5": 0.4267,
+        "hit@10": 0.6133,
+        "mrr@10": 0.2932
+      },
+      "ci95": {
+        "hit@5": [
+          0.3067,
+          0.5333
+        ],
+        "mrr@10": [
+          0.2174,
+          0.3772
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.36,
+          "mrr@10": 0.243
+        },
+        "metrics-generated": {
+          "hit@5": 0.4,
+          "mrr@10": 0.1992
+        },
+        "novel-generated": {
+          "hit@5": 0.52,
+          "mrr@10": 0.4373
+        }
+      },
+      "latency_ms": {
+        "dense_search": {
+          "p50": 9.48,
+          "p95": 14.25
+        },
+        "embed_query": {
+          "p50": 40.16,
+          "p95": 47.97
+        },
+        "rerank": {
+          "p50": 332.99,
+          "p95": 396.46
+        },
+        "route": {
+          "p50": 0.4,
+          "p95": 1.15
+        },
+        "total": {
+          "p50": 384.08,
+          "p95": 456.71
+        }
+      },
+      "routing": {
+        "filtered": 72,
+        "gold_doc_in_filter": 72
+      }
+    },
+    {
+      "config": {
+        "strategy": "fixed",
+        "retriever": "bm25",
+        "routing": false,
+        "rerank": false,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "fixed/bm25/unrouted/norerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1067,
+        "hit@3": 0.1733,
+        "hit@5": 0.2,
+        "hit@10": 0.24,
+        "mrr@10": 0.151
+      },
+      "ci95": {
+        "hit@5": [
+          0.12,
+          0.2933
+        ],
+        "mrr@10": [
+          0.0855,
+          0.2249
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.2,
+          "mrr@10": 0.1524
+        },
+        "metrics-generated": {
+          "hit@5": 0.0,
+          "mrr@10": 0.0
+        },
+        "novel-generated": {
+          "hit@5": 0.4,
+          "mrr@10": 0.3007
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 0.95,
+          "p95": 1.43
+        },
+        "route": {
+          "p50": 0.0,
+          "p95": 0.0
+        },
+        "total": {
+          "p50": 0.98,
+          "p95": 1.46
+        }
+      },
+      "routing": null
+    },
+    {
+      "config": {
+        "strategy": "fixed",
+        "retriever": "bm25",
+        "routing": false,
+        "rerank": true,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "fixed/bm25/unrouted/rerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1733,
+        "hit@3": 0.2667,
+        "hit@5": 0.3467,
+        "hit@10": 0.4,
+        "mrr@10": 0.2413
+      },
+      "ci95": {
+        "hit@5": [
+          0.24,
+          0.4533
+        ],
+        "mrr@10": [
+          0.1573,
+          0.3258
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.4,
+          "mrr@10": 0.228
+        },
+        "metrics-generated": {
+          "hit@5": 0.16,
+          "mrr@10": 0.1102
+        },
+        "novel-generated": {
+          "hit@5": 0.48,
+          "mrr@10": 0.3858
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 1.25,
+          "p95": 1.66
+        },
+        "rerank": {
+          "p50": 348.72,
+          "p95": 379.15
+        },
+        "route": {
+          "p50": 0.0,
+          "p95": 0.0
+        },
+        "total": {
+          "p50": 350.14,
+          "p95": 380.66
+        }
+      },
+      "routing": null
+    },
+    {
+      "config": {
+        "strategy": "fixed",
+        "retriever": "bm25",
+        "routing": true,
+        "rerank": false,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "fixed/bm25/routed/norerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.16,
+        "hit@3": 0.2267,
+        "hit@5": 0.3067,
+        "hit@10": 0.4933,
+        "mrr@10": 0.2372
+      },
+      "ci95": {
+        "hit@5": [
+          0.2,
+          0.4133
+        ],
+        "mrr@10": [
+          0.1608,
+          0.3184
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.32,
+          "mrr@10": 0.2189
+        },
+        "metrics-generated": {
+          "hit@5": 0.16,
+          "mrr@10": 0.1119
+        },
+        "novel-generated": {
+          "hit@5": 0.44,
+          "mrr@10": 0.3807
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 2.24,
+          "p95": 3.83
+        },
+        "route": {
+          "p50": 0.47,
+          "p95": 1.34
+        },
+        "total": {
+          "p50": 2.99,
+          "p95": 4.76
+        }
+      },
+      "routing": {
+        "filtered": 72,
+        "gold_doc_in_filter": 72
+      }
+    },
+    {
+      "config": {
+        "strategy": "fixed",
+        "retriever": "bm25",
+        "routing": true,
+        "rerank": true,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "fixed/bm25/routed/rerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.16,
+        "hit@3": 0.3467,
+        "hit@5": 0.3733,
+        "hit@10": 0.5467,
+        "mrr@10": 0.2718
+      },
+      "ci95": {
+        "hit@5": [
+          0.2667,
+          0.48
+        ],
+        "mrr@10": [
+          0.1919,
+          0.3548
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.36,
+          "mrr@10": 0.234
+        },
+        "metrics-generated": {
+          "hit@5": 0.28,
+          "mrr@10": 0.1614
+        },
+        "novel-generated": {
+          "hit@5": 0.48,
+          "mrr@10": 0.42
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 2.23,
+          "p95": 3.81
+        },
+        "rerank": {
+          "p50": 355.44,
+          "p95": 410.82
+        },
+        "route": {
+          "p50": 0.44,
+          "p95": 1.14
+        },
+        "total": {
+          "p50": 359.76,
+          "p95": 413.59
+        }
+      },
+      "routing": {
+        "filtered": 72,
+        "gold_doc_in_filter": 72
+      }
+    },
+    {
+      "config": {
+        "strategy": "fixed",
+        "retriever": "hybrid",
+        "routing": false,
+        "rerank": false,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "fixed/hybrid/unrouted/norerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.12,
+        "hit@3": 0.24,
+        "hit@5": 0.36,
+        "hit@10": 0.48,
+        "mrr@10": 0.2168
+      },
+      "ci95": {
+        "hit@5": [
+          0.2533,
+          0.4667
+        ],
+        "mrr@10": [
+          0.1467,
+          0.2913
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.36,
+          "mrr@10": 0.2128
+        },
+        "metrics-generated": {
+          "hit@5": 0.24,
+          "mrr@10": 0.099
+        },
+        "novel-generated": {
+          "hit@5": 0.48,
+          "mrr@10": 0.3387
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 1.04,
+          "p95": 1.75
+        },
+        "dense_search": {
+          "p50": 9.2,
+          "p95": 15.81
+        },
+        "embed_query": {
+          "p50": 41.21,
+          "p95": 49.8
+        },
+        "fusion": {
+          "p50": 0.09,
+          "p95": 0.14
+        },
+        "route": {
+          "p50": 0.0,
+          "p95": 0.0
+        },
+        "total": {
+          "p50": 53.15,
+          "p95": 63.51
+        }
+      },
+      "routing": null
+    },
+    {
+      "config": {
+        "strategy": "fixed",
+        "retriever": "hybrid",
+        "routing": false,
+        "rerank": true,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "fixed/hybrid/unrouted/rerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1867,
+        "hit@3": 0.3467,
+        "hit@5": 0.4533,
+        "hit@10": 0.6133,
+        "mrr@10": 0.2953
+      },
+      "ci95": {
+        "hit@5": [
+          0.3467,
+          0.56
+        ],
+        "mrr@10": [
+          0.2145,
+          0.3795
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.44,
+          "mrr@10": 0.2563
+        },
+        "metrics-generated": {
+          "hit@5": 0.48,
+          "mrr@10": 0.2758
+        },
+        "novel-generated": {
+          "hit@5": 0.44,
+          "mrr@10": 0.3538
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 1.05,
+          "p95": 1.55
+        },
+        "dense_search": {
+          "p50": 8.59,
+          "p95": 15.07
+        },
+        "embed_query": {
+          "p50": 41.77,
+          "p95": 47.92
+        },
+        "fusion": {
+          "p50": 0.09,
+          "p95": 0.14
+        },
+        "rerank": {
+          "p50": 338.01,
+          "p95": 367.29
+        },
+        "route": {
+          "p50": 0.0,
+          "p95": 0.0
+        },
+        "total": {
+          "p50": 389.69,
+          "p95": 426.67
+        }
+      },
+      "routing": null
+    },
+    {
+      "config": {
+        "strategy": "fixed",
+        "retriever": "hybrid",
+        "routing": true,
+        "rerank": false,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "fixed/hybrid/routed/norerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1733,
+        "hit@3": 0.3867,
+        "hit@5": 0.5333,
+        "hit@10": 0.6667,
+        "mrr@10": 0.3177
+      },
+      "ci95": {
+        "hit@5": [
+          0.4133,
+          0.64
+        ],
+        "mrr@10": [
+          0.2433,
+          0.396
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.4,
+          "mrr@10": 0.2295
+        },
+        "metrics-generated": {
+          "hit@5": 0.56,
+          "mrr@10": 0.3254
+        },
+        "novel-generated": {
+          "hit@5": 0.64,
+          "mrr@10": 0.398
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 1.93,
+          "p95": 3.28
+        },
+        "dense_search": {
+          "p50": 9.77,
+          "p95": 16.26
+        },
+        "embed_query": {
+          "p50": 38.07,
+          "p95": 48.33
+        },
+        "fusion": {
+          "p50": 0.09,
+          "p95": 0.14
+        },
+        "route": {
+          "p50": 0.33,
+          "p95": 0.88
+        },
+        "total": {
+          "p50": 51.04,
+          "p95": 62.28
+        }
+      },
+      "routing": {
+        "filtered": 72,
+        "gold_doc_in_filter": 72
+      }
+    },
+    {
+      "config": {
+        "strategy": "fixed",
+        "retriever": "hybrid",
+        "routing": true,
+        "rerank": true,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "fixed/hybrid/routed/rerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1467,
+        "hit@3": 0.3467,
+        "hit@5": 0.3867,
+        "hit@10": 0.5333,
+        "mrr@10": 0.2623
+      },
+      "ci95": {
+        "hit@5": [
+          0.28,
+          0.4933
+        ],
+        "mrr@10": [
+          0.1871,
+          0.3428
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.36,
+          "mrr@10": 0.2367
+        },
+        "metrics-generated": {
+          "hit@5": 0.36,
+          "mrr@10": 0.1818
+        },
+        "novel-generated": {
+          "hit@5": 0.44,
+          "mrr@10": 0.3684
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 2.17,
+          "p95": 3.74
+        },
+        "dense_search": {
+          "p50": 9.59,
+          "p95": 13.01
+        },
+        "embed_query": {
+          "p50": 40.03,
+          "p95": 49.15
+        },
+        "fusion": {
+          "p50": 0.1,
+          "p95": 0.15
+        },
+        "rerank": {
+          "p50": 341.79,
+          "p95": 420.83
+        },
+        "route": {
+          "p50": 0.44,
+          "p95": 0.96
+        },
+        "total": {
+          "p50": 397.79,
+          "p95": 475.92
+        }
+      },
+      "routing": {
+        "filtered": 72,
+        "gold_doc_in_filter": 72
+      }
+    },
+    {
+      "config": {
+        "strategy": "structure",
+        "retriever": "dense",
+        "routing": false,
+        "rerank": false,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "structure/dense/unrouted/norerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.2,
+        "hit@3": 0.3067,
+        "hit@5": 0.36,
+        "hit@10": 0.6133,
+        "mrr@10": 0.2925
+      },
+      "ci95": {
+        "hit@5": [
+          0.2533,
+          0.4667
+        ],
+        "mrr@10": [
+          0.2125,
+          0.3808
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.32,
+          "mrr@10": 0.2449
+        },
+        "metrics-generated": {
+          "hit@5": 0.32,
+          "mrr@10": 0.2901
+        },
+        "novel-generated": {
+          "hit@5": 0.44,
+          "mrr@10": 0.3426
+        }
+      },
+      "latency_ms": {
+        "dense_search": {
+          "p50": 9.25,
+          "p95": 12.82
+        },
+        "embed_query": {
+          "p50": 41.62,
+          "p95": 53.23
+        },
+        "route": {
+          "p50": 0.0,
+          "p95": 0.0
+        },
+        "total": {
+          "p50": 50.9,
+          "p95": 63.65
+        }
+      },
+      "routing": null
+    },
+    {
+      "config": {
+        "strategy": "structure",
+        "retriever": "dense",
+        "routing": false,
+        "rerank": true,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "structure/dense/unrouted/rerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1867,
+        "hit@3": 0.3733,
+        "hit@5": 0.52,
+        "hit@10": 0.6667,
+        "mrr@10": 0.3245
+      },
+      "ci95": {
+        "hit@5": [
+          0.4,
+          0.6267
+        ],
+        "mrr@10": [
+          0.2449,
+          0.4067
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.36,
+          "mrr@10": 0.2007
+        },
+        "metrics-generated": {
+          "hit@5": 0.56,
+          "mrr@10": 0.3323
+        },
+        "novel-generated": {
+          "hit@5": 0.64,
+          "mrr@10": 0.4404
+        }
+      },
+      "latency_ms": {
+        "dense_search": {
+          "p50": 9.24,
+          "p95": 12.61
+        },
+        "embed_query": {
+          "p50": 42.03,
+          "p95": 48.16
+        },
+        "rerank": {
+          "p50": 315.5,
+          "p95": 414.74
+        },
+        "route": {
+          "p50": 0.0,
+          "p95": 0.0
+        },
+        "total": {
+          "p50": 367.83,
+          "p95": 470.26
+        }
+      },
+      "routing": null
+    },
+    {
+      "config": {
+        "strategy": "structure",
+        "retriever": "dense",
+        "routing": true,
+        "rerank": false,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "structure/dense/routed/norerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.2667,
+        "hit@3": 0.4267,
+        "hit@5": 0.5467,
+        "hit@10": 0.7333,
+        "mrr@10": 0.3818
+      },
+      "ci95": {
+        "hit@5": [
+          0.44,
+          0.6533
+        ],
+        "mrr@10": [
+          0.2967,
+          0.4752
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.48,
+          "mrr@10": 0.3027
+        },
+        "metrics-generated": {
+          "hit@5": 0.64,
+          "mrr@10": 0.4485
+        },
+        "novel-generated": {
+          "hit@5": 0.52,
+          "mrr@10": 0.3942
+        }
+      },
+      "latency_ms": {
+        "dense_search": {
+          "p50": 9.99,
+          "p95": 19.28
+        },
+        "embed_query": {
+          "p50": 39.34,
+          "p95": 55.98
+        },
+        "route": {
+          "p50": 0.38,
+          "p95": 0.99
+        },
+        "total": {
+          "p50": 50.12,
+          "p95": 71.82
+        }
+      },
+      "routing": {
+        "filtered": 72,
+        "gold_doc_in_filter": 72
+      }
+    },
+    {
+      "config": {
+        "strategy": "structure",
+        "retriever": "dense",
+        "routing": true,
+        "rerank": true,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "structure/dense/routed/rerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1333,
+        "hit@3": 0.3333,
+        "hit@5": 0.4267,
+        "hit@10": 0.64,
+        "mrr@10": 0.2753
+      },
+      "ci95": {
+        "hit@5": [
+          0.3067,
+          0.5333
+        ],
+        "mrr@10": [
+          0.2007,
+          0.3485
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.32,
+          "mrr@10": 0.1848
+        },
+        "metrics-generated": {
+          "hit@5": 0.36,
+          "mrr@10": 0.2448
+        },
+        "novel-generated": {
+          "hit@5": 0.6,
+          "mrr@10": 0.3964
+        }
+      },
+      "latency_ms": {
+        "dense_search": {
+          "p50": 10.51,
+          "p95": 15.75
+        },
+        "embed_query": {
+          "p50": 40.72,
+          "p95": 48.86
+        },
+        "rerank": {
+          "p50": 317.97,
+          "p95": 449.94
+        },
+        "route": {
+          "p50": 0.45,
+          "p95": 1.18
+        },
+        "total": {
+          "p50": 369.96,
+          "p95": 499.71
+        }
+      },
+      "routing": {
+        "filtered": 72,
+        "gold_doc_in_filter": 72
+      }
+    },
+    {
+      "config": {
+        "strategy": "structure",
+        "retriever": "bm25",
+        "routing": false,
+        "rerank": false,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "structure/bm25/unrouted/norerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.08,
+        "hit@3": 0.1867,
+        "hit@5": 0.2133,
+        "hit@10": 0.2933,
+        "mrr@10": 0.1439
+      },
+      "ci95": {
+        "hit@5": [
+          0.12,
+          0.3067
+        ],
+        "mrr@10": [
+          0.0821,
+          0.2138
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.16,
+          "mrr@10": 0.1068
+        },
+        "metrics-generated": {
+          "hit@5": 0.08,
+          "mrr@10": 0.028
+        },
+        "novel-generated": {
+          "hit@5": 0.4,
+          "mrr@10": 0.297
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 0.96,
+          "p95": 2.03
+        },
+        "route": {
+          "p50": 0.0,
+          "p95": 0.0
+        },
+        "total": {
+          "p50": 1.0,
+          "p95": 2.06
+        }
+      },
+      "routing": null
+    },
+    {
+      "config": {
+        "strategy": "structure",
+        "retriever": "bm25",
+        "routing": false,
+        "rerank": true,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "structure/bm25/unrouted/rerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.16,
+        "hit@3": 0.24,
+        "hit@5": 0.2933,
+        "hit@10": 0.3733,
+        "mrr@10": 0.2177
+      },
+      "ci95": {
+        "hit@5": [
+          0.1867,
+          0.4
+        ],
+        "mrr@10": [
+          0.1337,
+          0.2994
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.32,
+          "mrr@10": 0.2013
+        },
+        "metrics-generated": {
+          "hit@5": 0.16,
+          "mrr@10": 0.1454
+        },
+        "novel-generated": {
+          "hit@5": 0.4,
+          "mrr@10": 0.3063
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 1.24,
+          "p95": 1.54
+        },
+        "rerank": {
+          "p50": 324.9,
+          "p95": 395.85
+        },
+        "route": {
+          "p50": 0.0,
+          "p95": 0.0
+        },
+        "total": {
+          "p50": 325.88,
+          "p95": 397.28
+        }
+      },
+      "routing": null
+    },
+    {
+      "config": {
+        "strategy": "structure",
+        "retriever": "bm25",
+        "routing": true,
+        "rerank": false,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "structure/bm25/routed/norerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1733,
+        "hit@3": 0.2933,
+        "hit@5": 0.4,
+        "hit@10": 0.5333,
+        "mrr@10": 0.269
+      },
+      "ci95": {
+        "hit@5": [
+          0.2933,
+          0.5067
+        ],
+        "mrr@10": [
+          0.1912,
+          0.3556
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.32,
+          "mrr@10": 0.2343
+        },
+        "metrics-generated": {
+          "hit@5": 0.4,
+          "mrr@10": 0.2354
+        },
+        "novel-generated": {
+          "hit@5": 0.48,
+          "mrr@10": 0.3372
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 2.1,
+          "p95": 4.45
+        },
+        "route": {
+          "p50": 0.4,
+          "p95": 0.99
+        },
+        "total": {
+          "p50": 2.65,
+          "p95": 4.78
+        }
+      },
+      "routing": {
+        "filtered": 72,
+        "gold_doc_in_filter": 72
+      }
+    },
+    {
+      "config": {
+        "strategy": "structure",
+        "retriever": "bm25",
+        "routing": true,
+        "rerank": true,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "structure/bm25/routed/rerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1333,
+        "hit@3": 0.4,
+        "hit@5": 0.48,
+        "hit@10": 0.64,
+        "mrr@10": 0.2876
+      },
+      "ci95": {
+        "hit@5": [
+          0.3733,
+          0.5867
+        ],
+        "mrr@10": [
+          0.2124,
+          0.3629
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.36,
+          "mrr@10": 0.1943
+        },
+        "metrics-generated": {
+          "hit@5": 0.44,
+          "mrr@10": 0.228
+        },
+        "novel-generated": {
+          "hit@5": 0.64,
+          "mrr@10": 0.4403
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 2.37,
+          "p95": 4.09
+        },
+        "rerank": {
+          "p50": 328.91,
+          "p95": 370.98
+        },
+        "route": {
+          "p50": 0.45,
+          "p95": 1.11
+        },
+        "total": {
+          "p50": 333.54,
+          "p95": 374.11
+        }
+      },
+      "routing": {
+        "filtered": 72,
+        "gold_doc_in_filter": 72
+      }
+    },
+    {
+      "config": {
+        "strategy": "structure",
+        "retriever": "hybrid",
+        "routing": false,
+        "rerank": false,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "structure/hybrid/unrouted/norerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1867,
+        "hit@3": 0.3067,
+        "hit@5": 0.4267,
+        "hit@10": 0.4933,
+        "mrr@10": 0.2745
+      },
+      "ci95": {
+        "hit@5": [
+          0.32,
+          0.5333
+        ],
+        "mrr@10": [
+          0.1914,
+          0.3604
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.36,
+          "mrr@10": 0.2723
+        },
+        "metrics-generated": {
+          "hit@5": 0.44,
+          "mrr@10": 0.2354
+        },
+        "novel-generated": {
+          "hit@5": 0.48,
+          "mrr@10": 0.3158
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 0.91,
+          "p95": 1.53
+        },
+        "dense_search": {
+          "p50": 8.82,
+          "p95": 18.91
+        },
+        "embed_query": {
+          "p50": 38.95,
+          "p95": 47.97
+        },
+        "fusion": {
+          "p50": 0.09,
+          "p95": 0.13
+        },
+        "route": {
+          "p50": 0.0,
+          "p95": 0.0
+        },
+        "total": {
+          "p50": 50.1,
+          "p95": 67.02
+        }
+      },
+      "routing": null
+    },
+    {
+      "config": {
+        "strategy": "structure",
+        "retriever": "hybrid",
+        "routing": false,
+        "rerank": true,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "structure/hybrid/unrouted/rerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1733,
+        "hit@3": 0.3733,
+        "hit@5": 0.52,
+        "hit@10": 0.7067,
+        "mrr@10": 0.3214
+      },
+      "ci95": {
+        "hit@5": [
+          0.4133,
+          0.6267
+        ],
+        "mrr@10": [
+          0.2431,
+          0.4061
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.44,
+          "mrr@10": 0.2147
+        },
+        "metrics-generated": {
+          "hit@5": 0.52,
+          "mrr@10": 0.3339
+        },
+        "novel-generated": {
+          "hit@5": 0.6,
+          "mrr@10": 0.4156
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 1.0,
+          "p95": 1.68
+        },
+        "dense_search": {
+          "p50": 8.75,
+          "p95": 14.29
+        },
+        "embed_query": {
+          "p50": 41.82,
+          "p95": 46.82
+        },
+        "fusion": {
+          "p50": 0.09,
+          "p95": 0.16
+        },
+        "rerank": {
+          "p50": 318.74,
+          "p95": 384.51
+        },
+        "route": {
+          "p50": 0.0,
+          "p95": 0.0
+        },
+        "total": {
+          "p50": 369.69,
+          "p95": 440.51
+        }
+      },
+      "routing": null
+    },
+    {
+      "config": {
+        "strategy": "structure",
+        "retriever": "hybrid",
+        "routing": true,
+        "rerank": false,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "structure/hybrid/routed/norerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.24,
+        "hit@3": 0.4533,
+        "hit@5": 0.6133,
+        "hit@10": 0.7067,
+        "mrr@10": 0.3798
+      },
+      "ci95": {
+        "hit@5": [
+          0.4933,
+          0.72
+        ],
+        "mrr@10": [
+          0.2965,
+          0.463
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.48,
+          "mrr@10": 0.278
+        },
+        "metrics-generated": {
+          "hit@5": 0.72,
+          "mrr@10": 0.4931
+        },
+        "novel-generated": {
+          "hit@5": 0.64,
+          "mrr@10": 0.3684
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 2.18,
+          "p95": 4.48
+        },
+        "dense_search": {
+          "p50": 10.25,
+          "p95": 17.73
+        },
+        "embed_query": {
+          "p50": 40.89,
+          "p95": 49.27
+        },
+        "fusion": {
+          "p50": 0.1,
+          "p95": 0.15
+        },
+        "route": {
+          "p50": 0.35,
+          "p95": 0.82
+        },
+        "total": {
+          "p50": 54.26,
+          "p95": 68.25
+        }
+      },
+      "routing": {
+        "filtered": 72,
+        "gold_doc_in_filter": 72
+      }
+    },
+    {
+      "config": {
+        "strategy": "structure",
+        "retriever": "hybrid",
+        "routing": true,
+        "rerank": true,
+        "candidates": 50,
+        "top_k": 20
+      },
+      "label": "structure/hybrid/routed/rerank",
+      "n": 75,
+      "metrics": {
+        "hit@1": 0.1467,
+        "hit@3": 0.3333,
+        "hit@5": 0.5067,
+        "hit@10": 0.64,
+        "mrr@10": 0.2865
+      },
+      "ci95": {
+        "hit@5": [
+          0.3867,
+          0.6133
+        ],
+        "mrr@10": [
+          0.2094,
+          0.3685
+        ]
+      },
+      "by_question_type": {
+        "domain-relevant": {
+          "hit@5": 0.4,
+          "mrr@10": 0.1953
+        },
+        "metrics-generated": {
+          "hit@5": 0.48,
+          "mrr@10": 0.2448
+        },
+        "novel-generated": {
+          "hit@5": 0.64,
+          "mrr@10": 0.4193
+        }
+      },
+      "latency_ms": {
+        "bm25": {
+          "p50": 2.52,
+          "p95": 4.71
+        },
+        "dense_search": {
+          "p50": 10.3,
+          "p95": 16.96
+        },
+        "embed_query": {
+          "p50": 41.41,
+          "p95": 48.63
+        },
+        "fusion": {
+          "p50": 0.11,
+          "p95": 0.15
+        },
+        "rerank": {
+          "p50": 322.45,
+          "p95": 374.61
+        },
+        "route": {
+          "p50": 0.45,
+          "p95": 1.08
+        },
+        "total": {
+          "p50": 379.07,
+          "p95": 456.85
+        }
+      },
+      "routing": {
+        "filtered": 72,
+        "gold_doc_in_filter": 72
+      }
+    }
+  ]
+}
