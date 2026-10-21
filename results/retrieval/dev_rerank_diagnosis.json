@@ -1,0 +1,51 @@
+{
+  "created_utc": "2026-10-21T16:09:43+00:00",
+  "git": {
+    "commit": "1e49f371308bef15fa9bb2d1ff5522fb262e9f71",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {},
+  "step": "rerank_diagnosis_dev",
+  "config": "structure/dense/routed/norerank",
+  "results": {
+    "domain-relevant": {
+      "n": 25,
+      "table_share_top5_before": 0.28,
+      "table_share_top5_after": 0.408,
+      "gold_lost_by_rerank": 6,
+      "gold_gained_by_rerank": 0,
+      "gold_chunks_found_before_that_are_tables": "6/18"
+    },
+    "metrics-generated": {
+      "n": 25,
+      "table_share_top5_before": 0.696,
+      "table_share_top5_after": 0.64,
+      "gold_lost_by_rerank": 11,
+      "gold_gained_by_rerank": 4,
+      "gold_chunks_found_before_that_are_tables": "21/22"
+    },
+    "novel-generated": {
+      "n": 25,
+      "table_share_top5_before": 0.2,
+      "table_share_top5_after": 0.264,
+      "gold_lost_by_rerank": 2,
+      "gold_gained_by_rerank": 4,
+      "gold_chunks_found_before_that_are_tables": "7/26"
+    },
+    "all": {
+      "n": 75,
+      "table_share_top5_before": 0.392,
+      "table_share_top5_after": 0.4373,
+      "gold_lost_by_rerank": 19,
+      "gold_gained_by_rerank": 8,
+      "gold_chunks_found_before_that_are_tables": "34/66"
+    }
+  }
+}
