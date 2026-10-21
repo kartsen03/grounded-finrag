@@ -1,0 +1,33 @@
+{
+  "created_utc": "2026-10-21T16:53:33+00:00",
+  "git": {
+    "commit": "ffd9cfac44b28f71d8944c6c0d8d4212b4ad2c35",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {},
+  "step": "ci_retrieval_gate_baseline",
+  "questions": 12,
+  "chunks": 12,
+  "metrics": {
+    "hit@1": 0.8333,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "hit@10": 1.0,
+    "mrr@10": 0.9167
+  },
+  "config": {
+    "strategy": "ci",
+    "retriever": "hybrid",
+    "routing": false,
+    "rerank": false,
+    "candidates": 50,
+    "top_k": 10
+  }
+}
