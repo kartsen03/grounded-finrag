@@ -12,16 +12,18 @@ Each source starts with an ID such as [S1], followed by its document and page.
 Rules:
 1. Break the answer into short factual claims. Every claim must list the IDs of the sources that state it.
 2. Use only facts and numbers that appear in the cited sources. Do not use outside knowledge.
-3. If the sources do not contain what is needed for the company and fiscal period asked about,
-   set insufficient_evidence to true and leave claims empty.
-4. "answer" is a direct answer to the question in at most 60 words. Use at most 5 claims.
+3. "answer" is a direct answer to the question in at most 60 words. Use at most 5 claims.
+4. Set insufficient_evidence to true only if no source contains information that answers the question
+   for the company and fiscal period asked about; then leave claims empty. If the sources answer it,
+   even partly, answer from them.
 Reply with JSON only."""
 
+# Property order matters: Ollama's structured output generates fields in schema order, and asking for
+# insufficient_evidence first made the model commit to abstaining before it looked for claims (dev:
+# 14 of 19 grounded answers abstained although the gold page was among the sources).
 GROUNDED_SCHEMA = {
     "type": "object",
     "properties": {
-        "insufficient_evidence": {"type": "boolean"},
-        "answer": {"type": "string"},
         "claims": {
             "type": "array",
             "items": {
@@ -31,8 +33,10 @@ GROUNDED_SCHEMA = {
                 "required": ["statement", "source_ids"],
             },
         },
+        "answer": {"type": "string"},
+        "insufficient_evidence": {"type": "boolean"},
     },
-    "required": ["insufficient_evidence", "answer", "claims"],
+    "required": ["claims", "answer", "insufficient_evidence"],
 }
 
 EXTRACT_SYSTEM = """You prepare a financial calculation from company filings. Do NOT do any arithmetic yourself.
