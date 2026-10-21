@@ -12,7 +12,7 @@ from finrag import config
 
 
 def _fmt(x: float) -> str:
-    return f"{x:.3f}"
+    return f"{x:.4f}"
 
 
 def retrieval_table() -> str:
@@ -21,7 +21,7 @@ def retrieval_table() -> str:
     lines = [
         "# Retrieval ablation (dev split)",
         "",
-        f"Generated from `results/retrieval/dev_ablation.json`. Commit `{git['commit'][:7]}`"
+        f"Generated from `results/retrieval/dev_ablation.json` (values exactly as stored; hit@k = hits out of 75). Commit `{git['commit'][:7]}`"
         f"{' (dirty)' if git['dirty'] else ''}, {data['created_utc']}. {data['n_questions']} dev questions.",
         f"Embeddings `{data['embed_model']}`, re-ranker `{data['rerank_model']}`; GPU {machine['gpu']}, "
         f"power plan {machine['power_plan']}.",
@@ -38,13 +38,13 @@ def retrieval_table() -> str:
         mark = " **(selected)**" if r["label"] == data["selected"] else ""
         lines.append(f"| {c['strategy']} | {c['retriever']} | {'yes' if c['routing'] else 'no'} | "
                      f"{'yes' if c['rerank'] else 'no'}{mark} | {_fmt(m['hit@1'])} | {_fmt(m['hit@3'])} | "
-                     f"{_fmt(m['hit@5'])} | {_fmt(m['hit@10'])} | {_fmt(m['mrr@10'])} | {lo:.3f}-{hi:.3f} | "
-                     f"{lat['p50']:.0f} | {lat['p95']:.0f} |")
+                     f"{_fmt(m['hit@5'])} | {_fmt(m['hit@10'])} | {_fmt(m['mrr@10'])} | {lo:.4f}-{hi:.4f} | "
+                     f"{lat['p50']} | {lat['p95']} |")
     best = next(r for r in data["results"] if r["label"] == data["selected"])
     lines += ["", f"## Per-stage latency of the selected configuration (ms)", "", "| Stage | p50 | p95 |",
               "|---|---|---|"]
     for stage, v in best["latency_ms"].items():
-        lines.append(f"| {stage} | {v['p50']:.1f} | {v['p95']:.1f} |")
+        lines.append(f"| {stage} | {v['p50']} | {v['p95']} |")
     routed = [r for r in data["results"] if r["routing"]]
     if routed:
         rt = routed[0]["routing"]
