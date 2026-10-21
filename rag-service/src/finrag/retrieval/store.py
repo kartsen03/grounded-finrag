@@ -38,6 +38,7 @@ class VectorStore:
     def reset(self, strategy: str, dim: int) -> None:
         t = _table(strategy)
         with self.conn.cursor() as cur:
+            cur.execute("CREATE EXTENSION IF NOT EXISTS vector")  # docker-compose's init script does this too
             cur.execute(f"DROP TABLE IF EXISTS {t}")
             cur.execute(f"""
                 CREATE TABLE {t} (

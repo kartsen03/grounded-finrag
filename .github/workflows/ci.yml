@@ -1,0 +1,113 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: rag-service/pyproject.toml
+      - name: Install rag-service
+        run: pip install -e "rag-service[dev]"
+      - name: Unit tests with coverage
+        working-directory: rag-service
+        run: pytest --cov=finrag --cov-report=term --cov-report=xml
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: python-coverage
+          path: rag-service/coverage.xml
+
+  java-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: JUnit tests (Testcontainers Redis + PostgreSQL) with JaCoCo coverage
+        working-directory: llm-gateway
+        run: ./mvnw -B verify
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: java-coverage
+          path: llm-gateway/target/site/jacoco/
+
+  retrieval-gate:
+    # Full retrieval path on CPU: rag-service -> llm-gateway -> model-server, pgvector + BM25 + RRF,
+    # on the synthetic fixture corpus. Fails if hit@5 drops below results/ci/retrieval_gate_baseline.json.
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: pgvector/pgvector:0.8.7-pg17-bookworm@sha256:ac08538c6f8b9904c33c8224c5e5706dbe760aca29db1d096972b4052c22a75d
+        env:
+          POSTGRES_DB: finrag
+          POSTGRES_USER: finrag
+          POSTGRES_PASSWORD: finrag-dev
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U finrag -d finrag" --health-interval 5s --health-timeout 3s --health-retries 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Redis with a password (service containers cannot take arguments)
+        run: >-
+          docker run -d --name redis -p 6379:6379
+          redis:7.2.16-alpine@sha256:29e8589c3f9ba699b5f7aa4b3c7733c58852a3626439e619aa0ee78de08c6ca0
+          redis-server --requirepass finrag-dev
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Build gateway
+        working-directory: llm-gateway
+        run: ./mvnw -B -q package -DskipTests
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            rag-service/pyproject.toml
+            model-server/requirements.txt
+      - name: Install model server (CPU torch) and rag-service
+        run: |
+          pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install -r model-server/requirements.txt
+          pip install -e rag-service
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/huggingface
+          key: hf-${{ hashFiles('model-server/app.py', 'rag-service/src/finrag/config.py') }}
+      - name: Start model server and gateway
+        run: |
+          (cd model-server && MODEL_DEVICE=cpu nohup python -m uvicorn app:app --host 127.0.0.1 --port 8090 > ../model-server.log 2>&1 &)
+          nohup java -jar llm-gateway/target/llm-gateway-0.0.1-SNAPSHOT.jar > gateway.log 2>&1 &
+          for i in $(seq 1 120); do
+            curl -sf http://127.0.0.1:8090/health | grep -q '"ok"' && curl -sf http://127.0.0.1:8080/actuator/health/liveness >/dev/null && exit 0
+            sleep 5
+          done
+          echo "services did not become healthy"; exit 1
+      - name: Retrieval regression gate
+        working-directory: rag-service
+        run: python -m finrag.ci.retrieval_gate
+      - name: Service logs
+        if: failure()
+        run: tail -n 100 model-server.log gateway.log
