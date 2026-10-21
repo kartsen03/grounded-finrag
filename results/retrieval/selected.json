@@ -1,6 +1,6 @@
 {
   "selection_rule": "max mrr@10, then max hit@5, then min p50 total latency (dev split)",
-  "selected": "structure/dense/routed/norerank",
+  "selected": "structure/hybrid/routed/norerank",
   "selected_at": "2026-10-21T16:07:56+00:00",
   "commit": "e599901edb02ef4c7635e9b05d2ffc26b8f5fdfb",
   "test_configs": [
@@ -14,11 +14,33 @@
     },
     {
       "strategy": "structure",
-      "retriever": "dense",
+      "retriever": "hybrid",
       "routing": true,
       "rerank": false,
       "candidates": 50,
       "top_k": 20
     }
-  ]
+  ],
+  "rule_selected": "structure/dense/routed/norerank",
+  "override": {
+    "reason": "Answer generation reads the top 5 chunks, so hit@5 is the metric closest to final answer accuracy; hybrid has hit@5 0.6133 vs 0.5467 with MRR@10 0.3798 vs 0.3818. Decided on dev after seeing the ablation (Karthik, checkpoint 1); differences are within the 95% CIs; test not yet scored.",
+    "at": "2026-10-21T16:22:45+00:00",
+    "commit": "450a8cb9ea187fd5e9eb992547ef2589a7cef96b",
+    "dev_metrics": {
+      "rule_selected": {
+        "hit@1": 0.2667,
+        "hit@3": 0.4267,
+        "hit@5": 0.5467,
+        "hit@10": 0.7333,
+        "mrr@10": 0.3818
+      },
+      "selected": {
+        "hit@1": 0.24,
+        "hit@3": 0.4533,
+        "hit@5": 0.6133,
+        "hit@10": 0.7067,
+        "mrr@10": 0.3798
+      }
+    }
+  }
 }
