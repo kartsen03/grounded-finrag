@@ -1,0 +1,30 @@
+{
+  "created_utc": "2026-10-21T15:56:04+00:00",
+  "git": {
+    "commit": "ea1d08b896074528dab63acac03bb8a2b898bc33",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {
+    "psycopg": "3.3.6",
+    "pgvector": "0.5.1"
+  },
+  "step": "indexing",
+  "embed_model": "BAAI/bge-base-en-v1.5@a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "embed_device": "cuda",
+  "path": "rag-service -> llm-gateway -> model-server",
+  "strategy": "fixed",
+  "chunks": 29699,
+  "rows_in_table": 29699,
+  "dim": 768,
+  "embed_seconds": 194.4,
+  "chunks_per_second": 152.7,
+  "load_seconds": 15.6,
+  "hnsw_build_seconds": 8.5
+}

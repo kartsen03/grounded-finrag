@@ -11,7 +11,7 @@ are 0-based, the same convention as FinanceBench's `evidence_page_num`. Each blo
 the 10-K/10-Q section (`Item 7. ...`) and nearest sub-heading in effect at that point.
 
 Corpus: 84 documents, 12,013 pages, 26,006 heading blocks, 91,397 text blocks and 7,129
-tables rendered as Markdown. Wall time 696.2 s.
+tables rendered as Markdown. Wall time 728.4 s (commit ea1d08b).
 
 ### Tables from geometry
 
@@ -57,6 +57,7 @@ Every repair or suspicious page is written to `data/processed/parse_issues.jsonl
 | table_of_contents_page | 160 | 71 | Pages with four or more `Item N.` lines | Section tracking skipped so a TOC cannot set the current section |
 | rotated_text | 4 | 4 | Non-upright words (JPMorgan rotated table labels) | Rotated words dropped; one gold evidence page is affected |
 | unmapped_cid_glyphs | 3 | 3 | `(cid:N)` glyphs with no Unicode mapping | Logged |
+| control_chars_removed | 13 | 2 | NUL and other control characters in the text layer (American Express FY2022, 3M FY2022); PostgreSQL rejected them at index time | Stripped during parsing so BM25, embeddings and stored text agree |
 
 Defects found by inspection but not repaired:
 - **Title lines absorbed into a table header.** On Corning's FY2020 balance sheet the

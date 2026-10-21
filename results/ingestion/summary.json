@@ -1,7 +1,7 @@
 {
-  "created_utc": "2026-10-21T15:33:44+00:00",
+  "created_utc": "2026-10-21T15:52:22+00:00",
   "git": {
-    "commit": "cfa3d785f36023df88172108aa4e60db49c8d960",
+    "commit": "ea1d08b896074528dab63acac03bb8a2b898bc33",
     "dirty": false
   },
   "machine": {
@@ -30,9 +30,10 @@
     "table": 7129,
     "text": 91397
   },
-  "wall_seconds": 696.2,
-  "parse_seconds_total": 6211.8,
+  "wall_seconds": 728.4,
+  "parse_seconds_total": 6554.9,
   "issues_by_type": {
+    "control_chars_removed": 13,
     "dehyphenated": 50,
     "low_text_page": 187,
     "rotated_text": 4,
@@ -41,6 +42,7 @@
     "unmapped_cid_glyphs": 3
   },
   "docs_with_issue": {
+    "control_chars_removed": 2,
     "dehyphenated": 33,
     "low_text_page": 45,
     "rotated_text": 4,
@@ -49,6 +51,16 @@
     "unmapped_cid_glyphs": 3
   },
   "issue_examples": {
+    "control_chars_removed": [
+      "3M_2022_10K p0: 5 characters",
+      "AMERICANEXPRESS_2022_10K p175: 52 characters",
+      "AMERICANEXPRESS_2022_10K p176: 64 characters",
+      "AMERICANEXPRESS_2022_10K p177: 38 characters",
+      "AMERICANEXPRESS_2022_10K p178: 35 characters",
+      "AMERICANEXPRESS_2022_10K p179: 42 characters",
+      "AMERICANEXPRESS_2022_10K p180: 34 characters",
+      "AMERICANEXPRESS_2022_10K p181: 25 characters"
+    ],
     "dehyphenated": [
       "3M_2018_10K p51: pre- tax -> pretax",
       "3M_2022_10K p76: pre- tax -> pretax",
