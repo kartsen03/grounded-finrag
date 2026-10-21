@@ -35,3 +35,5 @@ logs/
 *.iml
 .DS_Store
 Thumbs.db
+.pytest-results.xml
+rag-service/coverage.json

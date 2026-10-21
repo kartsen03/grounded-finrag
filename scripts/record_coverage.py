@@ -15,6 +15,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parents[1]
 RAG = ROOT / "rag-service"
@@ -25,12 +26,13 @@ from finrag import provenance  # noqa: E402
 
 def python_coverage() -> dict:
     py = RAG / ".venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
-    out = subprocess.run([str(py), "-m", "pytest", "-q", "-p", "no:warnings", "--cov=finrag", "--cov-report=json"],
-                         cwd=RAG, capture_output=True, text=True)
-    summary = re.search(r"(\d+) passed", out.stdout)
-    failed = re.search(r"(\d+) failed", out.stdout)
+    junit = RAG / ".pytest-results.xml"
+    subprocess.run([str(py), "-m", "pytest", "-p", "no:warnings", "--cov=finrag", "--cov-report=json",
+                    f"--junitxml={junit}"], cwd=RAG, capture_output=True, text=True)
+    suite = ElementTree.parse(junit).getroot()
+    suite = suite if suite.tag == "testsuite" else suite.find("testsuite")
     totals = json.loads((RAG / "coverage.json").read_text(encoding="utf-8"))["totals"]
-    return {"tests": int(summary.group(1)) if summary else 0, "failed": int(failed.group(1)) if failed else 0,
+    return {"tests": int(suite.get("tests")), "failed": int(suite.get("failures")) + int(suite.get("errors")),
             "line_coverage_percent": round(totals["percent_covered"], 2),
             "lines_covered": totals["covered_lines"], "lines_total": totals["num_statements"],
             "tool": "pytest-cov (src/finrag)"}
