@@ -27,6 +27,7 @@ class ChatReply:
     latency_ms: int
     provider: str
     request_id: str
+    cache_hit: bool = False
 
 
 class GatewayClient:
@@ -68,7 +69,8 @@ class GatewayClient:
         data = self._post("/v1/chat/completions", body, request_id)
         return ChatReply(content=data["message"]["content"], prompt_tokens=data["usage"]["prompt_tokens"],
                          completion_tokens=data["usage"]["completion_tokens"], latency_ms=data["latency_ms"],
-                         provider=data["provider"], request_id=data["request_id"])
+                         provider=data["provider"], request_id=data["request_id"],
+                         cache_hit=bool(data.get("cache_hit", False)))
 
     def close(self) -> None:
         self._http.close()

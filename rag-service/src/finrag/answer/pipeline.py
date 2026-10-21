@@ -89,13 +89,14 @@ class Answerer:
         usage["completion_tokens"] += reply.completion_tokens
         usage["llm_calls"] += 1
         usage["llm_ms"] += reply.latency_ms
+        usage["cache_hits"] += int(reply.cache_hit)
         return reply.content
 
     def answer(self, question: str, cfg: AnswerConfig, gold: set[tuple[str, int]] | None = None,
                request_id: str | None = None) -> dict:
         rid = request_id or GatewayClient.new_request_id()
         timings: dict[str, float] = {}
-        usage = {"prompt_tokens": 0, "completion_tokens": 0, "llm_calls": 0, "llm_ms": 0}
+        usage = {"prompt_tokens": 0, "completion_tokens": 0, "llm_calls": 0, "llm_ms": 0, "cache_hits": 0}
         start = time.perf_counter()
         sources, route = self._sources(question, cfg, gold, rid, timings)
         support = self._support(question, sources, rid, timings)
