@@ -15,3 +15,6 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule: { interval: weekly }
+  - package-ecosystem: docker
+    directories: [/llm-gateway, /model-server, /rag-service]
+    schedule: { interval: weekly }

@@ -63,11 +63,23 @@ More: [architecture](docs/architecture.md) · [decision records](docs/adr/) ·
 
 ## Quickstart
 
-Prerequisites: Docker, Python 3.11, Java 21, Ollama, an NVIDIA GPU (CPU works, slowly).
+**With Docker only** (CPU embeddings; Ollama on the host with `OLLAMA_HOST=0.0.0.0`):
+
+```bash
+python scripts/download_financebench.py               # pinned commit, SHA-256 verified
+ollama pull qwen2.5:7b-instruct-q4_K_M
+docker compose --profile app up -d                    # PostgreSQL+pgvector, Redis, model-server, gateway, rag-service
+docker compose run --rm rag-service python -m finrag.ingest.run
+docker compose run --rm rag-service python -m finrag.retrieval.index
+curl -s localhost:8000/answer -H "Content-Type: application/json" -d '{"question": "What was 3M capital expenditure in FY2018?"}'
+```
+
+**Natively** (how the numbers above were produced; GPU embeddings). Prerequisites: Docker,
+Python 3.11, Java 21, Ollama, an NVIDIA GPU.
 
 ```bash
 docker compose up -d                                  # PostgreSQL 17 + pgvector, Redis 7.2
-python scripts/download_financebench.py               # pinned commit, SHA-256 verified
+python scripts/download_financebench.py
 ollama pull qwen2.5:7b-instruct-q4_K_M
 ```
 

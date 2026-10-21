@@ -111,3 +111,12 @@ jobs:
       - name: Service logs
         if: failure()
         run: tail -n 100 model-server.log gateway.log
+
+  docker-build:
+    # The images behind `docker compose --profile app up` must keep building.
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Build all service images
+        run: docker compose --profile app build

@@ -1,5 +1,9 @@
-# Local infrastructure for grounded-finrag. Ports bind to 127.0.0.1 only.
+# Local stack for grounded-finrag. Ports bind to 127.0.0.1 only.
 # Credentials default to dev-only values; override them in .env (see .env.example).
+#   docker compose up -d                  # infrastructure only: PostgreSQL + pgvector, Redis
+#   docker compose --profile app up -d    # + model-server (CPU), llm-gateway, rag-service
+# Ollama runs on the host; set OLLAMA_HOST=0.0.0.0 there so containers can reach it.
+# Networks enforce the design: only the gateway can reach the model server.
 name: grounded-finrag
 
 services:
@@ -20,6 +24,7 @@ services:
       timeout: 3s
       retries: 20
     restart: unless-stopped
+    networks: [data]
 
   redis:
     image: redis:7.2.16-alpine@sha256:29e8589c3f9ba699b5f7aa4b3c7733c58852a3626439e619aa0ee78de08c6ca0
@@ -45,7 +50,56 @@ services:
       timeout: 3s
       retries: 20
     restart: unless-stopped
+    networks: [data]
+
+  model-server:
+    profiles: [app]
+    build: ./model-server
+    volumes:
+      - hfcache:/models
+    networks: [models]
+
+  llm-gateway:
+    profiles: [app]
+    build: ./llm-gateway
+    environment:
+      GATEWAY_DB_URL: jdbc:postgresql://postgres:5432/finrag
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-finrag-dev}
+      REDIS_HOST: redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-finrag-dev}
+      MODEL_SERVER_URL: http://model-server:8090
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+      model-server: { condition: service_started }
+    networks: [data, models, app]
+
+  rag-service:
+    profiles: [app]
+    build: ./rag-service
+    environment:
+      GATEWAY_URL: http://llm-gateway:8080
+      FINRAG_PG_DSN: postgresql://finrag:${POSTGRES_PASSWORD:-finrag-dev}@postgres:5432/finrag
+    volumes:
+      - ./data:/repo/data
+      - ./results:/repo/results
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      llm-gateway: { condition: service_started }
+    networks: [data, app]
+
+networks:
+  data:
+  models:
+  app:
 
 volumes:
   pgdata:
   redisdata:
+  hfcache:
