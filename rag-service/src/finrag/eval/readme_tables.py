@@ -72,7 +72,7 @@ def answers_section() -> list[str]:
             for key, label in variants:
                 o = r[key]["overall"]
                 out.append(f"| {label} | {o['accuracy']} ({o['correct']}/{o['n']}) | {o['precision_when_answering']} | "
-                           f"{o['abstention_rate']} | {o['citation_precision_gold_pages']} | "
+                           f"{o['abstention_rate']} | {o['citation_precision_gold_pages'] if o['citation_precision_gold_pages'] is not None else 'n/a (free text)'} | "
                            f"{o['accuracy_ci95'][0]}-{o['accuracy_ci95'][1]} |")
         b, a = rep["results"].get("best"), rep["results"].get("best_model_arith")
         if b and a:

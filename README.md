@@ -26,9 +26,29 @@ embeddings, `bge-reranker-base` cross-encoder (support score). Hardware: RTX 306
 |---|---|---|---|---|---|---|---|---|
 | naive: fixed chunks, dense | dev | 0.12 | 0.2533 | 0.28 | 0.44 | 0.2122 | 0.1733-0.3867 | 54.05 |
 | best: structure chunks, hybrid, routed | dev | 0.24 | 0.4533 | 0.6133 | 0.7067 | 0.3798 | 0.4933-0.72 | 54.26 |
+| naive: fixed chunks, dense | test | 0.1333 | 0.32 | 0.3733 | 0.52 | 0.2429 | 0.2667-0.48 | 73.15 |
+| best: structure chunks, hybrid, routed | test | 0.2 | 0.3733 | 0.5067 | 0.6667 | 0.3276 | 0.4-0.6133 | 73.14 |
 
-Dev: commit `e599901`, NVIDIA GeForce RTX 3060 Laptop GPU, power plan Turbo, 2026-10-21. Test: not scored yet.
+Dev: commit `e599901`, NVIDIA GeForce RTX 3060 Laptop GPU, power plan Turbo, 2026-10-21. Test: commit `39c6675`, NVIDIA GeForce RTX 3060 Laptop GPU, power plan Turbo, 2026-10-21.
 All 24 dev configurations: [results/retrieval/dev_ablation.md](results/retrieval/dev_ablation.md).
+
+### Answers (dev split, judged by the LLM judge + 1% numeric tolerance)
+
+| System | Accuracy | Precision when answering | Abstention rate | Citation precision (gold pages) | Accuracy 95% CI |
+|---|---|---|---|---|---|
+| naive RAG | 0.1867 (14/75) | 0.1867 | 0.0 | n/a (free text) | 0.1067-0.28 |
+| best (no threshold) | 0.2533 (19/75) | 0.4419 | 0.4267 | 0.4412 | 0.16-0.36 |
+| best + abstention threshold 0.9961526989936829 | 0.0933 (7/75) | 0.7778 | 0.88 | 0.4615 | 0.0267-0.1733 |
+| oracle (gold pages) | 0.44 (33/75) | 0.5893 | 0.2533 | 1.0 | 0.3333-0.56 |
+
+Numeric (metrics-generated) questions: extract-then-compute 0.32 (8/25) vs model arithmetic 0.36 (9/25).
+
+commit `681799f`, NVIDIA GeForce RTX 3060 Laptop GPU, power plan Turbo, 2026-10-21.
+
+### Other measurements
+
+- **Unanswerable probes** (30 questions about companies or periods not in the corpus): hallucination rate 0.0 for best, 0.0667 for naive.
+- **Tests:** rag-service 42 tests, 45.96% line coverage; llm-gateway 20 tests, 71.95% line coverage.
 
 <!-- results:end -->
 
