@@ -12,6 +12,7 @@ import dev.finrag.gateway.api.Dtos.EmbeddingResponse;
 import dev.finrag.gateway.api.Dtos.RerankRequest;
 import dev.finrag.gateway.api.Dtos.RerankResponse;
 import dev.finrag.gateway.service.GatewayService;
+import dev.finrag.gateway.web.ApiKeyFilter;
 import dev.finrag.gateway.web.RequestIdFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -28,16 +29,20 @@ public class ModelController {
 
     @PostMapping("/chat/completions")
     public ChatResponse chat(@Valid @RequestBody ChatRequest body, HttpServletRequest request) {
-        return service.chat(body, RequestIdFilter.of(request));
+        return service.chat(body, RequestIdFilter.of(request), client(request));
     }
 
     @PostMapping("/embeddings")
     public EmbeddingResponse embeddings(@Valid @RequestBody EmbeddingRequest body, HttpServletRequest request) {
-        return service.embed(body, RequestIdFilter.of(request));
+        return service.embed(body, RequestIdFilter.of(request), client(request));
     }
 
     @PostMapping("/rerank")
     public RerankResponse rerank(@Valid @RequestBody RerankRequest body, HttpServletRequest request) {
-        return service.rerank(body, RequestIdFilter.of(request));
+        return service.rerank(body, RequestIdFilter.of(request), client(request));
+    }
+
+    private static String client(HttpServletRequest request) {
+        return (String) request.getAttribute(ApiKeyFilter.CLIENT_ATTRIBUTE);
     }
 }

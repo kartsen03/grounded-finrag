@@ -30,6 +30,7 @@ public final class Dtos {
             @JsonProperty("response_format") Map<String, Object> responseFormat) {
     }
 
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown = true)
     public record Usage(@JsonProperty("prompt_tokens") int promptTokens,
             @JsonProperty("completion_tokens") int completionTokens) {
 
@@ -40,14 +41,16 @@ public final class Dtos {
     }
 
     public record ChatResponse(@JsonProperty("request_id") String requestId, String model, String provider,
-            Message message, Usage usage, @JsonProperty("latency_ms") long latencyMs) {
+            Message message, Usage usage, @JsonProperty("latency_ms") long latencyMs,
+            @JsonProperty("cache_hit") boolean cacheHit, @JsonProperty("cost_usd") java.math.BigDecimal costUsd) {
     }
 
     public record EmbeddingRequest(@NotBlank String model, @NotEmpty @Size(max = 512) List<@NotBlank String> input) {
     }
 
     public record EmbeddingResponse(@JsonProperty("request_id") String requestId, String model, String provider,
-            List<float[]> embeddings, Usage usage, @JsonProperty("latency_ms") long latencyMs) {
+            List<float[]> embeddings, Usage usage, @JsonProperty("latency_ms") long latencyMs,
+            @JsonProperty("cache_hit") boolean cacheHit, @JsonProperty("cost_usd") java.math.BigDecimal costUsd) {
     }
 
     public record RerankRequest(@NotBlank String model, @NotBlank String query,
@@ -55,7 +58,8 @@ public final class Dtos {
     }
 
     public record RerankResponse(@JsonProperty("request_id") String requestId, String model, String provider,
-            List<Double> scores, Usage usage, @JsonProperty("latency_ms") long latencyMs) {
+            List<Double> scores, Usage usage, @JsonProperty("latency_ms") long latencyMs,
+            @JsonProperty("cache_hit") boolean cacheHit, @JsonProperty("cost_usd") java.math.BigDecimal costUsd) {
     }
 
     public record ErrorBody(@JsonProperty("request_id") String requestId, String type, String message) {
