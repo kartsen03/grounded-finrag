@@ -28,7 +28,7 @@ public class ProviderRegistry {
 
     /** Package-private for tests, which pass a builder bound to a mock server. */
     static Optional<ModelProvider> create(String name, GatewayProperties.Provider p, RestClient.Builder builder) {
-        HttpClient http = HttpClient.newBuilder().connectTimeout(p.connectTimeout()).build();
+        HttpClient http = httpClient(p);
         JdkClientHttpRequestFactory factory = new JdkClientHttpRequestFactory(http);
         factory.setReadTimeout(p.readTimeout());
         builder = builder.baseUrl(p.baseUrl()).requestFactory(factory);
@@ -39,6 +39,15 @@ public class ProviderRegistry {
                     : Optional.of(new OpenAiProvider(name,
                             builder.defaultHeader("Authorization", "Bearer " + p.apiKey()).build()));
         };
+    }
+
+    /**
+     * HTTP/1.1 on purpose: the JDK client defaults to HTTP/2 and, over plain http, sends an
+     * "Upgrade: h2c" request with a chunked body that uvicorn (model server) answers as if the
+     * body were empty (HTTP 422).
+     */
+    static HttpClient httpClient(GatewayProperties.Provider p) {
+        return HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).connectTimeout(p.connectTimeout()).build();
     }
 
     public Optional<ModelProvider> get(String name) {
