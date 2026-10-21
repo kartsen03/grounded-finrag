@@ -26,7 +26,7 @@ from finrag.retrieval.pipeline import RERANK_ALIAS, RetrievalConfig, Retriever, 
 
 CHAT_ALIAS = "local-chat"
 INSUFFICIENT = "Insufficient evidence in the retrieved filings to answer this question."
-MAX_TOKENS = 800
+MAX_TOKENS = 600  # answers are short; a cap stops degenerate repetition early
 ORACLE_MAX_CHUNKS = 8
 
 
@@ -158,6 +158,11 @@ def _cite(src: dict) -> str:
     return f"[{src['doc_name']}, p.{src['page']}]"
 
 
+def _source_id(value: object) -> str:
+    """Models often write "[S2]" or " s2"; the ID itself is what matters."""
+    return str(value).strip().strip("[]").strip().upper()
+
+
 def _parse(raw: str) -> tuple[dict | None, list[str]]:
     try:
         data = json.loads(raw)
@@ -179,7 +184,7 @@ def verify_grounded(raw: str, by_id: dict[str, dict]) -> dict:
         errors.append("there are no claims; every answer needs at least one cited claim")
     citations, rendered, ungrounded = [], [], []
     for i, claim in enumerate(claims, start=1):
-        ids = claim.get("source_ids") or []
+        ids = [_source_id(x) for x in claim.get("source_ids") or []]
         if not ids:
             errors.append(f"claim {i} cites no source")
         bad = [x for x in ids if x not in by_id]
@@ -211,7 +216,7 @@ def verify_extract(raw: str, by_id: dict[str, dict]) -> dict:
         errors.append("no inputs were extracted")
     variables, lines, citations = {}, [], []
     for item in inputs:
-        name, sid, value = item.get("name", ""), item.get("source_id", ""), item.get("value")
+        name, sid, value = item.get("name", ""), _source_id(item.get("source_id", "")), item.get("value")
         if not name.isidentifier():
             errors.append(f"input name {name!r} must be a snake_case identifier")
             continue

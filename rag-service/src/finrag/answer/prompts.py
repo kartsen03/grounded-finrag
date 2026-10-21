@@ -14,7 +14,7 @@ Rules:
 2. Use only facts and numbers that appear in the cited sources. Do not use outside knowledge.
 3. If the sources do not contain what is needed for the company and fiscal period asked about,
    set insufficient_evidence to true and leave claims empty.
-4. "answer" is a one- or two-sentence direct answer to the question.
+4. "answer" is a direct answer to the question in at most 60 words. Use at most 5 claims.
 Reply with JSON only."""
 
 GROUNDED_SCHEMA = {
