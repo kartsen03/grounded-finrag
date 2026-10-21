@@ -1,0 +1,39 @@
+{
+  "created_utc": "2026-10-21T15:33:44+00:00",
+  "git": {
+    "commit": "cfa3d785f36023df88172108aa4e60db49c8d960",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {},
+  "step": "evidence_page_check",
+  "evidence_items": 189,
+  "outcomes": {
+    "best_is_p": 187,
+    "best_is_p_minus_1": 0,
+    "best_is_p_plus_1": 0,
+    "weak_coverage": 2
+  },
+  "min_coverage": 0.6,
+  "median_coverage_at_p": 1.0,
+  "weak_items": [
+    {
+      "financebench_id": "financebench_id_04660",
+      "doc_name": "BLOCK_2016_10K",
+      "evidence_page_num": 67,
+      "coverage_at_p": 0.581
+    },
+    {
+      "financebench_id": "financebench_id_10130",
+      "doc_name": "CORNING_2020_10K",
+      "evidence_page_num": 71,
+      "coverage_at_p": 0.547
+    }
+  ]
+}
