@@ -1,0 +1,55 @@
+{
+  "created_utc": "2026-10-21T18:35:11+00:00",
+  "git": {
+    "commit": "06b063aae52686b8fc6eae03496c668c9e37590d",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {},
+  "step": "gateway_stats",
+  "request_id_prefix": "test-best-",
+  "questions": 75,
+  "gateway_calls": 239,
+  "calls_with_errors": 0,
+  "questions_with_a_cache_hit": 0,
+  "model_time_per_question_ms": {
+    "p50": 8511.0,
+    "p95": 20948.9
+  },
+  "chat_time_per_question_ms": {
+    "p50": 5713.0,
+    "p95": 18233.5
+  },
+  "tokens_per_question": {
+    "prompt_mean": 4173.3,
+    "completion_mean": 177.7
+  },
+  "cost_usd_per_question": {
+    "mean": 0.0,
+    "max": 0.0,
+    "note": "local models are priced at 0 USD per 1k tokens in the gateway config"
+  },
+  "by_endpoint": {
+    "/v1/chat/completions": {
+      "calls": 89,
+      "p50_ms": 5713.0,
+      "p95_ms": 11441.8
+    },
+    "/v1/embeddings": {
+      "calls": 75,
+      "p50_ms": 121.0,
+      "p95_ms": 191.0
+    },
+    "/v1/rerank": {
+      "calls": 75,
+      "p50_ms": 2583.0,
+      "p95_ms": 3086.8999999999987
+    }
+  }
+}
