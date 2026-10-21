@@ -1,0 +1,32 @@
+{
+  "created_utc": "2026-10-21T18:06:55+00:00",
+  "git": {
+    "commit": "af7076648ced74305321b0d30e0e4454ee12fb14",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {},
+  "step": "coverage",
+  "rag_service": {
+    "tests": 42,
+    "failed": 0,
+    "line_coverage_percent": 45.96,
+    "lines_covered": 1024,
+    "lines_total": 2228,
+    "tool": "pytest-cov (src/finrag)"
+  },
+  "llm_gateway": {
+    "tests": 20,
+    "failed": 0,
+    "line_coverage_percent": 71.95,
+    "lines_covered": 413,
+    "lines_total": 574,
+    "tool": "JaCoCo 0.8.15"
+  }
+}
