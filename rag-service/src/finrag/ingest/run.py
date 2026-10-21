@@ -49,6 +49,7 @@ def main(argv: list[str] | None = None) -> int:
         wanted = set(args.docs.split(","))
         docs = [d for d in docs if d in wanted]
     chunking.tokenizer()  # download once before the workers start
+    git_at_start = provenance.git_state()
 
     out = config.PROCESSED_DIR
     (out / "pages").mkdir(parents=True, exist_ok=True)
@@ -90,6 +91,7 @@ def main(argv: list[str] | None = None) -> int:
     summary = provenance.stamp(
         "pdfplumber", "pdfminer.six", "tokenizers",
         step="ingestion",
+        git=git_at_start,
         settings={"chunk_tokens": chunking.CHUNK_TOKENS, "overlap_tokens": chunking.OVERLAP_TOKENS,
                   "tokenizer": f"{config.EMBED_MODEL}@{config.EMBED_MODEL_REVISION}", "workers": args.workers},
         documents=len(results),
@@ -109,7 +111,7 @@ def main(argv: list[str] | None = None) -> int:
     page_text = {(r["doc_name"], p["page_idx"]): "\n".join(b["text"] for b in p["blocks"])
                  for r in results for p in r["pages"]}
     qs = {qid: q for qid, q in corpus.questions().items() if q["doc_name"] in set(docs)}
-    check = {**provenance.stamp(step="evidence_page_check"), **evidence_check.check(qs, page_text)}
+    check = {**provenance.stamp(step="evidence_page_check", git=git_at_start), **evidence_check.check(qs, page_text)}
     (res_dir / "evidence_page_check.json").write_text(json.dumps(check, indent=2) + "\n", encoding="utf-8",
                                                       newline="\n")
     print(json.dumps({k: summary[k] for k in ("documents", "pages", "wall_seconds", "issues_by_type", "chunks")},
