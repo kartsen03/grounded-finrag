@@ -87,6 +87,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     OUT.mkdir(parents=True, exist_ok=True)
     qids = corpus.split()[args.split]
+    git_at_start = provenance.git_state()
     retriever = Retriever(GatewayClient(), VectorStore())
     for strategy in ("fixed", "structure"):
         chunk_index(strategy)  # build BM25 before timing anything
@@ -112,7 +113,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"{cfg.label:40s} " + " ".join(f"{k}={v:.3f}" for k, v in r["metrics"].items())
               + f"  p50={r['latency_ms']['total']['p50']}ms", flush=True)
 
-    stamp = provenance.stamp("psycopg", "pgvector", "numpy", "scipy", step=f"retrieval_eval_{args.split}",
+    stamp = provenance.stamp("psycopg", "pgvector", "numpy", "scipy", step=f"retrieval_eval_{args.split}", git=git_at_start,
                              split=args.split, n_questions=len(qids), top_k_chunks=TOP_K_CHUNKS,
                              embed_model=f"{config.EMBED_MODEL}@{config.EMBED_MODEL_REVISION}",
                              rerank_model=f"{config.RERANK_MODEL}@{config.RERANK_MODEL_REVISION}")
