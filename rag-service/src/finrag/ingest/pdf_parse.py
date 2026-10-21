@@ -25,7 +25,8 @@ PAGE_NUMBER = re.compile(r"^(?:page\s+)?(?:\d{1,3}|[ivxlc]{1,6})$", re.IGNORECAS
 # Statement captions such as "Years ended December 31" are headings but not sub-sections.
 PERIOD_CAPTION = re.compile(r"^(?:\(?in\s+(?:millions|thousands|billions)|(?:for\s+the\s+)?(?:fiscal\s+)?"
                             r"(?:years?|three|six|nine|twelve|quarters?)\b)", re.IGNORECASE)
-LOW_TEXT_CHARS = 200  # fewer characters than this on a page is worth flagging
+LOW_TEXT_CHARS = 200
+CONTROL_CHARS = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")  # fewer characters than this on a page is worth flagging
 
 
 @dataclass
@@ -88,6 +89,13 @@ def parse_pdf(pdf_path: Path, doc_name: str) -> tuple[list[ParsedPage], list[dic
         if rotated:
             issues.append(_issue(doc_name, idx, "rotated_text", f"{rotated} words not upright"))
         words = [w for w in words if w.get("upright", True)]
+        # Some PDFs embed control characters (NUL included) in their text layer; PostgreSQL
+        # rejects NUL in text columns and they carry no meaning, so strip them everywhere.
+        control = sum(len(CONTROL_CHARS.findall(w["text"])) for w in words)
+        if control:
+            issues.append(_issue(doc_name, idx, "control_chars_removed", f"{control} characters"))
+            words = [{**w, "text": CONTROL_CHARS.sub("", w["text"])} for w in words]
+            words = [w for w in words if w["text"]]
         if not words:
             continue
         cid = sum(w["text"].count("(cid:") for w in words)
