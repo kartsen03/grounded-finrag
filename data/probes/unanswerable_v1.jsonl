@@ -1,0 +1,30 @@
+{"probe_id": "probe_company_01", "kind": "company_not_in_corpus", "question": "What was Apple's FY2022 total net sales (in USD millions)?"}
+{"probe_id": "probe_company_02", "kind": "company_not_in_corpus", "question": "What is Tesla's FY2021 gross margin based on its income statement?"}
+{"probe_id": "probe_company_03", "kind": "company_not_in_corpus", "question": "How much did Alphabet spend on capital expenditures in FY2022?"}
+{"probe_id": "probe_company_04", "kind": "company_not_in_corpus", "question": "What was Meta Platforms' FY2023 operating income?"}
+{"probe_id": "probe_company_05", "kind": "company_not_in_corpus", "question": "What was NVIDIA's data center revenue in fiscal 2023?"}
+{"probe_id": "probe_company_06", "kind": "company_not_in_corpus", "question": "What is Intel's FY2022 current ratio based on its balance sheet?"}
+{"probe_id": "probe_company_07", "kind": "company_not_in_corpus", "question": "What dividends per share did Exxon Mobil pay in FY2021?"}
+{"probe_id": "probe_company_08", "kind": "company_not_in_corpus", "question": "Did Chevron's FY2022 net income increase compared with FY2021?"}
+{"probe_id": "probe_company_09", "kind": "company_not_in_corpus", "question": "What was Procter & Gamble's FY2022 free cash flow?"}
+{"probe_id": "probe_company_10", "kind": "company_not_in_corpus", "question": "What was Home Depot's FY2021 inventory turnover ratio?"}
+{"probe_id": "probe_company_11", "kind": "company_not_in_corpus", "question": "How many restaurants did McDonald's operate at the end of FY2022?"}
+{"probe_id": "probe_company_12", "kind": "company_not_in_corpus", "question": "What was Starbucks' FY2023 revenue growth rate?"}
+{"probe_id": "probe_company_13", "kind": "company_not_in_corpus", "question": "What was Walt Disney's FY2022 long-term debt?"}
+{"probe_id": "probe_company_14", "kind": "company_not_in_corpus", "question": "What was Goldman Sachs' FY2022 return on equity?"}
+{"probe_id": "probe_company_15", "kind": "company_not_in_corpus", "question": "What was Visa's FY2021 net revenue (in USD millions)?"}
+{"probe_id": "probe_period_01", "kind": "period_not_in_corpus", "question": "What was 3M's FY2030 capital expenditure amount (in USD millions)?"}
+{"probe_id": "probe_period_02", "kind": "period_not_in_corpus", "question": "What was Boeing's FY2031 total revenue?"}
+{"probe_id": "probe_period_03", "kind": "period_not_in_corpus", "question": "What is Adobe's FY2029 operating margin?"}
+{"probe_id": "probe_period_04", "kind": "period_not_in_corpus", "question": "What was Amazon's FY2030 net income?"}
+{"probe_id": "probe_period_05", "kind": "period_not_in_corpus", "question": "What was PepsiCo's Q2 FY2031 net revenue?"}
+{"probe_id": "probe_period_06", "kind": "period_not_in_corpus", "question": "What is Verizon's FY2030 debt-to-equity ratio?"}
+{"probe_id": "probe_period_07", "kind": "period_not_in_corpus", "question": "How much cash and cash equivalents did Nike hold at the end of FY2032?"}
+{"probe_id": "probe_period_08", "kind": "period_not_in_corpus", "question": "What was Walmart's FY2030 inventory turnover ratio?"}
+{"probe_id": "probe_period_09", "kind": "period_not_in_corpus", "question": "What was Pfizer's FY2029 research and development expense?"}
+{"probe_id": "probe_period_10", "kind": "period_not_in_corpus", "question": "What was JPMorgan's Q1 FY2030 net interest income?"}
+{"probe_id": "probe_period_11", "kind": "period_not_in_corpus", "question": "What was Microsoft's FY2031 free cash flow?"}
+{"probe_id": "probe_period_12", "kind": "period_not_in_corpus", "question": "Did Coca-Cola's FY2030 operating income grow compared with FY2029?"}
+{"probe_id": "probe_period_13", "kind": "period_not_in_corpus", "question": "What was Lockheed Martin's FY2030 backlog?"}
+{"probe_id": "probe_period_14", "kind": "period_not_in_corpus", "question": "What was Best Buy's FY2031 gross profit margin?"}
+{"probe_id": "probe_period_15", "kind": "period_not_in_corpus", "question": "What was Corning's FY2032 working capital?"}
