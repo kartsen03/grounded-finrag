@@ -1,0 +1,892 @@
+{
+  "created_utc": "2026-10-21T17:47:08+00:00",
+  "git": {
+    "commit": "681799fbae2d74b477da81094ba72e3acb1e9b7a",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {},
+  "step": "answer_report_dev",
+  "split": "dev",
+  "threshold": 0.9961526989936829,
+  "judge": "local-chat (qwen2.5:7b-instruct-q4_K_M) via gateway, rubric docs/judge_rubric.md, 1% tolerance check",
+  "results": {
+    "naive": {
+      "no_threshold": {
+        "overall": {
+          "n": 75,
+          "answered": 75,
+          "abstained": 0,
+          "correct": 14,
+          "accuracy": 0.1867,
+          "precision_when_answering": 0.1867,
+          "abstention_rate": 0.0,
+          "accuracy_ci95": [
+            0.1067,
+            0.28
+          ],
+          "abstain_reasons": {},
+          "citations": 0,
+          "citation_precision_gold_pages": null,
+          "repaired_answers": 0,
+          "answers_with_ungrounded_numbers": 0,
+          "latency_ms_total": {
+            "p50": 9440.41,
+            "p95": 20141.65
+          },
+          "llm_tokens": {
+            "prompt": 168947,
+            "completion": 14486
+          }
+        },
+        "by_question_type": {
+          "domain-relevant": {
+            "n": 25,
+            "answered": 25,
+            "abstained": 0,
+            "correct": 7,
+            "accuracy": 0.28,
+            "precision_when_answering": 0.28,
+            "abstention_rate": 0.0,
+            "accuracy_ci95": [
+              0.12,
+              0.48
+            ],
+            "abstain_reasons": {},
+            "citations": 0,
+            "citation_precision_gold_pages": null,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 9854.39,
+              "p95": 17304.61
+            },
+            "llm_tokens": {
+              "prompt": 54877,
+              "completion": 4374
+            }
+          },
+          "metrics-generated": {
+            "n": 25,
+            "answered": 25,
+            "abstained": 0,
+            "correct": 1,
+            "accuracy": 0.04,
+            "precision_when_answering": 0.04,
+            "abstention_rate": 0.0,
+            "accuracy_ci95": [
+              0.0,
+              0.12
+            ],
+            "abstain_reasons": {},
+            "citations": 0,
+            "citation_precision_gold_pages": null,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 15906.34,
+              "p95": 22636.24
+            },
+            "llm_tokens": {
+              "prompt": 59373,
+              "completion": 7395
+            }
+          },
+          "novel-generated": {
+            "n": 25,
+            "answered": 25,
+            "abstained": 0,
+            "correct": 6,
+            "accuracy": 0.24,
+            "precision_when_answering": 0.24,
+            "abstention_rate": 0.0,
+            "accuracy_ci95": [
+              0.08,
+              0.44
+            ],
+            "abstain_reasons": {},
+            "citations": 0,
+            "citation_precision_gold_pages": null,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 7646.08,
+              "p95": 10115.61
+            },
+            "llm_tokens": {
+              "prompt": 54697,
+              "completion": 2717
+            }
+          }
+        },
+        "modes": {
+          "naive": 75
+        }
+      }
+    },
+    "best": {
+      "no_threshold": {
+        "overall": {
+          "n": 75,
+          "answered": 43,
+          "abstained": 32,
+          "correct": 19,
+          "accuracy": 0.2533,
+          "precision_when_answering": 0.4419,
+          "abstention_rate": 0.4267,
+          "accuracy_ci95": [
+            0.16,
+            0.36
+          ],
+          "abstain_reasons": {
+            "model_insufficient_evidence": 22,
+            "verification_failed": 10
+          },
+          "citations": 68,
+          "citation_precision_gold_pages": 0.4412,
+          "repaired_answers": 3,
+          "answers_with_ungrounded_numbers": 4,
+          "latency_ms_total": {
+            "p50": 8815.35,
+            "p95": 22309.14
+          },
+          "llm_tokens": {
+            "prompt": 173634,
+            "completion": 15322
+          }
+        },
+        "by_question_type": {
+          "domain-relevant": {
+            "n": 25,
+            "answered": 10,
+            "abstained": 15,
+            "correct": 3,
+            "accuracy": 0.12,
+            "precision_when_answering": 0.3,
+            "abstention_rate": 0.6,
+            "accuracy_ci95": [
+              0.0,
+              0.24
+            ],
+            "abstain_reasons": {
+              "model_insufficient_evidence": 12,
+              "verification_failed": 3
+            },
+            "citations": 15,
+            "citation_precision_gold_pages": 0.3333,
+            "repaired_answers": 1,
+            "answers_with_ungrounded_numbers": 1,
+            "latency_ms_total": {
+              "p50": 8560.9,
+              "p95": 22213.5
+            },
+            "llm_tokens": {
+              "prompt": 53108,
+              "completion": 4871
+            }
+          },
+          "metrics-generated": {
+            "n": 25,
+            "answered": 14,
+            "abstained": 11,
+            "correct": 8,
+            "accuracy": 0.32,
+            "precision_when_answering": 0.5714,
+            "abstention_rate": 0.44,
+            "accuracy_ci95": [
+              0.16,
+              0.52
+            ],
+            "abstain_reasons": {
+              "model_insufficient_evidence": 5,
+              "verification_failed": 6
+            },
+            "citations": 18,
+            "citation_precision_gold_pages": 0.6111,
+            "repaired_answers": 2,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 12197.76,
+              "p95": 23340.1
+            },
+            "llm_tokens": {
+              "prompt": 76442,
+              "completion": 6981
+            }
+          },
+          "novel-generated": {
+            "n": 25,
+            "answered": 19,
+            "abstained": 6,
+            "correct": 8,
+            "accuracy": 0.32,
+            "precision_when_answering": 0.4211,
+            "abstention_rate": 0.24,
+            "accuracy_ci95": [
+              0.16,
+              0.52
+            ],
+            "abstain_reasons": {
+              "model_insufficient_evidence": 5,
+              "verification_failed": 1
+            },
+            "citations": 35,
+            "citation_precision_gold_pages": 0.4,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 3,
+            "latency_ms_total": {
+              "p50": 7733.36,
+              "p95": 10526.52
+            },
+            "llm_tokens": {
+              "prompt": 44084,
+              "completion": 3470
+            }
+          }
+        },
+        "modes": {
+          "extract": 45,
+          "grounded": 30
+        }
+      },
+      "with_threshold": {
+        "overall": {
+          "n": 75,
+          "answered": 9,
+          "abstained": 66,
+          "correct": 7,
+          "accuracy": 0.0933,
+          "precision_when_answering": 0.7778,
+          "abstention_rate": 0.88,
+          "accuracy_ci95": [
+            0.0267,
+            0.1733
+          ],
+          "abstain_reasons": {
+            "weak_retrieval_support": 34,
+            "model_insufficient_evidence": 22,
+            "verification_failed": 10
+          },
+          "citations": 13,
+          "citation_precision_gold_pages": 0.4615,
+          "repaired_answers": 1,
+          "answers_with_ungrounded_numbers": 0,
+          "latency_ms_total": {
+            "p50": 8815.35,
+            "p95": 22309.14
+          },
+          "llm_tokens": {
+            "prompt": 173634,
+            "completion": 15322
+          }
+        },
+        "by_question_type": {
+          "domain-relevant": {
+            "n": 25,
+            "answered": 3,
+            "abstained": 22,
+            "correct": 1,
+            "accuracy": 0.04,
+            "precision_when_answering": 0.3333,
+            "abstention_rate": 0.88,
+            "accuracy_ci95": [
+              0.0,
+              0.12
+            ],
+            "abstain_reasons": {
+              "weak_retrieval_support": 7,
+              "model_insufficient_evidence": 12,
+              "verification_failed": 3
+            },
+            "citations": 6,
+            "citation_precision_gold_pages": 0.1667,
+            "repaired_answers": 1,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 8560.9,
+              "p95": 22213.5
+            },
+            "llm_tokens": {
+              "prompt": 53108,
+              "completion": 4871
+            }
+          },
+          "metrics-generated": {
+            "n": 25,
+            "answered": 1,
+            "abstained": 24,
+            "correct": 1,
+            "accuracy": 0.04,
+            "precision_when_answering": 1.0,
+            "abstention_rate": 0.96,
+            "accuracy_ci95": [
+              0.0,
+              0.12
+            ],
+            "abstain_reasons": {
+              "weak_retrieval_support": 13,
+              "model_insufficient_evidence": 5,
+              "verification_failed": 6
+            },
+            "citations": 1,
+            "citation_precision_gold_pages": 1.0,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 12197.76,
+              "p95": 23340.1
+            },
+            "llm_tokens": {
+              "prompt": 76442,
+              "completion": 6981
+            }
+          },
+          "novel-generated": {
+            "n": 25,
+            "answered": 5,
+            "abstained": 20,
+            "correct": 5,
+            "accuracy": 0.2,
+            "precision_when_answering": 1.0,
+            "abstention_rate": 0.8,
+            "accuracy_ci95": [
+              0.08,
+              0.36
+            ],
+            "abstain_reasons": {
+              "weak_retrieval_support": 14,
+              "model_insufficient_evidence": 5,
+              "verification_failed": 1
+            },
+            "citations": 6,
+            "citation_precision_gold_pages": 0.6667,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 7733.36,
+              "p95": 10526.52
+            },
+            "llm_tokens": {
+              "prompt": 44084,
+              "completion": 3470
+            }
+          }
+        },
+        "modes": {
+          "extract": 45,
+          "grounded": 30
+        }
+      }
+    },
+    "best_model_arith": {
+      "no_threshold": {
+        "overall": {
+          "n": 75,
+          "answered": 55,
+          "abstained": 20,
+          "correct": 20,
+          "accuracy": 0.2667,
+          "precision_when_answering": 0.3636,
+          "abstention_rate": 0.2667,
+          "accuracy_ci95": [
+            0.1733,
+            0.36
+          ],
+          "abstain_reasons": {
+            "model_insufficient_evidence": 16,
+            "verification_failed": 4
+          },
+          "citations": 87,
+          "citation_precision_gold_pages": 0.3678,
+          "repaired_answers": 3,
+          "answers_with_ungrounded_numbers": 19,
+          "latency_ms_total": {
+            "p50": 5283.46,
+            "p95": 16861.55
+          },
+          "llm_tokens": {
+            "prompt": 97225,
+            "completion": 8792
+          }
+        },
+        "by_question_type": {
+          "domain-relevant": {
+            "n": 25,
+            "answered": 14,
+            "abstained": 11,
+            "correct": 4,
+            "accuracy": 0.16,
+            "precision_when_answering": 0.2857,
+            "abstention_rate": 0.44,
+            "accuracy_ci95": [
+              0.04,
+              0.32
+            ],
+            "abstain_reasons": {
+              "model_insufficient_evidence": 9,
+              "verification_failed": 2
+            },
+            "citations": 23,
+            "citation_precision_gold_pages": 0.2174,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 1,
+            "latency_ms_total": {
+              "p50": 182.43,
+              "p95": 10990.13
+            },
+            "llm_tokens": {
+              "prompt": 22210,
+              "completion": 2435
+            }
+          },
+          "metrics-generated": {
+            "n": 25,
+            "answered": 21,
+            "abstained": 4,
+            "correct": 9,
+            "accuracy": 0.36,
+            "precision_when_answering": 0.4286,
+            "abstention_rate": 0.16,
+            "accuracy_ci95": [
+              0.2,
+              0.56
+            ],
+            "abstain_reasons": {
+              "verification_failed": 1,
+              "model_insufficient_evidence": 3
+            },
+            "citations": 28,
+            "citation_precision_gold_pages": 0.4643,
+            "repaired_answers": 3,
+            "answers_with_ungrounded_numbers": 14,
+            "latency_ms_total": {
+              "p50": 7294.3,
+              "p95": 19695.09
+            },
+            "llm_tokens": {
+              "prompt": 61095,
+              "completion": 5318
+            }
+          },
+          "novel-generated": {
+            "n": 25,
+            "answered": 20,
+            "abstained": 5,
+            "correct": 7,
+            "accuracy": 0.28,
+            "precision_when_answering": 0.35,
+            "abstention_rate": 0.2,
+            "accuracy_ci95": [
+              0.12,
+              0.44
+            ],
+            "abstain_reasons": {
+              "model_insufficient_evidence": 4,
+              "verification_failed": 1
+            },
+            "citations": 36,
+            "citation_precision_gold_pages": 0.3889,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 4,
+            "latency_ms_total": {
+              "p50": 106.84,
+              "p95": 7382.2
+            },
+            "llm_tokens": {
+              "prompt": 13920,
+              "completion": 1039
+            }
+          }
+        },
+        "modes": {
+          "grounded": 75
+        }
+      },
+      "with_threshold": {
+        "overall": {
+          "n": 75,
+          "answered": 10,
+          "abstained": 65,
+          "correct": 6,
+          "accuracy": 0.08,
+          "precision_when_answering": 0.6,
+          "abstention_rate": 0.8667,
+          "accuracy_ci95": [
+            0.0267,
+            0.1467
+          ],
+          "abstain_reasons": {
+            "weak_retrieval_support": 45,
+            "model_insufficient_evidence": 16,
+            "verification_failed": 4
+          },
+          "citations": 14,
+          "citation_precision_gold_pages": 0.5714,
+          "repaired_answers": 0,
+          "answers_with_ungrounded_numbers": 2,
+          "latency_ms_total": {
+            "p50": 5283.46,
+            "p95": 16861.55
+          },
+          "llm_tokens": {
+            "prompt": 97225,
+            "completion": 8792
+          }
+        },
+        "by_question_type": {
+          "domain-relevant": {
+            "n": 25,
+            "answered": 3,
+            "abstained": 22,
+            "correct": 2,
+            "accuracy": 0.08,
+            "precision_when_answering": 0.6667,
+            "abstention_rate": 0.88,
+            "accuracy_ci95": [
+              0.0,
+              0.2
+            ],
+            "abstain_reasons": {
+              "weak_retrieval_support": 11,
+              "model_insufficient_evidence": 9,
+              "verification_failed": 2
+            },
+            "citations": 5,
+            "citation_precision_gold_pages": 0.2,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 182.43,
+              "p95": 10990.13
+            },
+            "llm_tokens": {
+              "prompt": 22210,
+              "completion": 2435
+            }
+          },
+          "metrics-generated": {
+            "n": 25,
+            "answered": 2,
+            "abstained": 23,
+            "correct": 1,
+            "accuracy": 0.04,
+            "precision_when_answering": 0.5,
+            "abstention_rate": 0.92,
+            "accuracy_ci95": [
+              0.0,
+              0.12
+            ],
+            "abstain_reasons": {
+              "weak_retrieval_support": 19,
+              "verification_failed": 1,
+              "model_insufficient_evidence": 3
+            },
+            "citations": 3,
+            "citation_precision_gold_pages": 1.0,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 1,
+            "latency_ms_total": {
+              "p50": 7294.3,
+              "p95": 19695.09
+            },
+            "llm_tokens": {
+              "prompt": 61095,
+              "completion": 5318
+            }
+          },
+          "novel-generated": {
+            "n": 25,
+            "answered": 5,
+            "abstained": 20,
+            "correct": 3,
+            "accuracy": 0.12,
+            "precision_when_answering": 0.6,
+            "abstention_rate": 0.8,
+            "accuracy_ci95": [
+              0.0,
+              0.24
+            ],
+            "abstain_reasons": {
+              "weak_retrieval_support": 15,
+              "model_insufficient_evidence": 4,
+              "verification_failed": 1
+            },
+            "citations": 6,
+            "citation_precision_gold_pages": 0.6667,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 1,
+            "latency_ms_total": {
+              "p50": 106.84,
+              "p95": 7382.2
+            },
+            "llm_tokens": {
+              "prompt": 13920,
+              "completion": 1039
+            }
+          }
+        },
+        "modes": {
+          "grounded": 75
+        }
+      }
+    },
+    "oracle": {
+      "no_threshold": {
+        "overall": {
+          "n": 75,
+          "answered": 56,
+          "abstained": 19,
+          "correct": 33,
+          "accuracy": 0.44,
+          "precision_when_answering": 0.5893,
+          "abstention_rate": 0.2533,
+          "accuracy_ci95": [
+            0.3333,
+            0.56
+          ],
+          "abstain_reasons": {
+            "verification_failed": 14,
+            "model_insufficient_evidence": 5
+          },
+          "citations": 64,
+          "citation_precision_gold_pages": 1.0,
+          "repaired_answers": 2,
+          "answers_with_ungrounded_numbers": 4,
+          "latency_ms_total": {
+            "p50": 8941.66,
+            "p95": 27249.5
+          },
+          "llm_tokens": {
+            "prompt": 150703,
+            "completion": 19549
+          }
+        },
+        "by_question_type": {
+          "domain-relevant": {
+            "n": 25,
+            "answered": 17,
+            "abstained": 8,
+            "correct": 7,
+            "accuracy": 0.28,
+            "precision_when_answering": 0.4118,
+            "abstention_rate": 0.32,
+            "accuracy_ci95": [
+              0.12,
+              0.48
+            ],
+            "abstain_reasons": {
+              "verification_failed": 4,
+              "model_insufficient_evidence": 4
+            },
+            "citations": 20,
+            "citation_precision_gold_pages": 1.0,
+            "repaired_answers": 1,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 8641.03,
+              "p95": 35787.13
+            },
+            "llm_tokens": {
+              "prompt": 45778,
+              "completion": 7173
+            }
+          },
+          "metrics-generated": {
+            "n": 25,
+            "answered": 19,
+            "abstained": 6,
+            "correct": 13,
+            "accuracy": 0.52,
+            "precision_when_answering": 0.6842,
+            "abstention_rate": 0.24,
+            "accuracy_ci95": [
+              0.32,
+              0.72
+            ],
+            "abstain_reasons": {
+              "verification_failed": 6
+            },
+            "citations": 24,
+            "citation_precision_gold_pages": 1.0,
+            "repaired_answers": 1,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 12191.34,
+              "p95": 23537.32
+            },
+            "llm_tokens": {
+              "prompt": 60442,
+              "completion": 7151
+            }
+          },
+          "novel-generated": {
+            "n": 25,
+            "answered": 20,
+            "abstained": 5,
+            "correct": 13,
+            "accuracy": 0.52,
+            "precision_when_answering": 0.65,
+            "abstention_rate": 0.2,
+            "accuracy_ci95": [
+              0.32,
+              0.72
+            ],
+            "abstain_reasons": {
+              "verification_failed": 4,
+              "model_insufficient_evidence": 1
+            },
+            "citations": 20,
+            "citation_precision_gold_pages": 1.0,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 4,
+            "latency_ms_total": {
+              "p50": 8462.69,
+              "p95": 25990.65
+            },
+            "llm_tokens": {
+              "prompt": 44483,
+              "completion": 5225
+            }
+          }
+        },
+        "modes": {
+          "extract": 45,
+          "grounded": 30
+        }
+      },
+      "with_threshold": {
+        "overall": {
+          "n": 75,
+          "answered": 8,
+          "abstained": 67,
+          "correct": 7,
+          "accuracy": 0.0933,
+          "precision_when_answering": 0.875,
+          "abstention_rate": 0.8933,
+          "accuracy_ci95": [
+            0.0267,
+            0.16
+          ],
+          "abstain_reasons": {
+            "weak_retrieval_support": 48,
+            "verification_failed": 14,
+            "model_insufficient_evidence": 5
+          },
+          "citations": 9,
+          "citation_precision_gold_pages": 1.0,
+          "repaired_answers": 1,
+          "answers_with_ungrounded_numbers": 0,
+          "latency_ms_total": {
+            "p50": 8941.66,
+            "p95": 27249.5
+          },
+          "llm_tokens": {
+            "prompt": 150703,
+            "completion": 19549
+          }
+        },
+        "by_question_type": {
+          "domain-relevant": {
+            "n": 25,
+            "answered": 2,
+            "abstained": 23,
+            "correct": 2,
+            "accuracy": 0.08,
+            "precision_when_answering": 1.0,
+            "abstention_rate": 0.92,
+            "accuracy_ci95": [
+              0.0,
+              0.2
+            ],
+            "abstain_reasons": {
+              "weak_retrieval_support": 15,
+              "verification_failed": 4,
+              "model_insufficient_evidence": 4
+            },
+            "citations": 2,
+            "citation_precision_gold_pages": 1.0,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 8641.03,
+              "p95": 35787.13
+            },
+            "llm_tokens": {
+              "prompt": 45778,
+              "completion": 7173
+            }
+          },
+          "metrics-generated": {
+            "n": 25,
+            "answered": 2,
+            "abstained": 23,
+            "correct": 2,
+            "accuracy": 0.08,
+            "precision_when_answering": 1.0,
+            "abstention_rate": 0.92,
+            "accuracy_ci95": [
+              0.0,
+              0.2
+            ],
+            "abstain_reasons": {
+              "weak_retrieval_support": 17,
+              "verification_failed": 6
+            },
+            "citations": 3,
+            "citation_precision_gold_pages": 1.0,
+            "repaired_answers": 1,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 12191.34,
+              "p95": 23537.32
+            },
+            "llm_tokens": {
+              "prompt": 60442,
+              "completion": 7151
+            }
+          },
+          "novel-generated": {
+            "n": 25,
+            "answered": 4,
+            "abstained": 21,
+            "correct": 3,
+            "accuracy": 0.12,
+            "precision_when_answering": 0.75,
+            "abstention_rate": 0.84,
+            "accuracy_ci95": [
+              0.0,
+              0.28
+            ],
+            "abstain_reasons": {
+              "weak_retrieval_support": 16,
+              "verification_failed": 4,
+              "model_insufficient_evidence": 1
+            },
+            "citations": 4,
+            "citation_precision_gold_pages": 1.0,
+            "repaired_answers": 0,
+            "answers_with_ungrounded_numbers": 0,
+            "latency_ms_total": {
+              "p50": 8462.69,
+              "p95": 25990.65
+            },
+            "llm_tokens": {
+              "prompt": 44483,
+              "completion": 5225
+            }
+          }
+        },
+        "modes": {
+          "extract": 45,
+          "grounded": 30
+        }
+      }
+    }
+  }
+}

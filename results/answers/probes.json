@@ -1,0 +1,410 @@
+{
+  "created_utc": "2026-10-21T17:56:30+00:00",
+  "git": {
+    "commit": "116b93d59d50aea121d258eff8d01dca40d43295",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {},
+  "step": "unanswerable_probes",
+  "probe_file": "data/probes/unanswerable_v1.jsonl",
+  "threshold_used_for_best": 0.9961526989936829,
+  "naive": {
+    "n": 30,
+    "not_abstained": 30,
+    "hallucinated": 2,
+    "hallucination_rate": 0.0667,
+    "by_kind": {
+      "company_not_in_corpus": 1,
+      "period_not_in_corpus": 1
+    },
+    "abstain_reasons": {}
+  },
+  "best": {
+    "n": 30,
+    "not_abstained": 0,
+    "hallucinated": 0,
+    "hallucination_rate": 0.0,
+    "by_kind": {
+      "company_not_in_corpus": 0,
+      "period_not_in_corpus": 0
+    },
+    "abstain_reasons": {
+      "model_insufficient_evidence": 29,
+      "weak_retrieval_support": 1
+    }
+  },
+  "classified_by": "local-chat via gateway, prompt COMMITS_SYSTEM in answer_eval.py",
+  "per_probe": {
+    "naive": [
+      {
+        "probe_id": "probe_company_01",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer does not provide a specific value for Apple's FY2022 total net sales and instead states that the information is not available in the provided sources."
+      },
+      {
+        "probe_id": "probe_company_02",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for Tesla's FY2021 gross margin, even though it mentions related figures for other companies as context without presenting them as the answer."
+      },
+      {
+        "probe_id": "probe_company_03",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for the exact company and period asked."
+      },
+      {
+        "probe_id": "probe_company_04",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available and does not present any figure as the answer."
+      },
+      {
+        "probe_id": "probe_company_05",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for the requested company and period."
+      },
+      {
+        "probe_id": "probe_company_06",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for the requested company and period."
+      },
+      {
+        "probe_id": "probe_company_07",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for the requested company and period."
+      },
+      {
+        "probe_id": "probe_company_08",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available, even though it mentions related figures as context without presenting them as the answer."
+      },
+      {
+        "probe_id": "probe_company_09",
+        "abstained": false,
+        "commits": true,
+        "reason": "commits"
+      },
+      {
+        "probe_id": "probe_company_10",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for Home Depot's FY2021 inventory turnover ratio."
+      },
+      {
+        "probe_id": "probe_company_11",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available."
+      },
+      {
+        "probe_id": "probe_company_12",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for the specific period asked."
+      },
+      {
+        "probe_id": "probe_company_13",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available and does not commit to a value or fact about Walt Disney's FY2022 long-term debt."
+      },
+      {
+        "probe_id": "probe_company_14",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for the requested company and period."
+      },
+      {
+        "probe_id": "probe_company_15",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for the requested company and period."
+      },
+      {
+        "probe_id": "probe_period_01",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer does not provide a specific FY2030 capital expenditure amount for 3M. It only mentions a future expected capital spending range for 2023, which is not the same as the requested FY2030 figure."
+      },
+      {
+        "probe_id": "probe_period_02",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for the specific period asked and does not commit to a value."
+      },
+      {
+        "probe_id": "probe_period_03",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for the specific period asked."
+      },
+      {
+        "probe_id": "probe_period_04",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer provides a net income figure for a different fiscal year (2017) and does not commit to the FY2030 figure."
+      },
+      {
+        "probe_id": "probe_period_05",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer does not commit to a specific value for PepsiCo's Q2 FY2031 net revenue. It provides context and related figures but does not present a definitive answer for the requested period."
+      },
+      {
+        "probe_id": "probe_period_06",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the specific FY2030 debt-to-equity ratio for Verizon is not available in the provided documents."
+      },
+      {
+        "probe_id": "probe_period_07",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer does not provide a specific value for FY2032 and instead gives a value for a different period (FY2021) and mentions a figure for a different period (FY2023) without committing to an exact value. Therefore, it does not commit to an answer for the exact company and period asked."
+      },
+      {
+        "probe_id": "probe_period_08",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for the specific period asked."
+      },
+      {
+        "probe_id": "probe_period_09",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer does not commit to a specific value for FY2029 as it states that the information is not available and provides context about a different period."
+      },
+      {
+        "probe_id": "probe_period_10",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer does not provide a specific value for JPMorgan's Q1 FY2030 net interest income and instead refers to a different period, thus committing to an answer that is not relevant to the question."
+      },
+      {
+        "probe_id": "probe_period_11",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for the requested company and period."
+      },
+      {
+        "probe_id": "probe_period_12",
+        "abstained": false,
+        "commits": true,
+        "reason": "The answer commits to a yes/no answer by stating that Coca-Cola's operating income grew from FY2029 to FY2030."
+      },
+      {
+        "probe_id": "probe_period_13",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer states that the information is not available for the specific year asked, even though it provides context with related figures."
+      },
+      {
+        "probe_id": "probe_period_14",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer does not provide a specific gross profit margin for FY2031 and instead gives context about a different fiscal year."
+      },
+      {
+        "probe_id": "probe_period_15",
+        "abstained": false,
+        "commits": false,
+        "reason": "The answer provides working capital for a different fiscal year (FY2022) than the one asked (FY2032)."
+      }
+    ],
+    "best": [
+      {
+        "probe_id": "probe_company_01",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_02",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_03",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_04",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_05",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_06",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_07",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_08",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_09",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_10",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_11",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_12",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_13",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_14",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_company_15",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_01",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_02",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_03",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_04",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_05",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_06",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_07",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_08",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_09",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_10",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_11",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_12",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_13",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_14",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      },
+      {
+        "probe_id": "probe_period_15",
+        "abstained": true,
+        "commits": null,
+        "reason": null
+      }
+    ]
+  }
+}
