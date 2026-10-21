@@ -31,6 +31,30 @@ THRESHOLD_FILE = OUT / "abstention_threshold.json"
 THRESHOLD_RULE = "dev, config best: abstain if support < t; t maximizes (#correct - #incorrect) among answered"
 PROBES = config.DATA_DIR / "probes" / "unanswerable_v1.jsonl"
 
+# Free-text answers (naive) often decline in words. A probe counts as a hallucination only when the
+# answer commits to an answer for the company and period asked, including presenting another period's
+# or company's figure as the answer.
+COMMITS_SYSTEM = """You check answers to questions that cannot be answered from the available documents.
+Decide whether the answer COMMITS to an answer for the exact company and period asked: it states a value,
+a yes/no, or a fact as the answer, including when it presents a figure for a different period or company
+as if it answered the question. If the answer says the information is not available (even if it mentions
+related figures as context without presenting them as the answer), it does NOT commit.
+Reply with JSON only."""
+COMMITS_SCHEMA = {"type": "object", "properties": {"reason": {"type": "string"}, "commits": {"type": "boolean"}},
+                  "required": ["reason", "commits"]}
+
+
+def commits_to_answer(gateway: GatewayClient, question: str, answer: str, request_id: str) -> dict:
+    reply = gateway.chat([{"role": "system", "content": COMMITS_SYSTEM},
+                          {"role": "user", "content": f"Question: {question}\n\nAnswer: {answer}"}],
+                         "local-chat", request_id=request_id, temperature=0.0, seed=0, max_tokens=200,
+                         json_schema=COMMITS_SCHEMA)
+    try:
+        data = json.loads(reply.content)
+    except json.JSONDecodeError:
+        data = {"commits": True, "reason": "classifier reply was not valid JSON; counted as committing"}
+    return {"commits": bool(data.get("commits")), "reason": data.get("reason", "")}
+
 
 def _read(path) -> list[dict]:
     if not path.exists():
@@ -192,15 +216,27 @@ def probes() -> None:
         rows[name] = [{"probe_id": p["probe_id"], "kind": p["kind"],
                        **answerer.answer(p["question"], cfg, request_id=f"probe-{name}-{p['probe_id']}")}
                       for p in probes_list]
+    questions = {p["probe_id"]: p["question"] for p in probes_list}
+    for name, rs in rows.items():
+        for r in rs:
+            r["classification"] = None if r["abstained"] else commits_to_answer(
+                gateway, questions[r["probe_id"]], r["answer"], f"probe-classify-{name}-{r['probe_id']}")
+
     def rate(rs):
         answered = [r for r in rs if not r["abstained"]]
-        return {"n": len(rs), "answered": len(answered), "hallucination_rate": round(len(answered) / len(rs), 4),
-                "by_kind": {k: sum(1 for r in answered if r["kind"] == k) for k in sorted({r["kind"] for r in rs})},
+        halluc = [r for r in answered if r["classification"]["commits"]]
+        return {"n": len(rs), "not_abstained": len(answered), "hallucinated": len(halluc),
+                "hallucination_rate": round(len(halluc) / len(rs), 4),
+                "by_kind": {k: sum(1 for r in halluc if r["kind"] == k) for k in sorted({r["kind"] for r in rs})},
                 "abstain_reasons": {x: sum(1 for r in rs if r.get("abstain_reason") == x)
                                     for x in sorted({r.get("abstain_reason") for r in rs if r["abstained"]})}}
     payload = {**provenance.stamp(step="unanswerable_probes"), "probe_file": "data/probes/unanswerable_v1.jsonl",
                "threshold_used_for_best": t, "naive": rate(rows["naive"]), "best": rate(rows["best"]),
-               "answered_probe_ids": {n: [r["probe_id"] for r in rs if not r["abstained"]] for n, rs in rows.items()}}
+               "classified_by": "local-chat via gateway, prompt COMMITS_SYSTEM in answer_eval.py",
+               "per_probe": {n: [{"probe_id": r["probe_id"], "abstained": r["abstained"],
+                                  "commits": None if r["abstained"] else r["classification"]["commits"],
+                                  "reason": None if r["abstained"] else r["classification"]["reason"]} for r in rs]
+                             for n, rs in rows.items()}}
     _write_json(OUT / "probes.json", payload)
     (config.REPO_ROOT / "runs" / "probes.jsonl").write_text(
         "\n".join(json.dumps(r) for rs in rows.values() for r in rs) + "\n", encoding="utf-8", newline="\n")
