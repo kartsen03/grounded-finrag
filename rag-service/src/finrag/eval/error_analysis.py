@@ -10,7 +10,8 @@ Each incorrect or abstained answer gets the first matching category:
   arithmetic          numeric question answered from the right page but the number is wrong
                       (model arithmetic in grounded mode; extraction or metric definition in extract mode)
   unsupported_claim   the answer states numbers that do not appear on the pages it cites
-  over_abstention     the model abstained although a gold page was among its sources
+  abstained_despite_gold_page   abstained (model flag or failed verification) although a gold page
+                      was among the sources; failed verification is often a caught hallucination
   other               anything else (reasoning, judgement, ambiguous reference answer)
 Writes results/answers/error_analysis_<split>_<config>.json (IDs and counts, no question text).
 """
@@ -24,11 +25,23 @@ from collections import Counter
 from functools import lru_cache
 
 from finrag import config, corpus, provenance
-from finrag.answer.numbers import grounded, numbers_in
+import re
+
+from finrag.answer.numbers import grounded, parse_number
 from finrag.eval.answer_eval import _joined, apply_threshold, load_threshold
+from finrag.retrieval.routing import detect_years
 
 CATEGORIES = ("retrieval_miss", "table_parse_error", "wrong_period", "arithmetic", "unsupported_claim",
-              "over_abstention", "other")
+              "abstained_despite_gold_page", "other")
+
+
+# Only formatted figures (thousands separators or decimals) are checked: bare integers in evidence text are
+# often printed page numbers (stripped by the parser on purpose) or dates glued together upstream.
+_FIGURE = re.compile(r"(?<![A-Za-z])\(?\$?\d{1,3}(?:,\d{3})+(?:\.\d+)?\)?|\d+\.\d+")
+
+
+def _figures(text: str) -> list[float]:
+    return [v for v in (parse_number(m.group(0)) for m in _FIGURE.finditer(text)) if v is not None]
 
 
 @lru_cache(maxsize=None)
@@ -37,6 +50,20 @@ def _page_text(doc: str, page_idx: int) -> str:
     with gzip.open(path, "rt", encoding="utf-8") as f:
         pages = json.load(f)
     return "\n".join(b["text"] for b in pages[page_idx]["blocks"])
+
+
+def _extracted_wrong_year(row: dict, question: str) -> bool:
+    """True when no extracted line item's period mentions the latest fiscal year the question asks about."""
+    years = detect_years(question)
+    if not years or not row.get("raw"):
+        return False
+    try:
+        inputs = json.loads(row["raw"][-1]["raw"]).get("inputs") or []
+    except (json.JSONDecodeError, AttributeError):
+        return False
+    target = max(years)
+    marks = (str(target), f"FY{target % 100:02d}", f"'{target % 100:02d}")
+    return bool(inputs) and not any(any(m in str(i.get("period", "")) for m in marks) for i in inputs)
 
 
 def categorize(row: dict) -> str:
@@ -50,16 +77,18 @@ def categorize(row: dict) -> str:
         key = (ev["doc_name"], int(ev["evidence_page_num"]))
         if key in gold_given:
             text = _page_text(*key)
-            if any(not grounded(v, text) for v in numbers_in(ev["evidence_text"]) if abs(v) >= 10):
+            if any(not grounded(v, text) for v in _figures(ev["evidence_text"])):
                 return "table_parse_error"
     if row["abstained"]:
-        return "over_abstention"
+        return "abstained_despite_gold_page"
     meta = corpus.all_doc_meta()
     gold_doc = meta[q["doc_name"]]
     cited_docs = {c[0] for c in row.get("citations") or []}
     if cited_docs and all((meta[d].fiscal_year, meta[d].fiscal_quarter) != (gold_doc.fiscal_year,
                                                                            gold_doc.fiscal_quarter)
                           for d in cited_docs if d in meta):
+        return "wrong_period"
+    if row["mode"] == "extract" and _extracted_wrong_year(row, q["question"]):
         return "wrong_period"
     if q["question_type"] == "metrics-generated" or row["mode"] == "extract":
         return "arithmetic"
@@ -72,15 +101,17 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--split", default="dev")
     parser.add_argument("--config", default="best")
+    parser.add_argument("--with-threshold", action="store_true",
+                        help="apply the tuned abstention threshold first (default: analyze raw answers)")
     args = parser.parse_args(argv)
-    rows = apply_threshold(_joined(args.split, args.config), load_threshold() if args.config == "best" else None)
+    rows = apply_threshold(_joined(args.split, args.config), load_threshold() if args.with_threshold else None)
     failures = [r for r in rows if r["abstained"] or not (r["judge"] and r["judge"]["correct"])]
     labeled = [{"financebench_id": r["financebench_id"], "question_type": r["question_type"], "mode": r["mode"],
                 "abstained": r["abstained"], "abstain_reason": r.get("abstain_reason"), "category": categorize(r)}
                for r in failures]
     counts = Counter(x["category"] for x in labeled)
     payload = {**provenance.stamp(step=f"error_analysis_{args.split}_{args.config}"), "split": args.split,
-               "config": args.config, "n_questions": len(rows), "n_failures": len(labeled),
+               "config": args.config, "threshold_applied": args.with_threshold, "n_questions": len(rows), "n_failures": len(labeled),
                "counts": {c: counts.get(c, 0) for c in CATEGORIES},
                "by_category": {c: [x["financebench_id"] for x in labeled if x["category"] == c] for c in CATEGORIES},
                "failures": labeled}
