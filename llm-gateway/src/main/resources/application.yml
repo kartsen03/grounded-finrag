@@ -1,6 +1,21 @@
 spring:
   application:
     name: llm-gateway
+  datasource:
+    url: ${GATEWAY_DB_URL:jdbc:postgresql://127.0.0.1:5432/finrag}
+    username: ${GATEWAY_DB_USER:finrag}
+    password: ${POSTGRES_PASSWORD:finrag-dev}
+  flyway:
+    # The gateway owns its own schema; the rag-service's tables live in public.
+    schemas: gateway
+    default-schema: gateway
+    create-schemas: true
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:finrag-dev}
+      timeout: 500ms
 
 server:
   address: ${GATEWAY_BIND_ADDRESS:127.0.0.1}
@@ -10,21 +25,33 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health,info,metrics,prometheus
   endpoint:
     health:
-      show-details: never
-
-logging:
-  pattern:
-    level: "%5p [%X{requestId:-}]"
+      show-details: always
+      show-components: always
 
 gateway:
+  rate-limit:
+    requests-per-minute: ${GATEWAY_RATE_LIMIT_PER_MINUTE:600}
+    fail-open: true
+  cache:
+    enabled: ${GATEWAY_CACHE_ENABLED:true}
+    ttl: 24h
+    max-embedding-inputs: 16
+  resilience:
+    retry-attempts: 3
+    retry-wait: 200ms
+    breaker-failure-rate-percent: 50
+    breaker-window-calls: 20
+    breaker-open-for: 30s
   clients:
     # Only SHA-256 hashes of API keys live in config. The default is the hash of the local
     # development key "dev-rag-service-key"; set RAG_SERVICE_KEY_SHA256 for anything else.
+    # Bulk indexing sends about 600 embedding calls a minute, so this client gets more headroom.
     - id: rag-service
       key-sha256: ${RAG_SERVICE_KEY_SHA256:3ba18319a2ad80604249578a621bb2eb761c09e23bf7895434dc43dadff51915}
+      requests-per-minute: ${RAG_SERVICE_RATE_LIMIT_PER_MINUTE:3000}
   providers:
     ollama:
       type: ollama
@@ -38,6 +65,7 @@ gateway:
       connect-timeout: 2s
       read-timeout: 120s
     openai:
+      # Optional hosted provider: disabled unless OPENAI_API_KEY is set.
       type: openai
       base-url: ${OPENAI_BASE_URL:https://api.openai.com}
       api-key: ${OPENAI_API_KEY:}
@@ -48,6 +76,12 @@ gateway:
       kind: chat
       provider: ollama
       upstream: qwen2.5:7b-instruct-q4_K_M
+      # Used only when the openai provider is enabled and Ollama is failing.
+      fallbacks:
+        - provider: openai
+          upstream: ${OPENAI_CHAT_MODEL:gpt-4o-mini}
+      cost-per-1k-prompt-usd: 0
+      cost-per-1k-completion-usd: 0
     "[bge-base-en-v1.5]":
       kind: embedding
       provider: local-models

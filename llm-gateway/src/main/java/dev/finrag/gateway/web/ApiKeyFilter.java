@@ -13,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import dev.finrag.gateway.audit.AuditLog;
+import dev.finrag.gateway.audit.AuditRecord;
 import dev.finrag.gateway.config.GatewayProperties;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -30,9 +32,11 @@ public class ApiKeyFilter extends OncePerRequestFilter {
 
     public static final String CLIENT_ATTRIBUTE = "clientId";
     private final List<GatewayProperties.Client> clients;
+    private final AuditLog audit;
 
-    public ApiKeyFilter(GatewayProperties properties) {
-        this.clients = properties.clients() == null ? List.of() : properties.clients();
+    public ApiKeyFilter(GatewayProperties properties, AuditLog audit) {
+        this.clients = properties.clients();
+        this.audit = audit;
     }
 
     @Override
@@ -49,6 +53,8 @@ public class ApiKeyFilter extends OncePerRequestFilter {
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.getWriter().write("{\"request_id\":\"" + RequestIdFilter.of(request)
                     + "\",\"type\":\"unauthorized\",\"message\":\"missing or invalid API key\"}");
+            audit.record(AuditRecord.rejected(RequestIdFilter.of(request), null, request.getRequestURI(),
+                    "unauthorized", 401));
             return;
         }
         request.setAttribute(CLIENT_ATTRIBUTE, client.get());
