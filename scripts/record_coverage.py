@@ -40,7 +40,7 @@ def python_coverage() -> dict:
 
 def java_coverage() -> dict:
     mvnw = GW / ("mvnw.cmd" if os.name == "nt" else "mvnw")
-    subprocess.run([str(mvnw), "-q", "-B", "verify", "-Djar.skip=true", "-Dspring-boot.repackage.skip=true"],
+    subprocess.run([str(mvnw), "-q", "-B", "verify"],
                    cwd=GW, capture_output=True, text=True, shell=os.name == "nt")
     tests = failed = 0
     for report in (GW / "target" / "surefire-reports").glob("*.txt"):
