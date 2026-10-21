@@ -1,0 +1,124 @@
+{
+  "created_utc": "2026-10-21T15:33:44+00:00",
+  "git": {
+    "commit": "cfa3d785f36023df88172108aa4e60db49c8d960",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {
+    "pdfplumber": "0.11.7",
+    "pdfminer.six": "20250506",
+    "tokenizers": "0.23.3"
+  },
+  "step": "ingestion",
+  "settings": {
+    "chunk_tokens": 350,
+    "overlap_tokens": 50,
+    "tokenizer": "BAAI/bge-base-en-v1.5@a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "workers": 10
+  },
+  "documents": 84,
+  "pages": 12013,
+  "blocks": {
+    "heading": 26006,
+    "table": 7129,
+    "text": 91397
+  },
+  "wall_seconds": 696.2,
+  "parse_seconds_total": 6211.8,
+  "issues_by_type": {
+    "dehyphenated": 50,
+    "low_text_page": 187,
+    "rotated_text": 4,
+    "split_word_joined": 384,
+    "table_of_contents_page": 160,
+    "unmapped_cid_glyphs": 3
+  },
+  "docs_with_issue": {
+    "dehyphenated": 33,
+    "low_text_page": 45,
+    "rotated_text": 4,
+    "split_word_joined": 52,
+    "table_of_contents_page": 71,
+    "unmapped_cid_glyphs": 3
+  },
+  "issue_examples": {
+    "dehyphenated": [
+      "3M_2018_10K p51: pre- tax -> pretax",
+      "3M_2022_10K p76: pre- tax -> pretax",
+      "3M_2023Q2_10Q p35: clean- up -> cleanup",
+      "3M_2023Q2_10Q p43: on- site -> onsite",
+      "ACTIVISIONBLIZZARD_2019_10K p28: non- public -> nonpublic",
+      "ADOBE_2015_10K p33: non- current -> noncurrent",
+      "AES_2022_10K p31: Non- compliance -> Noncompliance",
+      "AES_2022_10K p94: non- recurring -> nonrecurring"
+    ],
+    "low_text_page": [
+      "AES_2022_10K p130: 0 chars (image-only or blank?)",
+      "AES_2022_10K p135: 150 chars (image-only or blank?)",
+      "AES_2022_10K p187: 0 chars (image-only or blank?)",
+      "AES_2022_10K p205: 146 chars (image-only or blank?)",
+      "AMAZON_2017_10K p14: 57 chars (image-only or blank?)",
+      "AMCOR_2020_10K p4: 141 chars (image-only or blank?)",
+      "AMCOR_2020_10K p70: 154 chars (image-only or blank?)",
+      "AMCOR_2020_10K p146: 153 chars (image-only or blank?)"
+    ],
+    "rotated_text": [
+      "JPMORGAN_2021Q1_10Q p67: 8 words not upright",
+      "JPMORGAN_2022Q2_10Q p75: 8 words not upright",
+      "JPMORGAN_2022_10K p135: 8 words not upright",
+      "JPMORGAN_2023Q2_10Q p84: 8 words not upright"
+    ],
+    "split_word_joined": [
+      "3M_2018_10K p14: OVERVI EW -> OVERVIEW (gap 1.9pt)",
+      "3M_2018_10K p26: OPERATI ONS -> OPERATIONS (gap 1.3pt)",
+      "3M_2018_10K p31: SEG MENT -> SEGMENT (gap 1.3pt)",
+      "3M_2018_10K p37: AR EA -> AREA (gap 1.1pt)",
+      "3M_2018_10K p38: ESTIMA TES -> ESTIMATES (gap 1.4pt)",
+      "3M_2018_10K p42: LIQUIDI TY -> LIQUIDITY (gap 1.5pt)",
+      "3M_2018_10K p49: INSTRUMEN TS -> INSTRUMENTS (gap 1.7pt)",
+      "3M_2018_10K p55: Incom e -> Income (gap 1.2pt)"
+    ],
+    "table_of_contents_page": [
+      "3M_2018_10K p1: section tracking skipped",
+      "3M_2018_10K p2: section tracking skipped",
+      "3M_2018_10K p11: section tracking skipped",
+      "3M_2022_10K p1: section tracking skipped",
+      "3M_2022_10K p2: section tracking skipped",
+      "3M_2022_10K p124: section tracking skipped",
+      "3M_2023Q2_10Q p1: section tracking skipped",
+      "3M_2023Q2_10Q p84: section tracking skipped"
+    ],
+    "unmapped_cid_glyphs": [
+      "AMD_2015_10K p107: 2 (cid:N) sequences",
+      "BESTBUY_2023_10K p0: 12 (cid:N) sequences",
+      "BESTBUY_2024Q2_10Q p0: 8 (cid:N) sequences"
+    ]
+  },
+  "chunks": {
+    "fixed": {
+      "chunks": 29699,
+      "tokens_p50": 350,
+      "tokens_p95": 350,
+      "tokens_max": 352,
+      "share_with_table": 0.3355,
+      "share_spanning_pages": 0.4438,
+      "share_with_section": 0.9447
+    },
+    "structure": {
+      "chunks": 37028,
+      "tokens_p50": 269,
+      "tokens_p95": 341,
+      "tokens_max": 474,
+      "share_with_table": 0.2287,
+      "share_spanning_pages": 0.0,
+      "share_with_section": 0.9456
+    }
+  }
+}
