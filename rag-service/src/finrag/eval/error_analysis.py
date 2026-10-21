@@ -37,7 +37,7 @@ CATEGORIES = ("retrieval_miss", "table_parse_error", "wrong_period", "arithmetic
 
 # Only formatted figures (thousands separators or decimals) are checked: bare integers in evidence text are
 # often printed page numbers (stripped by the parser on purpose) or dates glued together upstream.
-_FIGURE = re.compile(r"(?<![A-Za-zd,.])\(?\$?\d{1,3}(?:,\d{3})+(?:\.\d+)?\)?|\d+\.\d+")
+_FIGURE = re.compile(r"(?<![A-Za-z\d,.])\(?\$?\d{1,3}(?:,\d{3})+(?:\.\d+)?\)?|\d+\.\d+")
 
 
 def _figures(text: str) -> list[float]:
