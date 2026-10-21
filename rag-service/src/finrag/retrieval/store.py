@@ -16,7 +16,7 @@ import psycopg
 from pgvector.psycopg import register_vector
 
 DEFAULT_DSN = "postgresql://finrag:finrag-dev@127.0.0.1:5432/finrag"
-TABLES = {"fixed": "chunks_fixed", "structure": "chunks_structure"}
+TABLES = {"fixed": "chunks_fixed", "structure": "chunks_structure", "ci": "chunks_ci"}  # ci: CI gate fixture
 EF_SEARCH = 100
 COLUMNS = ["chunk_id", "doc_name", "company", "doc_type", "fiscal_year", "fiscal_quarter", "page_idx", "pages",
            "section", "subsection", "has_table", "n_tokens", "text", "embed_text"]

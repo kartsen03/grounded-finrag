@@ -88,7 +88,14 @@ class Retriever:
     def __init__(self, gateway: GatewayClient, store: VectorStore):
         self.gateway = gateway
         self.store = store
-        self.docs = corpus.corpus_docs()
+        self._docs: list | None = None
+
+    @property
+    def docs(self) -> list:
+        # Loaded on first use: only routing needs the FinanceBench metadata (the CI gate runs without it).
+        if self._docs is None:
+            self._docs = corpus.corpus_docs()
+        return self._docs
 
     def retrieve(self, question: str, cfg: RetrievalConfig, request_id: str | None = None) -> RetrievalResult:
         timings: dict[str, float] = {}

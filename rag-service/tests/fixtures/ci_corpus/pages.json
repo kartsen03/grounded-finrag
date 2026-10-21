@@ -1,0 +1,75 @@
+{
+  "_note": "Synthetic filings for fictional companies, written for the CI retrieval gate. Not real data.",
+  "documents": [
+    {
+      "doc_name": "ACMEWIDGETS_2023_10K", "company": "Acme Widgets", "doc_type": "10-K", "fiscal_year": 2023,
+      "pages": [
+        {"page_idx": 0, "blocks": [
+          {"kind": "heading", "text": "Item 1. Business", "section": "Item 1. Business", "subsection": null},
+          {"kind": "text", "text": "Acme Widgets designs and manufactures industrial fasteners and precision widgets for automotive and aerospace customers. Our largest customer accounted for 14% of net sales in fiscal 2023.", "section": "Item 1. Business", "subsection": null}]},
+        {"page_idx": 1, "blocks": [
+          {"kind": "heading", "text": "Consolidated Statements of Operations", "section": "Item 8. Financial Statements", "subsection": "Consolidated Statements of Operations"},
+          {"kind": "table", "text": "| (Millions) | 2023 | 2022 |\n|---|---|---|\n| Net sales | 4,210 | 3,880 |\n| Cost of sales | 2,945 | 2,790 |\n| Gross profit | 1,265 | 1,090 |\n| Operating income | 612 | 498 |\n| Net income | 455 | 371 |", "section": "Item 8. Financial Statements", "subsection": "Consolidated Statements of Operations"}]},
+        {"page_idx": 2, "blocks": [
+          {"kind": "heading", "text": "Consolidated Statements of Cash Flows", "section": "Item 8. Financial Statements", "subsection": "Consolidated Statements of Cash Flows"},
+          {"kind": "table", "text": "| (Millions) | 2023 | 2022 |\n|---|---|---|\n| Net cash provided by operating activities | 702 | 615 |\n| Purchases of property, plant and equipment | (288) | (241) |\n| Dividends paid | (120) | (110) |", "section": "Item 8. Financial Statements", "subsection": "Consolidated Statements of Cash Flows"}]}
+      ]
+    },
+    {
+      "doc_name": "BOREALISENERGY_2022_10K", "company": "Borealis Energy", "doc_type": "10-K", "fiscal_year": 2022,
+      "pages": [
+        {"page_idx": 0, "blocks": [
+          {"kind": "heading", "text": "Item 1A. Risk Factors", "section": "Item 1A. Risk Factors", "subsection": null},
+          {"kind": "text", "text": "Borealis Energy operates wind farms in the northern plains. Our results depend on wind conditions; a calm year can reduce generation revenue materially. We also face interest rate risk on variable-rate project debt.", "section": "Item 1A. Risk Factors", "subsection": null}]},
+        {"page_idx": 1, "blocks": [
+          {"kind": "heading", "text": "Consolidated Balance Sheets", "section": "Item 8. Financial Statements", "subsection": "Consolidated Balance Sheets"},
+          {"kind": "table", "text": "| (Millions) | December 31, 2022 | December 31, 2021 |\n|---|---|---|\n| Total current assets | 1,140 | 980 |\n| Total current liabilities | 760 | 820 |\n| Long-term debt | 3,450 | 3,610 |\n| Total stockholders' equity | 2,210 | 2,050 |", "section": "Item 8. Financial Statements", "subsection": "Consolidated Balance Sheets"}]},
+        {"page_idx": 2, "blocks": [
+          {"kind": "heading", "text": "Generation statistics", "section": "Item 7. Management's Discussion and Analysis", "subsection": "Generation statistics"},
+          {"kind": "text", "text": "Borealis Energy generated 9.8 terawatt-hours of electricity in 2022, compared with 10.4 terawatt-hours in 2021, as average wind speeds were lower across the fleet. Installed capacity reached 3.1 gigawatts.", "section": "Item 7. Management's Discussion and Analysis", "subsection": "Generation statistics"}]}
+      ]
+    },
+    {
+      "doc_name": "CORALBANK_2023Q2_10Q", "company": "Coral Bank", "doc_type": "10-Q", "fiscal_year": 2023, "fiscal_quarter": 2,
+      "pages": [
+        {"page_idx": 0, "blocks": [
+          {"kind": "heading", "text": "Net interest income", "section": "Item 2. Management's Discussion and Analysis", "subsection": "Net interest income"},
+          {"kind": "text", "text": "Coral Bank's net interest income was $1,320 million in the second quarter of 2023, up from $1,180 million a year earlier, driven by higher yields on commercial loans. Net interest margin was 3.4%.", "section": "Item 2. Management's Discussion and Analysis", "subsection": "Net interest income"}]},
+        {"page_idx": 1, "blocks": [
+          {"kind": "heading", "text": "Capital ratios", "section": "Item 2. Management's Discussion and Analysis", "subsection": "Capital ratios"},
+          {"kind": "table", "text": "| Ratio | June 30, 2023 | December 31, 2022 |\n|---|---|---|\n| Common equity tier 1 | 11.8% | 11.2% |\n| Tier 1 leverage | 8.9% | 8.6% |", "section": "Item 2. Management's Discussion and Analysis", "subsection": "Capital ratios"}]},
+        {"page_idx": 2, "blocks": [
+          {"kind": "heading", "text": "Allowance for credit losses", "section": "Item 1. Financial Statements", "subsection": "Allowance for credit losses"},
+          {"kind": "text", "text": "The allowance for credit losses increased to $2,040 million at June 30, 2023 from $1,910 million at December 31, 2022, reflecting growth in commercial real estate exposure.", "section": "Item 1. Financial Statements", "subsection": "Allowance for credit losses"}]}
+      ]
+    },
+    {
+      "doc_name": "DUNEFOODS_2021_10K", "company": "Dune Foods", "doc_type": "10-K", "fiscal_year": 2021,
+      "pages": [
+        {"page_idx": 0, "blocks": [
+          {"kind": "heading", "text": "Item 1. Business", "section": "Item 1. Business", "subsection": null},
+          {"kind": "text", "text": "Dune Foods produces packaged snacks and breakfast cereals sold through grocery and convenience channels. The company operates 14 manufacturing plants and employed about 18,000 people at year end.", "section": "Item 1. Business", "subsection": null}]},
+        {"page_idx": 1, "blocks": [
+          {"kind": "heading", "text": "Segment results", "section": "Item 7. Management's Discussion and Analysis", "subsection": "Segment results"},
+          {"kind": "table", "text": "| Segment (Millions) | Net sales 2021 | Operating profit 2021 |\n|---|---|---|\n| Snacks | 6,120 | 1,010 |\n| Cereal | 3,480 | 540 |\n| International | 1,950 | 210 |", "section": "Item 7. Management's Discussion and Analysis", "subsection": "Segment results"}]},
+        {"page_idx": 2, "blocks": [
+          {"kind": "heading", "text": "Inventories", "section": "Item 8. Financial Statements", "subsection": "Inventories"},
+          {"kind": "table", "text": "| (Millions) | 2021 | 2020 |\n|---|---|---|\n| Raw materials | 410 | 365 |\n| Finished goods | 690 | 640 |\n| Total inventories | 1,100 | 1,005 |", "section": "Item 8. Financial Statements", "subsection": "Inventories"}]}
+      ]
+    }
+  ],
+  "questions": [
+    {"id": "ci01", "question": "What were Acme Widgets' net sales in fiscal 2023?", "gold": [["ACMEWIDGETS_2023_10K", 1]]},
+    {"id": "ci02", "question": "How much did Acme Widgets spend on purchases of property, plant and equipment in 2023?", "gold": [["ACMEWIDGETS_2023_10K", 2]]},
+    {"id": "ci03", "question": "What share of Acme Widgets' net sales came from its largest customer?", "gold": [["ACMEWIDGETS_2023_10K", 0]]},
+    {"id": "ci04", "question": "What risks does Borealis Energy face from weather?", "gold": [["BOREALISENERGY_2022_10K", 0]]},
+    {"id": "ci05", "question": "What was Borealis Energy's long-term debt at the end of 2022?", "gold": [["BOREALISENERGY_2022_10K", 1]]},
+    {"id": "ci06", "question": "How many terawatt-hours did Borealis Energy generate in 2022?", "gold": [["BOREALISENERGY_2022_10K", 2]]},
+    {"id": "ci07", "question": "What was Coral Bank's net interest margin in Q2 2023?", "gold": [["CORALBANK_2023Q2_10Q", 0]]},
+    {"id": "ci08", "question": "What was Coral Bank's common equity tier 1 ratio at June 30, 2023?", "gold": [["CORALBANK_2023Q2_10Q", 1]]},
+    {"id": "ci09", "question": "Why did Coral Bank's allowance for credit losses increase?", "gold": [["CORALBANK_2023Q2_10Q", 2]]},
+    {"id": "ci10", "question": "How many manufacturing plants does Dune Foods operate?", "gold": [["DUNEFOODS_2021_10K", 0]]},
+    {"id": "ci11", "question": "What was the operating profit of Dune Foods' cereal segment in 2021?", "gold": [["DUNEFOODS_2021_10K", 1]]},
+    {"id": "ci12", "question": "What were Dune Foods' total inventories in 2021?", "gold": [["DUNEFOODS_2021_10K", 2]]}
+  ]
+}
