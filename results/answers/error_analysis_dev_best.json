@@ -1,7 +1,7 @@
 {
-  "created_utc": "2026-10-21T18:02:03+00:00",
+  "created_utc": "2026-10-21T18:02:19+00:00",
   "git": {
-    "commit": "da4f41a2fd6b951eff6704767a3e63a664c69481",
+    "commit": "81c736f5cb3b4ed497fc841d1fc5c9b46a3ff705",
     "dirty": true
   },
   "machine": {
@@ -20,11 +20,11 @@
   "n_failures": 56,
   "counts": {
     "retrieval_miss": 28,
-    "table_parse_error": 1,
+    "table_parse_error": 0,
     "wrong_period": 0,
     "arithmetic": 5,
     "unsupported_claim": 2,
-    "abstained_despite_gold_page": 12,
+    "abstained_despite_gold_page": 13,
     "other": 8
   },
   "by_category": {
@@ -58,9 +58,7 @@
       "financebench_id_04784",
       "financebench_id_07966"
     ],
-    "table_parse_error": [
-      "financebench_id_04660"
-    ],
+    "table_parse_error": [],
     "wrong_period": [],
     "arithmetic": [
       "financebench_id_01226",
@@ -82,6 +80,7 @@
       "financebench_id_03031",
       "financebench_id_03856",
       "financebench_id_04412",
+      "financebench_id_04660",
       "financebench_id_04980",
       "financebench_id_06247",
       "financebench_id_06655",
@@ -481,7 +480,7 @@
       "mode": "extract",
       "abstained": true,
       "abstain_reason": "verification_failed",
-      "category": "table_parse_error"
+      "category": "abstained_despite_gold_page"
     },
     {
       "financebench_id": "financebench_id_04784",
