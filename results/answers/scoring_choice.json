@@ -1,0 +1,7 @@
+{
+  "field": "judge_correct",
+  "label": "raw LLM judge verdict",
+  "decided_before_test_scoring": true,
+  "reason": "Higher agreement with the 40 hand labels on dev: raw judge 0.7 agreement, kappa 0.4483; with the 1% tolerance override 0.675, kappa 0.4091. All disagreements are judge-strict (0 judge-correct/human-incorrect), so reported accuracies are lower bounds.",
+  "agreement_file": "results/answers/judge_agreement.json"
+}
