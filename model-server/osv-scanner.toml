@@ -1,0 +1,9 @@
+# Accepted vulnerability findings for the model server, each with a reason and a review date.
+
+[[IgnoredVulns]]
+id = "GHSA-rrmf-rvhw-rf47"
+ignoreUntil = 2027-01-31T00:00:00Z
+reason = """torch 2.11.0, fixed in 2.13.0. Upgrading torch changes embedding outputs, so every committed
+retrieval and answer result would have to be re-indexed and re-evaluated. The model server only loads
+pinned safetensors revisions from Hugging Face, binds to localhost / a private compose network, and is
+reachable only by the gateway. Upgrade at the next full re-baseline, before this date."""
