@@ -1,7 +1,7 @@
 {
-  "created_utc": "2026-10-21T15:52:22+00:00",
+  "created_utc": "2026-10-22T01:43:48+00:00",
   "git": {
-    "commit": "ea1d08b896074528dab63acac03bb8a2b898bc33",
+    "commit": "d18c116e19d8ce0d560846628a30c9c13a728977",
     "dirty": false
   },
   "machine": {
@@ -12,8 +12,8 @@
     "python": "3.11.9"
   },
   "packages": {
-    "pdfplumber": "0.11.7",
-    "pdfminer.six": "20250506",
+    "pdfplumber": "0.11.10",
+    "pdfminer.six": "20260107",
     "tokenizers": "0.23.3"
   },
   "step": "ingestion",
@@ -30,8 +30,8 @@
     "table": 7129,
     "text": 91397
   },
-  "wall_seconds": 728.4,
-  "parse_seconds_total": 6554.9,
+  "wall_seconds": 613.3,
+  "parse_seconds_total": 5636.2,
   "issues_by_type": {
     "control_chars_removed": 13,
     "dehyphenated": 50,
