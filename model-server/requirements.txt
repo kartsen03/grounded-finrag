@@ -9,7 +9,7 @@ fastapi==0.156.3
 pydantic==2.14.1
 uvicorn[standard]==0.54.0
 # Floors for transitive dependencies with known vulnerabilities (OSV-Scanner, 2026-10-22).
-anyio>=4.14.2
+anyio>=4.15.1
 certifi>=2026.10.19
 idna>=3.15
 # torch 2.11 requires setuptools<82; an exact pin (newest below 82) so scanners do not resolve it to an old release.
