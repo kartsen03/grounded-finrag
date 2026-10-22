@@ -1,8 +1,14 @@
 # Install torch first from the PyTorch index that matches your GPU, e.g.
 #   pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cu128
-# (CPU only: --index-url https://download.pytorch.org/whl/cpu)
+# (CPU only: --index-url https://download.pytorch.org/whl/cpu). The pin below is satisfied by
+# either local build and lets dependency scanners see the version actually used.
+torch==2.11.0
 sentence-transformers==6.1.0
 transformers==5.20.2
 fastapi==0.156.3
 pydantic==2.14.1
 uvicorn[standard]==0.54.0
+# Floors for transitive dependencies with known vulnerabilities (OSV-Scanner, 2026-10-22).
+anyio>=4.14.2
+certifi>=2026.10.19
+idna>=3.15
