@@ -33,6 +33,8 @@ def _vector_literal(vec: np.ndarray) -> str:
 class VectorStore:
     def __init__(self, dsn: str | None = None):
         self.conn = psycopg.connect(dsn or os.environ.get("FINRAG_PG_DSN", DEFAULT_DSN), autocommit=True)
+        # The type must exist before it can be registered; a fresh database (CI) has no extension yet.
+        self.conn.execute("CREATE EXTENSION IF NOT EXISTS vector")
         register_vector(self.conn)
 
     def reset(self, strategy: str, dim: int) -> None:
