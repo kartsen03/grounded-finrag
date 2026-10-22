@@ -58,4 +58,6 @@ jobs:
           pip install -e rag-service
           pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cpu
           pip install -r model-server/requirements.txt
-          pip-audit --skip-editable
+          # PYSEC-2026-3447 (setuptools, fixed in 83): torch 2.11 requires setuptools<82, and setuptools is
+          # build tooling here, not a runtime dependency. Revisit with the next torch upgrade.
+          pip-audit --skip-editable --ignore-vuln PYSEC-2026-3447
