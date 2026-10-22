@@ -125,3 +125,34 @@ filing (page ranking, not routing).
 2. Triggers block UPDATE/DELETE and rows are hash-chained: what does each protect against that the
    other does not?
 3. Rate limiting fails open when Redis is down. When would fail-closed be the right policy?
+
+## After checkpoint 3: judge validation and the test scoring
+
+### Judge validation (`results/answers/judge_agreement.json`)
+- **Evidence:** 40 dev answers hand-labeled (25 correct, 15 incorrect). Raw judge: 0.7 agreement,
+  Cohen's kappa 0.4483. With the 1% tolerance override: 0.675, kappa 0.4091. Every disagreement is
+  the judge rejecting an answer the human accepted (12 and 13); none the other way.
+- **Choice:** score with the raw judge verdict (`results/answers/scoring_choice.json`), decided on dev
+  before the test report; the threshold was re-tuned on dev under this choice (0.9874).
+- **Reading:** a moderate-agreement, strict judge: reported accuracies are lower bounds.
+
+### Test results, scored once (`results/answers/test_report.json`)
+- naive 30/75 (0.4), best 20/75 (0.2667; precision when answering 0.5714, abstention 0.5333), best with
+  model arithmetic 22/75, oracle 37/75. Numeric questions: extract-then-compute 7/25 vs model arithmetic 6/25.
+- **The uncomfortable result:** naive beats best on overall accuracy. Best abstained on 40 test
+  questions, 9 of which naive answered correctly; on the 35 best answered it was right 20 times and
+  naive 21 times on those same questions. Best's advantages are precision when answering, retrieval
+  (hit@5 0.5067 vs 0.3733), and 0/30 vs 2/30 on unanswerable probes.
+
+### Security scan findings (first CI run on GitHub)
+- OSV-Scanner and pip-audit found Tomcat 11.0.24 and Jackson 3.1.5 advisories (fixed by overriding
+  Boot-managed versions), vulnerable transitive anyio/certifi/idna (floors added), pdfminer.six
+  20250506 (upgrade checked against byte-identical ingestion output), and torch/setuptools advisories
+  that cannot be fixed without changing the embedding stack (accepted with reasons).
+
+### Questions to discuss
+1. Naive beats best on test accuracy. Which system would you deploy at an asset manager, and why?
+2. A kappa of 0.4483 is "moderate". Is the judge good enough to compare systems, and what would you
+   change before trusting it more (second labeler, stronger judge model, rubric fixes)?
+3. Overriding Boot-managed dependency versions fixes CVEs today but can break compatibility. How do
+   you make that safe in a real pipeline?
