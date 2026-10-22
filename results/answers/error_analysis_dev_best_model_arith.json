@@ -1,7 +1,7 @@
 {
-  "created_utc": "2026-10-21T18:04:14+00:00",
+  "created_utc": "2026-10-22T01:23:48+00:00",
   "git": {
-    "commit": "5cb5f95ecd9d1ec4ea1d5b81d7b7341afcd38fc1",
+    "commit": "8f38138e14ac3c970fcd4ac352494c97c3398048",
     "dirty": false
   },
   "machine": {
@@ -19,13 +19,13 @@
   "n_questions": 75,
   "n_failures": 55,
   "counts": {
-    "retrieval_miss": 27,
+    "retrieval_miss": 28,
     "table_parse_error": 0,
     "wrong_period": 0,
     "arithmetic": 8,
     "unsupported_claim": 2,
     "abstained_despite_gold_page": 6,
-    "other": 12
+    "other": 11
   },
   "by_category": {
     "retrieval_miss": [
@@ -45,6 +45,7 @@
       "financebench_id_00799",
       "financebench_id_00807",
       "financebench_id_01077",
+      "financebench_id_01346",
       "financebench_id_01865",
       "financebench_id_01911",
       "financebench_id_01912",
@@ -90,7 +91,6 @@
       "financebench_id_01198",
       "financebench_id_01226",
       "financebench_id_01254",
-      "financebench_id_01275",
       "financebench_id_01935",
       "financebench_id_01936",
       "financebench_id_02419"
@@ -338,12 +338,12 @@
       "category": "other"
     },
     {
-      "financebench_id": "financebench_id_01275",
+      "financebench_id": "financebench_id_01346",
       "question_type": "domain-relevant",
       "mode": "grounded",
       "abstained": false,
       "abstain_reason": null,
-      "category": "other"
+      "category": "retrieval_miss"
     },
     {
       "financebench_id": "financebench_id_01865",
