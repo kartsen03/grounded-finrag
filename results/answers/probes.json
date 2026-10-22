@@ -1,7 +1,7 @@
 {
-  "created_utc": "2026-10-21T17:56:30+00:00",
+  "created_utc": "2026-10-22T01:31:39+00:00",
   "git": {
-    "commit": "116b93d59d50aea121d258eff8d01dca40d43295",
+    "commit": "69d0f401dcfc6b852c552d68667cfd89d877cdd4",
     "dirty": false
   },
   "machine": {
@@ -14,7 +14,7 @@
   "packages": {},
   "step": "unanswerable_probes",
   "probe_file": "data/probes/unanswerable_v1.jsonl",
-  "threshold_used_for_best": 0.9961526989936829,
+  "threshold_used_for_best": 0.9873569011688232,
   "naive": {
     "n": 30,
     "not_abstained": 30,
@@ -47,7 +47,7 @@
         "probe_id": "probe_company_01",
         "abstained": false,
         "commits": false,
-        "reason": "The answer does not provide a specific value for Apple's FY2022 total net sales and instead states that the information is not available in the provided sources."
+        "reason": "The answer states that the specific figure for FY2022 net sales is not available and provides context about related information from a different company and year, thus it does not commit to an answer for the exact company and period asked."
       },
       {
         "probe_id": "probe_company_02",
