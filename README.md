@@ -71,7 +71,7 @@ commit `8f38138`, NVIDIA GeForce RTX 3060 Laptop GPU, power plan Turbo, 2026-10-
 - **Judge vs human labels** (40 dev answers, one labeler): raw judge (used for scoring) 0.7 agreement, Cohen's kappa 0.4483; with the 1% tolerance override 0.675, kappa 0.4091. Disagreements: 12 answers the judge marked wrong that the human marked correct, 0 the other way, so judged accuracy is a lower bound.
 - **Unanswerable probes** (30 questions about companies or periods not in the corpus): hallucination rate 0.0 for best, 0.0667 for naive.
 - **Gateway, test split, best config** (75 questions): model time per question p50 8511.0 ms, p95 20948.9 ms; cost per question 0.0 USD (local models).
-- **Tests:** rag-service 42 tests, 45.96% line coverage; llm-gateway 20 tests, 71.95% line coverage.
+- **Tests:** rag-service 42 tests, 45.8% line coverage; llm-gateway 20 tests, 71.95% line coverage.
 
 <!-- results:end -->
 
