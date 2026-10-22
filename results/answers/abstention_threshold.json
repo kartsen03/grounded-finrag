@@ -1,7 +1,7 @@
 {
-  "created_utc": "2026-10-21T17:47:06+00:00",
+  "created_utc": "2026-10-22T01:23:42+00:00",
   "git": {
-    "commit": "681799fbae2d74b477da81094ba72e3acb1e9b7a",
+    "commit": "8f38138e14ac3c970fcd4ac352494c97c3398048",
     "dirty": false
   },
   "machine": {
@@ -14,487 +14,488 @@
   "packages": {},
   "step": "abstention_threshold_dev",
   "rule": "dev, config best: abstain if support < t; t maximizes (#correct - #incorrect) among answered",
-  "threshold": 0.9961526989936829,
+  "scoring_field": "judge_correct",
+  "threshold": 0.9873569011688232,
   "chosen_point": {
-    "threshold": 0.9961526989936829,
-    "coverage": 0.12,
-    "precision_when_answering": 0.7778,
-    "correct": 7,
-    "incorrect": 2,
-    "utility": 5
+    "threshold": 0.9873569011688232,
+    "coverage": 0.1867,
+    "precision_when_answering": 0.7143,
+    "correct": 10,
+    "incorrect": 4,
+    "utility": 6
   },
   "curve": [
     {
       "threshold": null,
       "coverage": 0.5733,
-      "precision_when_answering": 0.4419,
-      "correct": 19,
-      "incorrect": 24,
-      "utility": -5
+      "precision_when_answering": 0.4651,
+      "correct": 20,
+      "incorrect": 23,
+      "utility": -3
     },
     {
       "threshold": 0.0025624632835388184,
       "coverage": 0.5733,
-      "precision_when_answering": 0.4419,
-      "correct": 19,
-      "incorrect": 24,
-      "utility": -5
+      "precision_when_answering": 0.4651,
+      "correct": 20,
+      "incorrect": 23,
+      "utility": -3
     },
     {
       "threshold": 0.005222530569881201,
       "coverage": 0.56,
-      "precision_when_answering": 0.4286,
-      "correct": 18,
-      "incorrect": 24,
-      "utility": -6
+      "precision_when_answering": 0.4524,
+      "correct": 19,
+      "incorrect": 23,
+      "utility": -4
     },
     {
       "threshold": 0.005956374574452639,
       "coverage": 0.56,
-      "precision_when_answering": 0.4286,
-      "correct": 18,
-      "incorrect": 24,
-      "utility": -6
+      "precision_when_answering": 0.4524,
+      "correct": 19,
+      "incorrect": 23,
+      "utility": -4
     },
     {
       "threshold": 0.008573378436267376,
       "coverage": 0.5467,
-      "precision_when_answering": 0.439,
-      "correct": 18,
-      "incorrect": 23,
-      "utility": -5
+      "precision_when_answering": 0.4634,
+      "correct": 19,
+      "incorrect": 22,
+      "utility": -3
     },
     {
       "threshold": 0.013392754830420017,
       "coverage": 0.5467,
-      "precision_when_answering": 0.439,
-      "correct": 18,
-      "incorrect": 23,
-      "utility": -5
+      "precision_when_answering": 0.4634,
+      "correct": 19,
+      "incorrect": 22,
+      "utility": -3
     },
     {
       "threshold": 0.015839146450161934,
       "coverage": 0.5467,
-      "precision_when_answering": 0.439,
-      "correct": 18,
-      "incorrect": 23,
-      "utility": -5
+      "precision_when_answering": 0.4634,
+      "correct": 19,
+      "incorrect": 22,
+      "utility": -3
     },
     {
       "threshold": 0.052063655108213425,
       "coverage": 0.5333,
-      "precision_when_answering": 0.425,
-      "correct": 17,
-      "incorrect": 23,
-      "utility": -6
+      "precision_when_answering": 0.45,
+      "correct": 18,
+      "incorrect": 22,
+      "utility": -4
     },
     {
       "threshold": 0.1328417956829071,
       "coverage": 0.52,
-      "precision_when_answering": 0.4103,
-      "correct": 16,
-      "incorrect": 23,
-      "utility": -7
+      "precision_when_answering": 0.4359,
+      "correct": 17,
+      "incorrect": 22,
+      "utility": -5
     },
     {
       "threshold": 0.22797518968582153,
       "coverage": 0.52,
-      "precision_when_answering": 0.4103,
-      "correct": 16,
-      "incorrect": 23,
-      "utility": -7
+      "precision_when_answering": 0.4359,
+      "correct": 17,
+      "incorrect": 22,
+      "utility": -5
     },
     {
       "threshold": 0.2497626394033432,
       "coverage": 0.5067,
-      "precision_when_answering": 0.4211,
-      "correct": 16,
-      "incorrect": 22,
-      "utility": -6
+      "precision_when_answering": 0.4474,
+      "correct": 17,
+      "incorrect": 21,
+      "utility": -4
     },
     {
       "threshold": 0.2674611210823059,
       "coverage": 0.5067,
-      "precision_when_answering": 0.4211,
-      "correct": 16,
-      "incorrect": 22,
-      "utility": -6
+      "precision_when_answering": 0.4474,
+      "correct": 17,
+      "incorrect": 21,
+      "utility": -4
     },
     {
       "threshold": 0.28397250175476074,
       "coverage": 0.5067,
-      "precision_when_answering": 0.4211,
-      "correct": 16,
-      "incorrect": 22,
-      "utility": -6
+      "precision_when_answering": 0.4474,
+      "correct": 17,
+      "incorrect": 21,
+      "utility": -4
     },
     {
       "threshold": 0.3494105637073517,
       "coverage": 0.5067,
-      "precision_when_answering": 0.4211,
-      "correct": 16,
-      "incorrect": 22,
-      "utility": -6
+      "precision_when_answering": 0.4474,
+      "correct": 17,
+      "incorrect": 21,
+      "utility": -4
     },
     {
       "threshold": 0.3558245003223419,
       "coverage": 0.4933,
-      "precision_when_answering": 0.4054,
-      "correct": 15,
-      "incorrect": 22,
-      "utility": -7
+      "precision_when_answering": 0.4324,
+      "correct": 16,
+      "incorrect": 21,
+      "utility": -5
     },
     {
       "threshold": 0.4321877062320709,
       "coverage": 0.4933,
-      "precision_when_answering": 0.4054,
-      "correct": 15,
-      "incorrect": 22,
-      "utility": -7
+      "precision_when_answering": 0.4324,
+      "correct": 16,
+      "incorrect": 21,
+      "utility": -5
     },
     {
       "threshold": 0.48724597692489624,
       "coverage": 0.4933,
-      "precision_when_answering": 0.4054,
-      "correct": 15,
-      "incorrect": 22,
-      "utility": -7
+      "precision_when_answering": 0.4324,
+      "correct": 16,
+      "incorrect": 21,
+      "utility": -5
     },
     {
       "threshold": 0.4887000024318695,
       "coverage": 0.4933,
-      "precision_when_answering": 0.4054,
-      "correct": 15,
-      "incorrect": 22,
-      "utility": -7
+      "precision_when_answering": 0.4324,
+      "correct": 16,
+      "incorrect": 21,
+      "utility": -5
     },
     {
       "threshold": 0.5102797746658325,
       "coverage": 0.4933,
-      "precision_when_answering": 0.4054,
-      "correct": 15,
-      "incorrect": 22,
-      "utility": -7
+      "precision_when_answering": 0.4324,
+      "correct": 16,
+      "incorrect": 21,
+      "utility": -5
     },
     {
       "threshold": 0.5187838077545166,
       "coverage": 0.48,
-      "precision_when_answering": 0.3889,
-      "correct": 14,
-      "incorrect": 22,
-      "utility": -8
+      "precision_when_answering": 0.4167,
+      "correct": 15,
+      "incorrect": 21,
+      "utility": -6
     },
     {
       "threshold": 0.5387955904006958,
       "coverage": 0.4667,
-      "precision_when_answering": 0.4,
-      "correct": 14,
-      "incorrect": 21,
-      "utility": -7
+      "precision_when_answering": 0.4286,
+      "correct": 15,
+      "incorrect": 20,
+      "utility": -5
     },
     {
       "threshold": 0.5859684944152832,
       "coverage": 0.4533,
-      "precision_when_answering": 0.4118,
-      "correct": 14,
-      "incorrect": 20,
-      "utility": -6
+      "precision_when_answering": 0.4412,
+      "correct": 15,
+      "incorrect": 19,
+      "utility": -4
     },
     {
       "threshold": 0.6053627133369446,
       "coverage": 0.4533,
-      "precision_when_answering": 0.4118,
-      "correct": 14,
-      "incorrect": 20,
-      "utility": -6
+      "precision_when_answering": 0.4412,
+      "correct": 15,
+      "incorrect": 19,
+      "utility": -4
     },
     {
       "threshold": 0.6144682765007019,
       "coverage": 0.4533,
-      "precision_when_answering": 0.4118,
-      "correct": 14,
-      "incorrect": 20,
-      "utility": -6
+      "precision_when_answering": 0.4412,
+      "correct": 15,
+      "incorrect": 19,
+      "utility": -4
     },
     {
       "threshold": 0.6284648180007935,
       "coverage": 0.44,
-      "precision_when_answering": 0.4242,
-      "correct": 14,
-      "incorrect": 19,
-      "utility": -5
+      "precision_when_answering": 0.4545,
+      "correct": 15,
+      "incorrect": 18,
+      "utility": -3
     },
     {
       "threshold": 0.6512606143951416,
       "coverage": 0.4267,
-      "precision_when_answering": 0.4375,
-      "correct": 14,
-      "incorrect": 18,
-      "utility": -4
+      "precision_when_answering": 0.4688,
+      "correct": 15,
+      "incorrect": 17,
+      "utility": -2
     },
     {
       "threshold": 0.657730221748352,
       "coverage": 0.4267,
-      "precision_when_answering": 0.4375,
-      "correct": 14,
-      "incorrect": 18,
-      "utility": -4
+      "precision_when_answering": 0.4688,
+      "correct": 15,
+      "incorrect": 17,
+      "utility": -2
     },
     {
       "threshold": 0.6585321426391602,
       "coverage": 0.4267,
-      "precision_when_answering": 0.4375,
-      "correct": 14,
-      "incorrect": 18,
-      "utility": -4
+      "precision_when_answering": 0.4688,
+      "correct": 15,
+      "incorrect": 17,
+      "utility": -2
     },
     {
       "threshold": 0.6601312160491943,
       "coverage": 0.4133,
-      "precision_when_answering": 0.4516,
-      "correct": 14,
-      "incorrect": 17,
-      "utility": -3
+      "precision_when_answering": 0.4839,
+      "correct": 15,
+      "incorrect": 16,
+      "utility": -1
     },
     {
       "threshold": 0.6631499528884888,
       "coverage": 0.4133,
-      "precision_when_answering": 0.4516,
-      "correct": 14,
-      "incorrect": 17,
-      "utility": -3
+      "precision_when_answering": 0.4839,
+      "correct": 15,
+      "incorrect": 16,
+      "utility": -1
     },
     {
       "threshold": 0.6777259111404419,
       "coverage": 0.4,
-      "precision_when_answering": 0.4333,
-      "correct": 13,
-      "incorrect": 17,
-      "utility": -4
+      "precision_when_answering": 0.4667,
+      "correct": 14,
+      "incorrect": 16,
+      "utility": -2
     },
     {
       "threshold": 0.6866231560707092,
       "coverage": 0.4,
-      "precision_when_answering": 0.4333,
-      "correct": 13,
-      "incorrect": 17,
-      "utility": -4
+      "precision_when_answering": 0.4667,
+      "correct": 14,
+      "incorrect": 16,
+      "utility": -2
     },
     {
       "threshold": 0.6996777057647705,
       "coverage": 0.3867,
-      "precision_when_answering": 0.4483,
-      "correct": 13,
-      "incorrect": 16,
-      "utility": -3
+      "precision_when_answering": 0.4828,
+      "correct": 14,
+      "incorrect": 15,
+      "utility": -1
     },
     {
       "threshold": 0.7805536985397339,
       "coverage": 0.3733,
-      "precision_when_answering": 0.4643,
-      "correct": 13,
-      "incorrect": 15,
-      "utility": -2
+      "precision_when_answering": 0.5,
+      "correct": 14,
+      "incorrect": 14,
+      "utility": 0
     },
     {
       "threshold": 0.78726726770401,
       "coverage": 0.3733,
-      "precision_when_answering": 0.4643,
-      "correct": 13,
-      "incorrect": 15,
-      "utility": -2
+      "precision_when_answering": 0.5,
+      "correct": 14,
+      "incorrect": 14,
+      "utility": 0
     },
     {
       "threshold": 0.8066362738609314,
       "coverage": 0.3733,
-      "precision_when_answering": 0.4643,
-      "correct": 13,
-      "incorrect": 15,
-      "utility": -2
+      "precision_when_answering": 0.5,
+      "correct": 14,
+      "incorrect": 14,
+      "utility": 0
     },
     {
       "threshold": 0.8150923252105713,
       "coverage": 0.36,
-      "precision_when_answering": 0.4444,
-      "correct": 12,
-      "incorrect": 15,
-      "utility": -3
+      "precision_when_answering": 0.4815,
+      "correct": 13,
+      "incorrect": 14,
+      "utility": -1
     },
     {
       "threshold": 0.8610895872116089,
       "coverage": 0.3467,
-      "precision_when_answering": 0.4615,
-      "correct": 12,
-      "incorrect": 14,
-      "utility": -2
+      "precision_when_answering": 0.5,
+      "correct": 13,
+      "incorrect": 13,
+      "utility": 0
     },
     {
       "threshold": 0.8821359872817993,
       "coverage": 0.3333,
-      "precision_when_answering": 0.48,
-      "correct": 12,
-      "incorrect": 13,
-      "utility": -1
+      "precision_when_answering": 0.52,
+      "correct": 13,
+      "incorrect": 12,
+      "utility": 1
     },
     {
       "threshold": 0.8956640958786011,
       "coverage": 0.32,
-      "precision_when_answering": 0.5,
-      "correct": 12,
-      "incorrect": 12,
-      "utility": 0
+      "precision_when_answering": 0.5417,
+      "correct": 13,
+      "incorrect": 11,
+      "utility": 2
     },
     {
       "threshold": 0.9040271639823914,
       "coverage": 0.32,
-      "precision_when_answering": 0.5,
-      "correct": 12,
-      "incorrect": 12,
-      "utility": 0
+      "precision_when_answering": 0.5417,
+      "correct": 13,
+      "incorrect": 11,
+      "utility": 2
     },
     {
       "threshold": 0.9222825765609741,
       "coverage": 0.3067,
-      "precision_when_answering": 0.4783,
-      "correct": 11,
-      "incorrect": 12,
-      "utility": -1
+      "precision_when_answering": 0.5217,
+      "correct": 12,
+      "incorrect": 11,
+      "utility": 1
     },
     {
       "threshold": 0.9308663010597229,
       "coverage": 0.3067,
-      "precision_when_answering": 0.4783,
-      "correct": 11,
-      "incorrect": 12,
-      "utility": -1
+      "precision_when_answering": 0.5217,
+      "correct": 12,
+      "incorrect": 11,
+      "utility": 1
     },
     {
       "threshold": 0.9338451623916626,
       "coverage": 0.2933,
-      "precision_when_answering": 0.4545,
-      "correct": 10,
-      "incorrect": 12,
-      "utility": -2
+      "precision_when_answering": 0.5,
+      "correct": 11,
+      "incorrect": 11,
+      "utility": 0
     },
     {
       "threshold": 0.9492602348327637,
       "coverage": 0.28,
-      "precision_when_answering": 0.4762,
-      "correct": 10,
-      "incorrect": 11,
-      "utility": -1
+      "precision_when_answering": 0.5238,
+      "correct": 11,
+      "incorrect": 10,
+      "utility": 1
     },
     {
       "threshold": 0.9536914229393005,
       "coverage": 0.28,
-      "precision_when_answering": 0.4762,
-      "correct": 10,
-      "incorrect": 11,
-      "utility": -1
+      "precision_when_answering": 0.5238,
+      "correct": 11,
+      "incorrect": 10,
+      "utility": 1
     },
     {
       "threshold": 0.959723949432373,
       "coverage": 0.28,
-      "precision_when_answering": 0.4762,
-      "correct": 10,
-      "incorrect": 11,
-      "utility": -1
+      "precision_when_answering": 0.5238,
+      "correct": 11,
+      "incorrect": 10,
+      "utility": 1
     },
     {
       "threshold": 0.960041344165802,
       "coverage": 0.2667,
-      "precision_when_answering": 0.5,
-      "correct": 10,
-      "incorrect": 10,
-      "utility": 0
+      "precision_when_answering": 0.55,
+      "correct": 11,
+      "incorrect": 9,
+      "utility": 2
     },
     {
       "threshold": 0.9616701006889343,
       "coverage": 0.2667,
-      "precision_when_answering": 0.5,
-      "correct": 10,
-      "incorrect": 10,
-      "utility": 0
+      "precision_when_answering": 0.55,
+      "correct": 11,
+      "incorrect": 9,
+      "utility": 2
     },
     {
       "threshold": 0.9622172713279724,
       "coverage": 0.2533,
-      "precision_when_answering": 0.5263,
-      "correct": 10,
-      "incorrect": 9,
-      "utility": 1
+      "precision_when_answering": 0.5789,
+      "correct": 11,
+      "incorrect": 8,
+      "utility": 3
     },
     {
       "threshold": 0.9645407199859619,
       "coverage": 0.2533,
-      "precision_when_answering": 0.5263,
-      "correct": 10,
-      "incorrect": 9,
-      "utility": 1
+      "precision_when_answering": 0.5789,
+      "correct": 11,
+      "incorrect": 8,
+      "utility": 3
     },
     {
       "threshold": 0.9702900648117065,
       "coverage": 0.24,
-      "precision_when_answering": 0.5,
-      "correct": 9,
-      "incorrect": 9,
-      "utility": 0
+      "precision_when_answering": 0.5556,
+      "correct": 10,
+      "incorrect": 8,
+      "utility": 2
     },
     {
       "threshold": 0.9745595455169678,
       "coverage": 0.2267,
-      "precision_when_answering": 0.5294,
-      "correct": 9,
-      "incorrect": 8,
-      "utility": 1
+      "precision_when_answering": 0.5882,
+      "correct": 10,
+      "incorrect": 7,
+      "utility": 3
     },
     {
       "threshold": 0.97540682554245,
       "coverage": 0.2133,
-      "precision_when_answering": 0.5625,
-      "correct": 9,
-      "incorrect": 7,
-      "utility": 2
+      "precision_when_answering": 0.625,
+      "correct": 10,
+      "incorrect": 6,
+      "utility": 4
     },
     {
       "threshold": 0.9778254628181458,
       "coverage": 0.2133,
-      "precision_when_answering": 0.5625,
-      "correct": 9,
-      "incorrect": 7,
-      "utility": 2
+      "precision_when_answering": 0.625,
+      "correct": 10,
+      "incorrect": 6,
+      "utility": 4
     },
     {
       "threshold": 0.9790521860122681,
       "coverage": 0.2,
-      "precision_when_answering": 0.6,
-      "correct": 9,
-      "incorrect": 6,
-      "utility": 3
+      "precision_when_answering": 0.6667,
+      "correct": 10,
+      "incorrect": 5,
+      "utility": 5
     },
     {
       "threshold": 0.9813904762268066,
       "coverage": 0.2,
-      "precision_when_answering": 0.6,
-      "correct": 9,
-      "incorrect": 6,
-      "utility": 3
+      "precision_when_answering": 0.6667,
+      "correct": 10,
+      "incorrect": 5,
+      "utility": 5
     },
     {
       "threshold": 0.9873569011688232,
       "coverage": 0.1867,
-      "precision_when_answering": 0.6429,
-      "correct": 9,
-      "incorrect": 5,
-      "utility": 4
+      "precision_when_answering": 0.7143,
+      "correct": 10,
+      "incorrect": 4,
+      "utility": 6
     },
     {
       "threshold": 0.9913966059684753,
       "coverage": 0.1733,
-      "precision_when_answering": 0.6154,
-      "correct": 8,
-      "incorrect": 5,
-      "utility": 3
+      "precision_when_answering": 0.6923,
+      "correct": 9,
+      "incorrect": 4,
+      "utility": 5
     },
     {
       "threshold": 0.9926021695137024,
