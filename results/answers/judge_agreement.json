@@ -1,0 +1,38 @@
+{
+  "created_utc": "2026-10-22T01:22:58+00:00",
+  "git": {
+    "commit": "ac8ca09553c772aeb75c061edbe545d4fd0cb41c",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {},
+  "step": "judge_human_agreement",
+  "n": 40,
+  "human_correct_rate": 0.625,
+  "judge_raw": {
+    "percent_agreement": 0.7,
+    "cohen_kappa": 0.4483,
+    "confusion": {
+      "both_correct": 13,
+      "both_incorrect": 15,
+      "judge_correct_human_incorrect": 0,
+      "judge_incorrect_human_correct": 12
+    }
+  },
+  "judge_plus_tolerance": {
+    "percent_agreement": 0.675,
+    "cohen_kappa": 0.4091,
+    "confusion": {
+      "both_correct": 12,
+      "both_incorrect": 15,
+      "judge_correct_human_incorrect": 0,
+      "judge_incorrect_human_correct": 13
+    }
+  }
+}
