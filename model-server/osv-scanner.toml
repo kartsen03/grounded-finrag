@@ -7,3 +7,9 @@ reason = """torch 2.11.0, fixed in 2.13.0. Upgrading torch changes embedding out
 retrieval and answer result would have to be re-indexed and re-evaluated. The model server only loads
 pinned safetensors revisions from Hugging Face, binds to localhost / a private compose network, and is
 reachable only by the gateway. Upgrade at the next full re-baseline, before this date."""
+
+[[IgnoredVulns]]
+id = "PYSEC-2026-3447"
+ignoreUntil = 2027-01-31T00:00:00Z
+reason = """setuptools, fixed in 83.0.0, but torch 2.11.0 requires setuptools<82. setuptools is packaging
+tooling here, not used at runtime by the model server. Resolved together with the torch upgrade."""
