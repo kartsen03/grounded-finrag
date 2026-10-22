@@ -1,7 +1,7 @@
 {
-  "created_utc": "2026-10-21T18:06:55+00:00",
+  "created_utc": "2026-10-22T01:44:33+00:00",
   "git": {
-    "commit": "af7076648ced74305321b0d30e0e4454ee12fb14",
+    "commit": "92e92492fd8cc828d231197793afdb1735485e79",
     "dirty": false
   },
   "machine": {
@@ -16,9 +16,9 @@
   "rag_service": {
     "tests": 42,
     "failed": 0,
-    "line_coverage_percent": 45.96,
+    "line_coverage_percent": 45.8,
     "lines_covered": 1024,
-    "lines_total": 2228,
+    "lines_total": 2236,
     "tool": "pytest-cov (src/finrag)"
   },
   "llm_gateway": {
