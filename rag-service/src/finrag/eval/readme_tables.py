@@ -58,7 +58,9 @@ def answers_section() -> list[str]:
         rep = _load(f"answers/{split}_report.json")
         if not rep:
             continue
-        out += [f"### Answers ({split} split, judged by the LLM judge + 1% numeric tolerance)", "",
+        scoring = ("raw LLM judge verdict" if rep.get("scoring_field") == "judge_correct"
+                   else "LLM judge + 1% numeric tolerance")
+        out += [f"### Answers ({split} split, scored by the {scoring}; the judge is strict, see agreement below)", "",
                 "| System | Accuracy | Precision when answering | Abstention rate | Citation precision (gold pages) | Accuracy 95% CI |",
                 "|---|---|---|---|---|---|"]
         names = {"naive": "naive RAG", "best": "best (no threshold)", "oracle": "oracle (gold pages)"}
@@ -90,10 +92,13 @@ def other_section() -> list[str]:
     out = []
     agr = _load("answers/judge_agreement.json")
     if agr:
-        j = agr["judge_plus_tolerance"]
-        jr = agr["judge_raw"]
-        out.append(f"- **Judge vs human labels** ({agr['n']} dev answers): {j['percent_agreement']} agreement, "
-                   f"Cohen's kappa {j['cohen_kappa']} (judge alone: {jr['percent_agreement']}, kappa {jr['cohen_kappa']}).")
+        jr, jt = agr["judge_raw"], agr["judge_plus_tolerance"]
+        c = jr["confusion"]
+        out.append(f"- **Judge vs human labels** ({agr['n']} dev answers, one labeler): raw judge (used for scoring) "
+                   f"{jr['percent_agreement']} agreement, Cohen's kappa {jr['cohen_kappa']}; with the 1% tolerance "
+                   f"override {jt['percent_agreement']}, kappa {jt['cohen_kappa']}. Disagreements: "
+                   f"{c['judge_incorrect_human_correct']} answers the judge marked wrong that the human marked "
+                   f"correct, {c['judge_correct_human_incorrect']} the other way, so judged accuracy is a lower bound.")
     pr = _load("answers/probes.json")
     if pr:
         out.append(f"- **Unanswerable probes** ({pr['best']['n']} questions about companies or periods not in the "

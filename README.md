@@ -18,6 +18,14 @@ Models: `qwen2.5:7b-instruct-q4_K_M` (Ollama) for answers and judging, `bge-base
 embeddings, `bge-reranker-base` cross-encoder (support score). Hardware: RTX 3060 Laptop GPU
 (6 GB), i7-12700H. Tables below are written by `python -m finrag.eval.readme_tables`.
 
+**Reading the results honestly.** On the test split the naive pipeline, which answers every
+question, is right more often overall than the best configuration. The best configuration
+retrieves the evidence page far more often, is right more often *when it answers*, and never
+committed to an answer on the unanswerable probes, but it abstains on about half of the test
+questions, and that coverage loss outweighs its precision gain. Extract-then-compute and model
+arithmetic are within one question of each other on numeric questions in both splits. The judge
+is strict (it never accepted an answer the human rejected), so all accuracies are lower bounds.
+
 <!-- results:start -->
 
 ### Retrieval (evidence-page hit@k, 75 questions per split)
@@ -32,22 +40,37 @@ embeddings, `bge-reranker-base` cross-encoder (support score). Hardware: RTX 306
 Dev: commit `e599901`, NVIDIA GeForce RTX 3060 Laptop GPU, power plan Turbo, 2026-10-21. Test: commit `39c6675`, NVIDIA GeForce RTX 3060 Laptop GPU, power plan Turbo, 2026-10-21.
 All 24 dev configurations: [results/retrieval/dev_ablation.md](results/retrieval/dev_ablation.md).
 
-### Answers (dev split, judged by the LLM judge + 1% numeric tolerance)
+### Answers (test split, scored by the raw LLM judge verdict; the judge is strict, see agreement below)
 
 | System | Accuracy | Precision when answering | Abstention rate | Citation precision (gold pages) | Accuracy 95% CI |
 |---|---|---|---|---|---|
-| naive RAG | 0.1867 (14/75) | 0.1867 | 0.0 | n/a (free text) | 0.1067-0.28 |
-| best (no threshold) | 0.2533 (19/75) | 0.4419 | 0.4267 | 0.4412 | 0.16-0.36 |
-| best + abstention threshold 0.9961526989936829 | 0.0933 (7/75) | 0.7778 | 0.88 | 0.4615 | 0.0267-0.1733 |
-| oracle (gold pages) | 0.44 (33/75) | 0.5893 | 0.2533 | 1.0 | 0.3333-0.56 |
+| naive RAG | 0.4 (30/75) | 0.4 | 0.0 | n/a (free text) | 0.2933-0.5067 |
+| best (no threshold) | 0.2667 (20/75) | 0.5714 | 0.5333 | 0.3137 | 0.1733-0.3733 |
+| best + abstention threshold 0.9873569011688232 | 0.08 (6/75) | 0.5455 | 0.8533 | 0.4375 | 0.0267-0.1467 |
+| oracle (gold pages) | 0.4933 (37/75) | 0.6271 | 0.2133 | 1.0 | 0.3867-0.6 |
+
+Numeric (metrics-generated) questions: extract-then-compute 0.28 (7/25) vs model arithmetic 0.24 (6/25).
+
+commit `57a0a5d`, NVIDIA GeForce RTX 3060 Laptop GPU, power plan Turbo, 2026-10-22.
+
+### Answers (dev split, scored by the raw LLM judge verdict; the judge is strict, see agreement below)
+
+| System | Accuracy | Precision when answering | Abstention rate | Citation precision (gold pages) | Accuracy 95% CI |
+|---|---|---|---|---|---|
+| naive RAG | 0.2133 (16/75) | 0.2133 | 0.0 | n/a (free text) | 0.12-0.3067 |
+| best (no threshold) | 0.2667 (20/75) | 0.4651 | 0.4267 | 0.4412 | 0.1733-0.3733 |
+| best + abstention threshold 0.9873569011688232 | 0.1333 (10/75) | 0.7143 | 0.8133 | 0.4545 | 0.0667-0.2133 |
+| oracle (gold pages) | 0.44 (33/75) | 0.5893 | 0.2533 | 1.0 | 0.3333-0.5467 |
 
 Numeric (metrics-generated) questions: extract-then-compute 0.32 (8/25) vs model arithmetic 0.36 (9/25).
 
-commit `681799f`, NVIDIA GeForce RTX 3060 Laptop GPU, power plan Turbo, 2026-10-21.
+commit `8f38138`, NVIDIA GeForce RTX 3060 Laptop GPU, power plan Turbo, 2026-10-22.
 
 ### Other measurements
 
+- **Judge vs human labels** (40 dev answers, one labeler): raw judge (used for scoring) 0.7 agreement, Cohen's kappa 0.4483; with the 1% tolerance override 0.675, kappa 0.4091. Disagreements: 12 answers the judge marked wrong that the human marked correct, 0 the other way, so judged accuracy is a lower bound.
 - **Unanswerable probes** (30 questions about companies or periods not in the corpus): hallucination rate 0.0 for best, 0.0667 for naive.
+- **Gateway, test split, best config** (75 questions): model time per question p50 8511.0 ms, p95 20948.9 ms; cost per question 0.0 USD (local models).
 - **Tests:** rag-service 42 tests, 45.96% line coverage; llm-gateway 20 tests, 71.95% line coverage.
 
 <!-- results:end -->
@@ -134,6 +157,9 @@ Reproduce the evaluation: `python -m finrag.eval.retrieval_eval --split dev`, th
 
 ## Limitations
 
+- **The best configuration abstains too often.** Its overall test accuracy is below the naive
+  pipeline's; the abstention behavior (model flag and support threshold, both chosen on dev) trades
+  too much coverage for precision. Re-tuning it is future work and would need a fresh test set.
 - **Small evaluation sets.** 75 test questions: a single question moves accuracy by 1.33
   points, and the 95% intervals in the tables are wide. Dev and test share 18 documents.
 - **One local 7B model.** Answers and the judge both use `qwen2.5:7b-instruct` (validated against
