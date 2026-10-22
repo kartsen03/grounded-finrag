@@ -28,6 +28,19 @@ from finrag.retrieval.store import VectorStore
 JUDGED = config.REPO_ROOT / "runs" / "judged"
 OUT = config.RESULTS_DIR / "answers"
 THRESHOLD_FILE = OUT / "abstention_threshold.json"
+SCORING_FILE = OUT / "scoring_choice.json"
+
+
+def judge_field() -> str:
+    """Which judge verdict counts as correct: chosen on dev from judge-human agreement, before test.
+    "judge_correct" = raw LLM verdict; "correct" = verdict with the 1% numeric tolerance override."""
+    if SCORING_FILE.exists():
+        return json.loads(SCORING_FILE.read_text(encoding="utf-8"))["field"]
+    return "correct"
+
+
+def is_correct(row: dict) -> bool:
+    return bool(row["judge"] and row["judge"][judge_field()])
 THRESHOLD_RULE = "dev, config best: abstain if support < t; t maximizes (#correct - #incorrect) among answered"
 PROBES = config.DATA_DIR / "probes" / "unanswerable_v1.jsonl"
 
@@ -120,7 +133,7 @@ def apply_threshold(rows: list[dict], t: float | None) -> list[dict]:
 def score(rows: list[dict]) -> dict:
     n = len(rows)
     answered = [r for r in rows if not r["abstained"]]
-    correct = [r for r in answered if r["judge"] and r["judge"]["correct"]]
+    correct = [r for r in answered if is_correct(r)]
     cited = [(r, c) for r in answered for c in r.get("citations") or []]
     gold_hits = sum(1 for r, c in cited if (c[0], c[1] - 1) in r["gold"])
     reasons: dict[str, int] = {}
@@ -197,6 +210,7 @@ def tune() -> None:
                       "incorrect": s["answered"] - s["correct"], "utility": s["correct"] - (s["answered"] - s["correct"])})
     best = max(curve, key=lambda p: (p["utility"], p["coverage"]))
     payload = {**provenance.stamp(step="abstention_threshold_dev"), "rule": THRESHOLD_RULE,
+               "scoring_field": judge_field(),
                "threshold": best["threshold"], "chosen_point": best, "curve": curve}
     _write_json(THRESHOLD_FILE, payload)
     print("threshold:", best)
@@ -254,6 +268,7 @@ def report(split: str) -> None:
         if name in ("best", "best_model_arith", "oracle") and t is not None:
             results[name]["with_threshold"] = score_config(split, name, t)
     payload = {**provenance.stamp(step=f"answer_report_{split}"), "split": split, "threshold": t,
+               "scoring_field": judge_field(),
                "judge": "local-chat (qwen2.5:7b-instruct-q4_K_M) via gateway, rubric docs/judge_rubric.md, "
                         "1% tolerance check", "results": results}
     _write_json(target, payload)

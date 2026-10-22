@@ -28,7 +28,7 @@ from finrag import config, corpus, provenance
 import re
 
 from finrag.answer.numbers import grounded, parse_number
-from finrag.eval.answer_eval import _joined, apply_threshold, load_threshold
+from finrag.eval.answer_eval import _joined, apply_threshold, is_correct, load_threshold
 from finrag.retrieval.routing import detect_years
 
 CATEGORIES = ("retrieval_miss", "table_parse_error", "wrong_period", "arithmetic", "unsupported_claim",
@@ -105,7 +105,7 @@ def main(argv: list[str] | None = None) -> int:
                         help="apply the tuned abstention threshold first (default: analyze raw answers)")
     args = parser.parse_args(argv)
     rows = apply_threshold(_joined(args.split, args.config), load_threshold() if args.with_threshold else None)
-    failures = [r for r in rows if r["abstained"] or not (r["judge"] and r["judge"]["correct"])]
+    failures = [r for r in rows if r["abstained"] or not is_correct(r)]
     labeled = [{"financebench_id": r["financebench_id"], "question_type": r["question_type"], "mode": r["mode"],
                 "abstained": r["abstained"], "abstain_reason": r.get("abstain_reason"), "category": categorize(r)}
                for r in failures]

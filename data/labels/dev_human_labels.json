@@ -1,0 +1,287 @@
+{
+  "labeler": "Karthik Sengupta",
+  "rubric": "docs/judge_rubric.md",
+  "seed": 20261021,
+  "labels": [
+    {
+      "item": 1,
+      "financebench_id": "financebench_id_00540",
+      "config": "oracle",
+      "label": "INCORRECT",
+      "note": "wrong formula (revenue instead of COGS)"
+    },
+    {
+      "item": 2,
+      "financebench_id": "financebench_id_01163",
+      "config": "best_model_arith",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 3,
+      "financebench_id": "financebench_id_07507",
+      "config": "oracle",
+      "label": "INCORRECT",
+      "note": ""
+    },
+    {
+      "item": 4,
+      "financebench_id": "financebench_id_04458",
+      "config": "naive",
+      "label": "INCORRECT",
+      "note": ""
+    },
+    {
+      "item": 5,
+      "financebench_id": "financebench_id_01091",
+      "config": "best",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 6,
+      "financebench_id": "financebench_id_10130",
+      "config": "best_model_arith",
+      "label": "INCORRECT",
+      "note": ""
+    },
+    {
+      "item": 7,
+      "financebench_id": "financebench_id_00494",
+      "config": "best_model_arith",
+      "label": "CORRECT",
+      "note": "777X is missing"
+    },
+    {
+      "item": 8,
+      "financebench_id": "financebench_id_02419",
+      "config": "naive",
+      "label": "INCORRECT",
+      "note": ""
+    },
+    {
+      "item": 9,
+      "financebench_id": "financebench_id_00494",
+      "config": "best",
+      "label": "CORRECT",
+      "note": "777X is missing"
+    },
+    {
+      "item": 10,
+      "financebench_id": "financebench_id_00288",
+      "config": "oracle",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 11,
+      "financebench_id": "financebench_id_03029",
+      "config": "naive",
+      "label": "INCORRECT",
+      "note": "thousands vs ten-thousands"
+    },
+    {
+      "item": 12,
+      "financebench_id": "financebench_id_00407",
+      "config": "best",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 13,
+      "financebench_id": "financebench_id_00005",
+      "config": "best",
+      "label": "INCORRECT",
+      "note": ""
+    },
+    {
+      "item": 14,
+      "financebench_id": "financebench_id_07966",
+      "config": "naive",
+      "label": "INCORRECT",
+      "note": ""
+    },
+    {
+      "item": 15,
+      "financebench_id": "financebench_id_07507",
+      "config": "best",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 16,
+      "financebench_id": "financebench_id_01865",
+      "config": "naive",
+      "label": "CORRECT",
+      "note": "wrong perecentages"
+    },
+    {
+      "item": 17,
+      "financebench_id": "financebench_id_04458",
+      "config": "oracle",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 18,
+      "financebench_id": "financebench_id_00882",
+      "config": "best_model_arith",
+      "label": "INCORRECT",
+      "note": "half the intended amount"
+    },
+    {
+      "item": 19,
+      "financebench_id": "financebench_id_00382",
+      "config": "best",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 20,
+      "financebench_id": "financebench_id_04980",
+      "config": "best_model_arith",
+      "label": "INCORRECT",
+      "note": ""
+    },
+    {
+      "item": 21,
+      "financebench_id": "financebench_id_00566",
+      "config": "best_model_arith",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 22,
+      "financebench_id": "financebench_id_00464",
+      "config": "best_model_arith",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 23,
+      "financebench_id": "financebench_id_00070",
+      "config": "best",
+      "label": "CORRECT",
+      "note": "but doesn't answer yes/no question, gave figure instead"
+    },
+    {
+      "item": 24,
+      "financebench_id": "financebench_id_04171",
+      "config": "best_model_arith",
+      "label": "CORRECT",
+      "note": "but units are not ideal"
+    },
+    {
+      "item": 25,
+      "financebench_id": "financebench_id_00464",
+      "config": "oracle",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 26,
+      "financebench_id": "financebench_id_01964",
+      "config": "best",
+      "label": "INCORRECT",
+      "note": ""
+    },
+    {
+      "item": 27,
+      "financebench_id": "financebench_id_02024",
+      "config": "naive",
+      "label": "INCORRECT",
+      "note": ""
+    },
+    {
+      "item": 28,
+      "financebench_id": "financebench_id_00070",
+      "config": "naive",
+      "label": "CORRECT",
+      "note": "but figures are wrong(1561 vs 19)"
+    },
+    {
+      "item": 29,
+      "financebench_id": "financebench_id_04784",
+      "config": "best",
+      "label": "INCORRECT",
+      "note": ""
+    },
+    {
+      "item": 30,
+      "financebench_id": "financebench_id_00685",
+      "config": "best_model_arith",
+      "label": "INCORRECT",
+      "note": ""
+    },
+    {
+      "item": 31,
+      "financebench_id": "financebench_id_04412",
+      "config": "oracle",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 32,
+      "financebench_id": "financebench_id_04660",
+      "config": "oracle",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 33,
+      "financebench_id": "financebench_id_04980",
+      "config": "naive",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 34,
+      "financebench_id": "financebench_id_01079",
+      "config": "naive",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 35,
+      "financebench_id": "financebench_id_10285",
+      "config": "oracle",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 36,
+      "financebench_id": "financebench_id_02981",
+      "config": "best",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 37,
+      "financebench_id": "financebench_id_04412",
+      "config": "best_model_arith",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 38,
+      "financebench_id": "financebench_id_00790",
+      "config": "oracle",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 39,
+      "financebench_id": "financebench_id_01163",
+      "config": "oracle",
+      "label": "CORRECT",
+      "note": ""
+    },
+    {
+      "item": 40,
+      "financebench_id": "financebench_id_07507",
+      "config": "naive",
+      "label": "INCORRECT",
+      "note": ""
+    }
+  ]
+}
