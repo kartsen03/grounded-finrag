@@ -3,7 +3,7 @@
 # (CPU only: --index-url https://download.pytorch.org/whl/cpu). The pin below is satisfied by
 # either local build and lets dependency scanners see the version actually used.
 torch==2.11.0
-sentence-transformers==6.1.0
+sentence-transformers==6.2.0
 transformers==5.20.2
 fastapi==0.156.3
 pydantic==2.14.1
