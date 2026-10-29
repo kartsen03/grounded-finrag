@@ -13,4 +13,4 @@ anyio>=4.14.2
 certifi>=2026.10.19
 idna>=3.15
 # torch 2.11 requires setuptools<82; an exact pin (newest below 82) so scanners do not resolve it to an old release.
-setuptools==81.0.0
+setuptools==84.2.1
