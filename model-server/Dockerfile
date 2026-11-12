@@ -1,5 +1,5 @@
 # CPU image (the GPU path runs natively; see README). Models download to the /models volume.
-FROM python:3.11-slim
+FROM python:3.15-slim
 RUN useradd --system --uid 10001 models && mkdir /models && chown 10001 /models
 WORKDIR /app
 COPY requirements.txt .
