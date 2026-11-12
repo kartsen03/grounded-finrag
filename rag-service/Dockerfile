@@ -1,6 +1,6 @@
 # rag-service API. Data (downloaded corpus, processed chunks) and results are mounted from the
 # repository at /repo, which FINRAG_REPO_ROOT points to; nothing from FinanceBench is baked in.
-FROM python:3.11-slim
+FROM python:3.15-slim
 RUN useradd --system --uid 10001 rag
 WORKDIR /app
 COPY pyproject.toml .
