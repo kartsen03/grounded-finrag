@@ -53,7 +53,8 @@ class Answerer:
     # ------------------------------------------------------------------ context
 
     def _sources(self, question: str, cfg: AnswerConfig, gold: set[tuple[str, int]] | None,
-                 request_id: str, timings: dict) -> tuple[list[dict], dict | None]:
+                 request_id: str, timings: dict,
+                 doc_names: frozenset[str] | None = None) -> tuple[list[dict], dict | None]:
         t0 = time.perf_counter()
         route = None
         if cfg.retrieval is None:
@@ -61,7 +62,8 @@ class Answerer:
             chunks = sorted((c for c in idx.chunks if (c["doc_name"], c["page_idx"]) in (gold or set())),
                             key=lambda c: (c["doc_name"], c["page_idx"], c["chunk_id"]))[:ORACLE_MAX_CHUNKS]
         else:
-            res = self.retriever.retrieve(question, cfg.retrieval, request_id=request_id)
+            extra = {} if doc_names is None else {"doc_names": doc_names}  # default path unchanged
+            res = self.retriever.retrieve(question, cfg.retrieval, request_id=request_id, **extra)
             chunks = [h.chunk for h in res.hits][:cfg.context_k]
             timings.update({f"retrieval_{k}": v for k, v in res.timings_ms.items()})
             if res.route is not None:
@@ -93,12 +95,12 @@ class Answerer:
         return reply.content
 
     def answer(self, question: str, cfg: AnswerConfig, gold: set[tuple[str, int]] | None = None,
-               request_id: str | None = None) -> dict:
+               request_id: str | None = None, doc_names: frozenset[str] | None = None) -> dict:
         rid = request_id or GatewayClient.new_request_id()
         timings: dict[str, float] = {}
         usage = {"prompt_tokens": 0, "completion_tokens": 0, "llm_calls": 0, "llm_ms": 0, "cache_hits": 0}
         start = time.perf_counter()
-        sources, route = self._sources(question, cfg, gold, rid, timings)
+        sources, route = self._sources(question, cfg, gold, rid, timings, doc_names)
         support = self._support(question, sources, rid, timings)
         mode = cfg.mode if cfg.mode != "auto" else ("extract" if classify.is_numeric(question) else "grounded")
         record = {"question": question, "config": cfg.name, "mode": mode, "request_id": rid, "route": route,

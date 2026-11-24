@@ -97,7 +97,10 @@ class Retriever:
             self._docs = corpus.corpus_docs()
         return self._docs
 
-    def retrieve(self, question: str, cfg: RetrievalConfig, request_id: str | None = None) -> RetrievalResult:
+    def retrieve(self, question: str, cfg: RetrievalConfig, request_id: str | None = None,
+                 doc_names: frozenset[str] | None = None) -> RetrievalResult:
+        """doc_names, when given, is an explicit document filter that replaces metadata routing
+        (used by the MCP tools' company / fiscal_year arguments). None keeps the evaluated behavior."""
         timings: dict[str, float] = {}
         start = time.perf_counter()
 
@@ -108,7 +111,10 @@ class Retriever:
 
         idx = chunk_index(cfg.strategy)
         t = time.perf_counter()
-        route = routing.route(question, self.docs) if cfg.routing else None
+        if doc_names is not None:
+            route = routing.Route(frozenset(), frozenset(doc_names), "explicit_filter")
+        else:
+            route = routing.route(question, self.docs) if cfg.routing else None
         allowed = route.doc_names if route else None
         t = lap("route", t)
 
