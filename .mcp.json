@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "grounded-finrag": {
+      "type": "stdio",
+      "command": "${FINRAG_PYTHON:-python}",
+      "args": ["mcp_server/server.py"],
+      "env": {
+        "GATEWAY_API_KEY": "${GATEWAY_API_KEY}",
+        "GATEWAY_URL": "${GATEWAY_URL:-http://127.0.0.1:8080}",
+        "HF_HOME": "${HF_HOME:-}"
+      }
+    }
+  }
+}
