@@ -52,6 +52,11 @@ gateway:
     - id: rag-service
       key-sha256: ${RAG_SERVICE_KEY_SHA256:3ba18319a2ad80604249578a621bb2eb761c09e23bf7895434dc43dadff51915}
       requests-per-minute: ${RAG_SERVICE_RATE_LIMIT_PER_MINUTE:3000}
+    # The MCP server (mcp_server/) authenticates as its own client, so its calls are rate-limited and
+    # audited separately. No default key: until MCP_SERVER_KEY_SHA256 is set, no key matches.
+    - id: mcp-server
+      key-sha256: ${MCP_SERVER_KEY_SHA256:}
+      requests-per-minute: ${MCP_SERVER_RATE_LIMIT_PER_MINUTE:300}
   providers:
     ollama:
       type: ollama
