@@ -60,4 +60,7 @@ jobs:
           pip install -r model-server/requirements.txt
           # PYSEC-2026-3447 (setuptools, fixed in 83): torch 2.11 requires setuptools<82, and setuptools is
           # build tooling here, not a runtime dependency. Revisit with the next torch upgrade.
-          pip-audit --skip-editable --ignore-vuln PYSEC-2026-3447
+          # GHSA-xmj3-9gf7-h52w (setuptools, fixed in 84.1): same constraint; a Windows-only path escape in
+          # setuptools' legacy wheel-to-egg install, which nothing here uses. Accepted until 2027-01-31,
+          # see model-server/osv-scanner.toml.
+          pip-audit --skip-editable --ignore-vuln PYSEC-2026-3447 --ignore-vuln GHSA-xmj3-9gf7-h52w

@@ -13,3 +13,11 @@ id = "PYSEC-2026-3447"
 ignoreUntil = 2027-01-31T00:00:00Z
 reason = """setuptools, fixed in 83.0.0, but torch 2.11.0 requires setuptools<82. setuptools is packaging
 tooling here, not used at runtime by the model server. Resolved together with the torch upgrade."""
+
+[[IgnoredVulns]]
+id = "GHSA-xmj3-9gf7-h52w"
+ignoreUntil = 2027-01-31T00:00:00Z
+reason = """setuptools, fixed in 84.1.0, but torch 2.11.0 requires setuptools<82 (torch 2.13+ lifts this).
+The flaw is a Windows path escape when setuptools' legacy install_as_egg path installs an attacker-made
+wheel. The model server never installs wheels through setuptools: pip installs pinned packages, and the
+container is Linux. Resolved together with the torch upgrade."""
