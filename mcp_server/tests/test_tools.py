@@ -3,6 +3,7 @@
 import json
 import time
 
+import anyio
 import httpx
 import psycopg
 import pytest
@@ -27,6 +28,7 @@ class FakeBackend:
         self.error = error
         self.delay = delay
         self.calls = []
+        self.list_calls = 0
 
     def _maybe_fail(self):
         if self.delay:
@@ -35,6 +37,9 @@ class FakeBackend:
             raise self.error
 
     def list_filings(self):
+        self.list_calls += 1
+        if self.delay:
+            time.sleep(self.delay)
         return FILINGS
 
     def search(self, query, doc_names, k, request_id):
@@ -170,6 +175,19 @@ async def test_list_filings_and_text_sanitizing():
     res = await call(FakeBackend(hits=[dirty]), "search_filings", {"query": "3M capex"})
     text = res.structured_content["results"][0]["text"]
     assert "\x00" not in text and text.endswith("[truncated]") and len(text) <= srv.MAX_CHUNK_CHARS + 20
+
+
+async def test_parallel_first_calls_fill_the_filings_cache_once():
+    # Regression: Claude Code issued search_filings and answer_question in parallel, both filled the
+    # empty cache, and list_filings then reported every filing twice.
+    backend = FakeBackend(answer={"answer": "x", "abstained": True, "abstain_reason": "weak", "mode": "grounded",
+                                  "citations": []}, delay=0.3)
+    async with Client(srv.build_server(backend)) as client:
+        async with anyio.create_task_group() as tg:
+            tg.start_soon(client.call_tool, "search_filings", {"query": "3M capex", "company": "3M"})
+            tg.start_soon(client.call_tool, "answer_question", {"question": "3M capex?", "company": "3M"})
+        out = (await client.call_tool("list_filings", {})).structured_content
+    assert out["count"] == len(FILINGS) and backend.list_calls == 1
 
 
 def test_backend_requires_api_key_from_environment(monkeypatch):

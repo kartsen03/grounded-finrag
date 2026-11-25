@@ -67,6 +67,7 @@ def _cite(doc: str, page: int) -> str:
 def build_server(backend: Backend) -> MCPServer:
     server = MCPServer("grounded-finrag", instructions=INSTRUCTIONS)
     filings_cache: list[dict] = []
+    filings_lock = anyio.Lock()
 
     async def run(fn, deadline: float):
         try:
@@ -76,8 +77,11 @@ def build_server(backend: Backend) -> MCPServer:
             raise classify(exc) from None
 
     async def filings() -> list[dict]:
-        if not filings_cache:
-            filings_cache.extend(await run(backend.list_filings, LIST_DEADLINE_S))
+        # Clients call tools in parallel (Claude Code does): without the lock, two first calls both
+        # see an empty cache and both fill it, doubling every filing.
+        async with filings_lock:
+            if not filings_cache:
+                filings_cache.extend(await run(backend.list_filings, LIST_DEADLINE_S))
         return filings_cache
 
     async def doc_filter(company: str | None, fiscal_year: int | None) -> tuple[frozenset[str] | None, dict]:
@@ -160,6 +164,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8765)
     args = parser.parse_args(argv)
+    if args.transport == "streamable-http" and args.host not in ("127.0.0.1", "::1", "localhost"):
+        parser.error("the HTTP transport has no authentication of its own, so it binds to loopback only")
     logging.basicConfig(stream=sys.stderr, level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     backend = FinragBackend.from_env()
     # Build the BM25 index and connections in the background so `initialize` answers at once.
