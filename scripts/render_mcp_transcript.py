@@ -15,6 +15,7 @@ import json
 from pathlib import Path
 
 PREVIEW_CHARS = 400
+LIST_PREVIEW = 4
 
 
 def _parse(content) -> object:
@@ -66,6 +67,8 @@ def _short(value):
                 out[k] = _short(v)
         return out
     if isinstance(value, list):
+        if len(value) > LIST_PREVIEW and all(isinstance(v, dict) for v in value):
+            return [_short(v) for v in value[:LIST_PREVIEW]] + [f"... {len(value) - LIST_PREVIEW} more in the JSON transcript"]
         return [_short(v) for v in value]
     return value
 
