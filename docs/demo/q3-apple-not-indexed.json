@@ -1,0 +1,791 @@
+{
+  "question": "Did Apple's revenue grow in fiscal 2022? Use the grounded-finrag tools and show me the evidence passages.",
+  "server_commit": "5345522",
+  "mcp_sdk": "2.3.0",
+  "date": "2026-11-25",
+  "steps": [
+    {
+      "assistant_text": "I'll search the indexed filings for Apple's fiscal 2022 revenue evidence."
+    },
+    {
+      "tool_call": {
+        "id": "toolu_01GAfdF7zAbPvAR3qZb1yQJt",
+        "name": "mcp__grounded-finrag__search_filings",
+        "input": {
+          "query": "Apple total net sales fiscal 2022 compared to fiscal 2021",
+          "company": "Apple",
+          "fiscal_year": 2022,
+          "k": 5
+        }
+      }
+    },
+    {
+      "tool_call": {
+        "id": "toolu_01FkaeBtGAdKAhyZvmpN3tdh",
+        "name": "mcp__grounded-finrag__answer_question",
+        "input": {
+          "question": "Did Apple's revenue grow in fiscal 2022 compared to fiscal 2021?",
+          "company": "Apple"
+        }
+      }
+    },
+    {
+      "tool_result": {
+        "id": "toolu_01GAfdF7zAbPvAR3qZb1yQJt",
+        "is_error": true,
+        "content": "Error executing tool search_filings: {\"error\": {\"code\": \"unknown_company\", \"message\": \"'Apple' does not match an indexed company. Call list_filings for the 32 indexed companies.\", \"retryable\": false}}"
+      }
+    },
+    {
+      "tool_result": {
+        "id": "toolu_01FkaeBtGAdKAhyZvmpN3tdh",
+        "is_error": true,
+        "content": "Error executing tool answer_question: {\"error\": {\"code\": \"unknown_company\", \"message\": \"'Apple' does not match an indexed company. Call list_filings for the 32 indexed companies.\", \"retryable\": false}}"
+      }
+    },
+    {
+      "assistant_text": "Apple didn't match an indexed company name, so I'll check the filings list."
+    },
+    {
+      "tool_call": {
+        "id": "toolu_014QS1whXAXNjj4A8a6uKMkC",
+        "name": "mcp__grounded-finrag__list_filings",
+        "input": {}
+      }
+    },
+    {
+      "tool_result": {
+        "id": "toolu_014QS1whXAXNjj4A8a6uKMkC",
+        "is_error": false,
+        "content": {
+          "count": 84,
+          "companies": [
+            "3M",
+            "AES Corporation",
+            "AMD",
+            "Activision Blizzard",
+            "Adobe",
+            "Amazon",
+            "Amcor",
+            "American Express",
+            "American Water Works",
+            "Best Buy",
+            "Block",
+            "Boeing",
+            "CVS Health",
+            "Coca-Cola",
+            "Corning",
+            "Costco",
+            "Foot Locker",
+            "General Mills",
+            "JPMorgan",
+            "Johnson & Johnson",
+            "Kraft Heinz",
+            "Lockheed Martin",
+            "MGM Resorts",
+            "Microsoft",
+            "Netflix",
+            "Nike",
+            "Paypal",
+            "PepsiCo",
+            "Pfizer",
+            "Ulta Beauty",
+            "Verizon",
+            "Walmart"
+          ],
+          "filings": [
+            {
+              "doc_name": "3M_2018_10K",
+              "company": "3M",
+              "doc_type": "10-K",
+              "fiscal_year": 2018,
+              "fiscal_quarter": null,
+              "chunks": 538
+            },
+            {
+              "doc_name": "3M_2022_10K",
+              "company": "3M",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 808
+            },
+            {
+              "doc_name": "3M_2023Q2_10Q",
+              "company": "3M",
+              "doc_type": "10-Q",
+              "fiscal_year": 2023,
+              "fiscal_quarter": 2,
+              "chunks": 332
+            },
+            {
+              "doc_name": "ACTIVISIONBLIZZARD_2019_10K",
+              "company": "Activision Blizzard",
+              "doc_type": "10-K",
+              "fiscal_year": 2019,
+              "fiscal_quarter": null,
+              "chunks": 547
+            },
+            {
+              "doc_name": "ADOBE_2015_10K",
+              "company": "Adobe",
+              "doc_type": "10-K",
+              "fiscal_year": 2015,
+              "fiscal_quarter": null,
+              "chunks": 567
+            },
+            {
+              "doc_name": "ADOBE_2016_10K",
+              "company": "Adobe",
+              "doc_type": "10-K",
+              "fiscal_year": 2016,
+              "fiscal_quarter": null,
+              "chunks": 360
+            },
+            {
+              "doc_name": "ADOBE_2017_10K",
+              "company": "Adobe",
+              "doc_type": "10-K",
+              "fiscal_year": 2017,
+              "fiscal_quarter": null,
+              "chunks": 344
+            },
+            {
+              "doc_name": "ADOBE_2022_10K",
+              "company": "Adobe",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 303
+            },
+            {
+              "doc_name": "AES_2022_10K",
+              "company": "AES Corporation",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 830
+            },
+            {
+              "doc_name": "AMAZON_2017_10K",
+              "company": "Amazon",
+              "doc_type": "10-K",
+              "fiscal_year": 2017,
+              "fiscal_quarter": null,
+              "chunks": 263
+            },
+            {
+              "doc_name": "AMAZON_2019_10K",
+              "company": "Amazon",
+              "doc_type": "10-K",
+              "fiscal_year": 2019,
+              "fiscal_quarter": null,
+              "chunks": 261
+            },
+            {
+              "doc_name": "AMCOR_2020_10K",
+              "company": "Amcor",
+              "doc_type": "10-K",
+              "fiscal_year": 2020,
+              "fiscal_quarter": null,
+              "chunks": 557
+            },
+            {
+              "doc_name": "AMCOR_2022_8K_dated-2022-07-01",
+              "company": "Amcor",
+              "doc_type": "8-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 25
+            },
+            {
+              "doc_name": "AMCOR_2023_10K",
+              "company": "Amcor",
+              "doc_type": "10-K",
+              "fiscal_year": 2023,
+              "fiscal_quarter": null,
+              "chunks": 429
+            },
+            {
+              "doc_name": "AMCOR_2023Q2_10Q",
+              "company": "Amcor",
+              "doc_type": "10-Q",
+              "fiscal_year": 2023,
+              "fiscal_quarter": 2,
+              "chunks": 131
+            },
+            {
+              "doc_name": "AMCOR_2023Q4_EARNINGS",
+              "company": "Amcor",
+              "doc_type": "Earnings release",
+              "fiscal_year": 2023,
+              "fiscal_quarter": 4,
+              "chunks": 47
+            },
+            {
+              "doc_name": "AMD_2015_10K",
+              "company": "AMD",
+              "doc_type": "10-K",
+              "fiscal_year": 2015,
+              "fiscal_quarter": null,
+              "chunks": 660
+            },
+            {
+              "doc_name": "AMD_2022_10K",
+              "company": "AMD",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 360
+            },
+            {
+              "doc_name": "AMERICANEXPRESS_2022_10K",
+              "company": "American Express",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 730
+            },
+            {
+              "doc_name": "AMERICANWATERWORKS_2020_10K",
+              "company": "American Water Works",
+              "doc_type": "10-K",
+              "fiscal_year": 2020,
+              "fiscal_quarter": null,
+              "chunks": 525
+            },
+            {
+              "doc_name": "AMERICANWATERWORKS_2021_10K",
+              "company": "American Water Works",
+              "doc_type": "10-K",
+              "fiscal_year": 2021,
+              "fiscal_quarter": null,
+              "chunks": 578
+            },
+            {
+              "doc_name": "AMERICANWATERWORKS_2022_10K",
+              "company": "American Water Works",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 874
+            },
+            {
+              "doc_name": "BESTBUY_2017_10K",
+              "company": "Best Buy",
+              "doc_type": "10-K",
+              "fiscal_year": 2017,
+              "fiscal_quarter": null,
+              "chunks": 323
+            },
+            {
+              "doc_name": "BESTBUY_2019_10K",
+              "company": "Best Buy",
+              "doc_type": "10-K",
+              "fiscal_year": 2019,
+              "fiscal_quarter": null,
+              "chunks": 313
+            },
+            {
+              "doc_name": "BESTBUY_2023_10K",
+              "company": "Best Buy",
+              "doc_type": "10-K",
+              "fiscal_year": 2023,
+              "fiscal_quarter": null,
+              "chunks": 253
+            },
+            {
+              "doc_name": "BESTBUY_2024Q2_10Q",
+              "company": "Best Buy",
+              "doc_type": "10-Q",
+              "fiscal_year": 2024,
+              "fiscal_quarter": 2,
+              "chunks": 97
+            },
+            {
+              "doc_name": "BLOCK_2016_10K",
+              "company": "Block",
+              "doc_type": "10-K",
+              "fiscal_year": 2016,
+              "fiscal_quarter": null,
+              "chunks": 355
+            },
+            {
+              "doc_name": "BLOCK_2020_10K",
+              "company": "Block",
+              "doc_type": "10-K",
+              "fiscal_year": 2020,
+              "fiscal_quarter": null,
+              "chunks": 499
+            },
+            {
+              "doc_name": "BOEING_2018_10K",
+              "company": "Boeing",
+              "doc_type": "10-K",
+              "fiscal_year": 2018,
+              "fiscal_quarter": null,
+              "chunks": 354
+            },
+            {
+              "doc_name": "BOEING_2022_10K",
+              "company": "Boeing",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 483
+            },
+            {
+              "doc_name": "COCACOLA_2017_10K",
+              "company": "Coca-Cola",
+              "doc_type": "10-K",
+              "fiscal_year": 2017,
+              "fiscal_quarter": null,
+              "chunks": 623
+            },
+            {
+              "doc_name": "COCACOLA_2021_10K",
+              "company": "Coca-Cola",
+              "doc_type": "10-K",
+              "fiscal_year": 2021,
+              "fiscal_quarter": null,
+              "chunks": 589
+            },
+            {
+              "doc_name": "COCACOLA_2022_10K",
+              "company": "Coca-Cola",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 575
+            },
+            {
+              "doc_name": "CORNING_2020_10K",
+              "company": "Corning",
+              "doc_type": "10-K",
+              "fiscal_year": 2020,
+              "fiscal_quarter": null,
+              "chunks": 374
+            },
+            {
+              "doc_name": "CORNING_2021_10K",
+              "company": "Corning",
+              "doc_type": "10-K",
+              "fiscal_year": 2021,
+              "fiscal_quarter": null,
+              "chunks": 375
+            },
+            {
+              "doc_name": "CORNING_2022_10K",
+              "company": "Corning",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 424
+            },
+            {
+              "doc_name": "COSTCO_2021_10K",
+              "company": "Costco",
+              "doc_type": "10-K",
+              "fiscal_year": 2021,
+              "fiscal_quarter": null,
+              "chunks": 198
+            },
+            {
+              "doc_name": "CVSHEALTH_2018_10K",
+              "company": "CVS Health",
+              "doc_type": "10-K",
+              "fiscal_year": 2018,
+              "fiscal_quarter": null,
+              "chunks": 1209
+            },
+            {
+              "doc_name": "CVSHEALTH_2022_10K",
+              "company": "CVS Health",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 750
+            },
+            {
+              "doc_name": "FOOTLOCKER_2022_8K_dated-2022-05-20",
+              "company": "Foot Locker",
+              "doc_type": "8-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 8
+            },
+            {
+              "doc_name": "FOOTLOCKER_2022_8K_dated_2022-08-19",
+              "company": "Foot Locker",
+              "doc_type": "8-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 74
+            },
+            {
+              "doc_name": "GENERALMILLS_2019_10K",
+              "company": "General Mills",
+              "doc_type": "10-K",
+              "fiscal_year": 2019,
+              "fiscal_quarter": null,
+              "chunks": 416
+            },
+            {
+              "doc_name": "GENERALMILLS_2020_10K",
+              "company": "General Mills",
+              "doc_type": "10-K",
+              "fiscal_year": 2020,
+              "fiscal_quarter": null,
+              "chunks": 411
+            },
+            {
+              "doc_name": "GENERALMILLS_2022_10K",
+              "company": "General Mills",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 384
+            },
+            {
+              "doc_name": "JOHNSON_JOHNSON_2022_10K",
+              "company": "Johnson & Johnson",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 490
+            },
+            {
+              "doc_name": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+              "company": "Johnson & Johnson",
+              "doc_type": "Earnings release",
+              "fiscal_year": 2022,
+              "fiscal_quarter": 4,
+              "chunks": 98
+            },
+            {
+              "doc_name": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-30",
+              "company": "Johnson & Johnson",
+              "doc_type": "8-K",
+              "fiscal_year": 2023,
+              "fiscal_quarter": null,
+              "chunks": 78
+            },
+            {
+              "doc_name": "JOHNSON_JOHNSON_2023Q2_EARNINGS",
+              "company": "Johnson & Johnson",
+              "doc_type": "Earnings release",
+              "fiscal_year": 2023,
+              "fiscal_quarter": 2,
+              "chunks": 105
+            },
+            {
+              "doc_name": "JPMORGAN_2021Q1_10Q",
+              "company": "JPMorgan",
+              "doc_type": "10-Q",
+              "fiscal_year": 2021,
+              "fiscal_quarter": 1,
+              "chunks": 654
+            },
+            {
+              "doc_name": "JPMORGAN_2022_10K",
+              "company": "JPMorgan",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 1436
+            },
+            {
+              "doc_name": "JPMORGAN_2022Q2_10Q",
+              "company": "JPMorgan",
+              "doc_type": "10-Q",
+              "fiscal_year": 2022,
+              "fiscal_quarter": 2,
+              "chunks": 756
+            },
+            {
+              "doc_name": "JPMORGAN_2023Q2_10Q",
+              "company": "JPMorgan",
+              "doc_type": "10-Q",
+              "fiscal_year": 2023,
+              "fiscal_quarter": 2,
+              "chunks": 850
+            },
+            {
+              "doc_name": "KRAFTHEINZ_2019_10K",
+              "company": "Kraft Heinz",
+              "doc_type": "10-K",
+              "fiscal_year": 2019,
+              "fiscal_quarter": null,
+              "chunks": 512
+            },
+            {
+              "doc_name": "LOCKHEEDMARTIN_2020_10K",
+              "company": "Lockheed Martin",
+              "doc_type": "10-K",
+              "fiscal_year": 2020,
+              "fiscal_quarter": null,
+              "chunks": 445
+            },
+            {
+              "doc_name": "LOCKHEEDMARTIN_2021_10K",
+              "company": "Lockheed Martin",
+              "doc_type": "10-K",
+              "fiscal_year": 2021,
+              "fiscal_quarter": null,
+              "chunks": 455
+            },
+            {
+              "doc_name": "LOCKHEEDMARTIN_2022_10K",
+              "company": "Lockheed Martin",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 456
+            },
+            {
+              "doc_name": "MGMRESORTS_2018_10K",
+              "company": "MGM Resorts",
+              "doc_type": "10-K",
+              "fiscal_year": 2018,
+              "fiscal_quarter": null,
+              "chunks": 609
+            },
+            {
+              "doc_name": "MGMRESORTS_2020_10K",
+              "company": "MGM Resorts",
+              "doc_type": "10-K",
+              "fiscal_year": 2020,
+              "fiscal_quarter": null,
+              "chunks": 512
+            },
+            {
+              "doc_name": "MGMRESORTS_2022_10K",
+              "company": "MGM Resorts",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 629
+            },
+            {
+              "doc_name": "MGMRESORTS_2022Q4_EARNINGS",
+              "company": "MGM Resorts",
+              "doc_type": "Earnings release",
+              "fiscal_year": 2022,
+              "fiscal_quarter": 4,
+              "chunks": 51
+            },
+            {
+              "doc_name": "MGMRESORTS_2023Q2_10Q",
+              "company": "MGM Resorts",
+              "doc_type": "10-Q",
+              "fiscal_year": 2023,
+              "fiscal_quarter": 2,
+              "chunks": 184
+            },
+            {
+              "doc_name": "MICROSOFT_2016_10K",
+              "company": "Microsoft",
+              "doc_type": "10-K",
+              "fiscal_year": 2016,
+              "fiscal_quarter": null,
+              "chunks": 352
+            },
+            {
+              "doc_name": "MICROSOFT_2023_10K",
+              "company": "Microsoft",
+              "doc_type": "10-K",
+              "fiscal_year": 2023,
+              "fiscal_quarter": null,
+              "chunks": 312
+            },
+            {
+              "doc_name": "NETFLIX_2015_10K",
+              "company": "Netflix",
+              "doc_type": "10-K",
+              "fiscal_year": 2015,
+              "fiscal_quarter": null,
+              "chunks": 222
+            },
+            {
+              "doc_name": "NETFLIX_2017_10K",
+              "company": "Netflix",
+              "doc_type": "10-K",
+              "fiscal_year": 2017,
+              "fiscal_quarter": null,
+              "chunks": 222
+            },
+            {
+              "doc_name": "NIKE_2018_10K",
+              "company": "Nike",
+              "doc_type": "10-K",
+              "fiscal_year": 2018,
+              "fiscal_quarter": null,
+              "chunks": 344
+            },
+            {
+              "doc_name": "NIKE_2019_10K",
+              "company": "Nike",
+              "doc_type": "10-K",
+              "fiscal_year": 2019,
+              "fiscal_quarter": null,
+              "chunks": 323
+            },
+            {
+              "doc_name": "NIKE_2021_10K",
+              "company": "Nike",
+              "doc_type": "10-K",
+              "fiscal_year": 2021,
+              "fiscal_quarter": null,
+              "chunks": 344
+            },
+            {
+              "doc_name": "NIKE_2023_10K",
+              "company": "Nike",
+              "doc_type": "10-K",
+              "fiscal_year": 2023,
+              "fiscal_quarter": null,
+              "chunks": 334
+            },
+            {
+              "doc_name": "PAYPAL_2022_10K",
+              "company": "Paypal",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 421
+            },
+            {
+              "doc_name": "PEPSICO_2021_10K",
+              "company": "PepsiCo",
+              "doc_type": "10-K",
+              "fiscal_year": 2021,
+              "fiscal_quarter": null,
+              "chunks": 1136
+            },
+            {
+              "doc_name": "PEPSICO_2022_10K",
+              "company": "PepsiCo",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 1137
+            },
+            {
+              "doc_name": "PEPSICO_2023_8K_dated-2023-05-05",
+              "company": "PepsiCo",
+              "doc_type": "8-K",
+              "fiscal_year": 2023,
+              "fiscal_quarter": null,
+              "chunks": 10
+            },
+            {
+              "doc_name": "PEPSICO_2023_8K_dated-2023-05-30",
+              "company": "PepsiCo",
+              "doc_type": "8-K",
+              "fiscal_year": 2023,
+              "fiscal_quarter": null,
+              "chunks": 475
+            },
+            {
+              "doc_name": "PEPSICO_2023Q1_EARNINGS",
+              "company": "PepsiCo",
+              "doc_type": "Earnings release",
+              "fiscal_year": 2023,
+              "fiscal_quarter": 1,
+              "chunks": 44
+            },
+            {
+              "doc_name": "PFIZER_2021_10K",
+              "company": "Pfizer",
+              "doc_type": "10-K",
+              "fiscal_year": 2021,
+              "fiscal_quarter": null,
+              "chunks": 624
+            },
+            {
+              "doc_name": "Pfizer_2023Q2_10Q",
+              "company": "Pfizer",
+              "doc_type": "10-Q",
+              "fiscal_year": 2023,
+              "fiscal_quarter": 2,
+              "chunks": 283
+            },
+            {
+              "doc_name": "ULTABEAUTY_2023_10K",
+              "company": "Ulta Beauty",
+              "doc_type": "10-K",
+              "fiscal_year": 2023,
+              "fiscal_quarter": null,
+              "chunks": 277
+            },
+            {
+              "doc_name": "ULTABEAUTY_2023Q4_EARNINGS",
+              "company": "Ulta Beauty",
+              "doc_type": "Earnings release",
+              "fiscal_year": 2023,
+              "fiscal_quarter": 4,
+              "chunks": 24
+            },
+            {
+              "doc_name": "VERIZON_2021_10K",
+              "company": "Verizon",
+              "doc_type": "10-K",
+              "fiscal_year": 2021,
+              "fiscal_quarter": null,
+              "chunks": 428
+            },
+            {
+              "doc_name": "VERIZON_2022_10K",
+              "company": "Verizon",
+              "doc_type": "10-K",
+              "fiscal_year": 2022,
+              "fiscal_quarter": null,
+              "chunks": 425
+            },
+            {
+              "doc_name": "WALMART_2018_10K",
+              "company": "Walmart",
+              "doc_type": "10-K",
+              "fiscal_year": 2018,
+              "fiscal_quarter": null,
+              "chunks": 835
+            },
+            {
+              "doc_name": "WALMART_2019_10K",
+              "company": "Walmart",
+              "doc_type": "10-K",
+              "fiscal_year": 2019,
+              "fiscal_quarter": null,
+              "chunks": 447
+            },
+            {
+              "doc_name": "WALMART_2020_10K",
+              "company": "Walmart",
+              "doc_type": "10-K",
+              "fiscal_year": 2020,
+              "fiscal_quarter": null,
+              "chunks": 533
+            }
+          ]
+        }
+      }
+    },
+    {
+      "assistant_text": "I can't show evidence passages for this, because Apple isn't in the index. Both tools rejected \"Apple\" as an unknown company. `list_filings` shows 84 filings covering 32 companies, and Apple has no 10-K, 10-Q, 8-K or earnings release among them.\n\nI didn't search without a company filter. That would only return passages from other companies, and none of them could support a claim about Apple.\n\nFrom my own general knowledge, which is not grounded in these tools, Apple's fiscal 2022 net sales rose about 8% over fiscal 2021. I haven't verified that against a filing.\n\nIf you want to stay within the index, here are two options:\n- **Another company:** the index has fiscal 2022 10-Ks for Adobe, AMD, Amazon (2017 and 2019 only), Boeing, Coca-Cola, Corning, Lockheed Martin, PayPal, Verizon and others, so I can run the same revenue-growth check on one of those.\n- **Apple filings:** you could add Apple's fiscal 2022 10-K to the index, and then I could rerun this question."
+    }
+  ],
+  "client": "Claude Code 2.1.218",
+  "model": "claude-sonnet-5-5",
+  "mcp_tools_available": [
+    "mcp__grounded-finrag__answer_question",
+    "mcp__grounded-finrag__list_filings",
+    "mcp__grounded-finrag__search_filings"
+  ],
+  "other_tools_available": [],
+  "outcome": {
+    "subtype": "success",
+    "duration_ms": 17269,
+    "num_turns": 4,
+    "final_text": "I can't show evidence passages for this, because Apple isn't in the index. Both tools rejected \"Apple\" as an unknown company. `list_filings` shows 84 filings covering 32 companies, and Apple has no 10-K, 10-Q, 8-K or earnings release among them.\n\nI didn't search without a company filter. That would only return passages from other companies, and none of them could support a claim about Apple.\n\nFrom my own general knowledge, which is not grounded in these tools, Apple's fiscal 2022 net sales rose about 8% over fiscal 2021. I haven't verified that against a filing.\n\nIf you want to stay within the index, here are two options:\n- **Another company:** the index has fiscal 2022 10-Ks for Adobe, AMD, Amazon (2017 and 2019 only), Boeing, Coca-Cola, Corning, Lockheed Martin, PayPal, Verizon and others, so I can run the same revenue-growth check on one of those.\n- **Apple filings:** you could add Apple's fiscal 2022 10-K to the index, and then I could rerun this question."
+  }
+}

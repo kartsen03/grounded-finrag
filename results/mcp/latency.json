@@ -1,0 +1,486 @@
+{
+  "created_utc": "2026-11-25T00:05:39+00:00",
+  "git": {
+    "commit": "5345522f8570139ecac1a9f514a25c6ec76f5275",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "anyio": "4.15.1",
+    "httpx": "0.28.1"
+  },
+  "step": "mcp-latency",
+  "transport": "stdio",
+  "client": "mcp Python SDK Client (in this script)",
+  "method": "client-side call_tool round trip, sequential calls; p95 by nearest rank",
+  "mcp_server_dirty": false,
+  "wall_seconds": 163.8,
+  "setup_note": "Windows 11 laptop; PostgreSQL 17 + pgvector and Redis in Docker; LLM gateway (Spring Boot, response cache disabled via GATEWAY_CACHE_ENABLED=false, mcp-server client key); model server on CPU (bge-base-en-v1.5 embeddings, bge-reranker-base); Ollama qwen2.5:7b-instruct-q4_K_M on the RTX 3060 Laptop GPU",
+  "cold_first_call": [
+    {
+      "tool": "list_filings",
+      "financebench_id": null,
+      "ms": 10384.5,
+      "is_error": false
+    },
+    {
+      "tool": "search_filings",
+      "financebench_id": "financebench_id_00005",
+      "ms": 194.8,
+      "is_error": false,
+      "status": "ok"
+    },
+    {
+      "tool": "answer_question",
+      "financebench_id": "financebench_id_00005",
+      "ms": 6524.5,
+      "is_error": false,
+      "abstained": true
+    }
+  ],
+  "summary": {
+    "list_filings": {
+      "n": 20,
+      "p50_ms": 16.3,
+      "p95_ms": 25.1,
+      "min_ms": 11.3,
+      "max_ms": 28.1,
+      "mean_ms": 17.8,
+      "errors": 0
+    },
+    "search_filings": {
+      "n": 20,
+      "p50_ms": 133.9,
+      "p95_ms": 163.4,
+      "min_ms": 114.0,
+      "max_ms": 195.7,
+      "mean_ms": 140.1,
+      "errors": 0
+    },
+    "answer_question": {
+      "n": 20,
+      "p50_ms": 6307.7,
+      "p95_ms": 11876.8,
+      "min_ms": 2681.3,
+      "max_ms": 14048.2,
+      "mean_ms": 7082.9,
+      "errors": 0
+    }
+  },
+  "calls": {
+    "list_filings": [
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 19.1,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 16.0,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 16.7,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 15.2,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 15.2,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 15.6,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 15.3,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 15.0,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 14.9,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 15.1,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 17.0,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 11.3,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 25.1,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 28.1,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 18.7,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 20.9,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 19.7,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 16.1,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 16.5,
+        "is_error": false
+      },
+      {
+        "tool": "list_filings",
+        "financebench_id": null,
+        "ms": 23.8,
+        "is_error": false
+      }
+    ],
+    "search_filings": [
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00070",
+        "ms": 195.7,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00222",
+        "ms": 143.7,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00288",
+        "ms": 162.5,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00382",
+        "ms": 131.2,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00394",
+        "ms": 127.7,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00407",
+        "ms": 115.9,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00464",
+        "ms": 118.8,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00476",
+        "ms": 135.1,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00494",
+        "ms": 114.0,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00517",
+        "ms": 163.4,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00521",
+        "ms": 118.7,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00540",
+        "ms": 156.5,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00566",
+        "ms": 116.8,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00591",
+        "ms": 115.9,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00601",
+        "ms": 145.1,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00685",
+        "ms": 160.7,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00705",
+        "ms": 130.2,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00711",
+        "ms": 159.0,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00735",
+        "ms": 158.5,
+        "is_error": false,
+        "status": "ok"
+      },
+      {
+        "tool": "search_filings",
+        "financebench_id": "financebench_id_00746",
+        "ms": 132.7,
+        "is_error": false,
+        "status": "ok"
+      }
+    ],
+    "answer_question": [
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00070",
+        "ms": 7136.5,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00222",
+        "ms": 2681.3,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00288",
+        "ms": 8819.3,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00382",
+        "ms": 6446.8,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00394",
+        "ms": 5587.6,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00407",
+        "ms": 6649.6,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00464",
+        "ms": 8808.7,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00476",
+        "ms": 5413.1,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00494",
+        "ms": 9412.3,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00517",
+        "ms": 4250.9,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00521",
+        "ms": 4420.5,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00540",
+        "ms": 14048.2,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00566",
+        "ms": 6104.3,
+        "is_error": false,
+        "abstained": false
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00591",
+        "ms": 5699.7,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00601",
+        "ms": 3684.9,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00685",
+        "ms": 11876.8,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00705",
+        "ms": 9861.4,
+        "is_error": false,
+        "abstained": false
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00711",
+        "ms": 8926.1,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00735",
+        "ms": 6168.6,
+        "is_error": false,
+        "abstained": true
+      },
+      {
+        "tool": "answer_question",
+        "financebench_id": "financebench_id_00746",
+        "ms": 5662.1,
+        "is_error": false,
+        "abstained": true
+      }
+    ]
+  }
+}

@@ -142,6 +142,100 @@ Reproduce the evaluation: `python -m finrag.eval.retrieval_eval --split dev`, th
 `python -m finrag.eval.answer_runs --split dev` and `python -m finrag.eval.answer_eval ...`
 (see the module docstrings).
 
+## Use it from Claude (MCP server)
+
+`mcp_server/` exposes the pipeline as a [Model Context Protocol](https://modelcontextprotocol.io)
+server built on the official Python SDK (`mcp==2.3.0`), so Claude Code or another MCP client can
+search the filings and get cited answers. It wraps the evaluated pipeline without changing it: the
+same retrieval configuration and the same dev-tuned abstention threshold. On the 20 benchmark
+questions it made the same answer/abstain decision as the evaluated dev run on all 20
+(`results/mcp/parity_dev.json`). Every model call goes through the
+gateway as a separate client (`mcp-server`) with its own key, rate limit and audit-log entries.
+
+| Tool | Arguments | Returns |
+|---|---|---|
+| `search_filings` | `query`, `company`?, `fiscal_year`?, `k` (1–10, default 5) | top evidence chunks, each with a `[document, page]` citation and score; `status: "no_evidence"` when nothing matches |
+| `answer_question` | `question`, `company`? | a cited answer, or `abstained: true` with the reason; numeric answers include the computation |
+| `list_filings` | none | the 84 indexed filings: company, form, fiscal year/quarter, chunk count |
+
+All three are annotated `readOnlyHint: true`, `destructiveHint: false`. Failures come back as MCP
+tool errors with a JSON body `{"error": {"code", "message", "retryable"}}`. The codes are
+`unknown_company`, `no_matching_filings`, `timeout`, `rate_limited` (with the gateway's
+Retry-After), `backend_unavailable`, `database_unavailable`, `gateway_unauthorized`,
+`gateway_error`, `gateway_rejected` and `internal_error`. Details of an internal error go only to
+the server log on stderr. Arguments that break the schema are rejected before the backend runs.
+Deadlines are 45 s for a search, 300 s for an answer and 20 s for the filing list. Gateway HTTP
+calls time out at 150 s, and database statements at 15 s.
+
+**Tests.** There are 22 unit tests through a real in-process MCP client session with the backend
+faked, covering success, abstention, invalid input, timeout, gateway and database errors, and the
+parallel-call regression. CI runs them. Two end-to-end tests run against the real local stack
+when `FINRAG_MCP_E2E=1`, one over stdio and one over streamable HTTP. CI has no model stack, so
+it skips them.
+
+**Setup.** The stack from the quickstart must be running.
+
+```bash
+pip install -e "rag-service[mcp]"
+# The server gets its own gateway key. The gateway stores only the key's SHA-256 hash.
+export GATEWAY_API_KEY="$(python -c 'import secrets; print(secrets.token_urlsafe(32))')"
+export MCP_SERVER_KEY_SHA256="$(python -c 'import hashlib, os; print(hashlib.sha256(os.environ["GATEWAY_API_KEY"].encode()).hexdigest())')"
+# Restart the gateway with MCP_SERVER_KEY_SHA256 in its environment, then from the repo root:
+claude                                   # Claude Code reads .mcp.json and asks you to enable the server
+```
+
+[`.mcp.json`](.mcp.json) starts `python mcp_server/server.py` over stdio and passes
+`${GATEWAY_API_KEY}` through from your shell, so the key is never written to a config file. Set
+`FINRAG_PYTHON` if the interpreter with the `mcp` extra is not the `python` on your PATH.
+`python mcp_server/server.py --transport streamable-http --port 8765` serves the same tools at
+`http://127.0.0.1:8765/mcp`. That endpoint has no authentication of its own, so the server refuses
+to bind it to anything except loopback.
+
+**Demo transcripts** ([docs/demo/](docs/demo/)). Three real questions asked in Claude Code
+2.1.218 with `claude-sonnet-5-5`, with only the three MCP tools available:
+[3M capex](docs/demo/q1-3m-capex.md) answers $1,577 million [3M_2018_10K, p.60].
+[AMD revenue](docs/demo/q2-amd-revenue.md) lists the AMD filings and answers $23,601 million
+[AMD_2022_10K, p.68]. [Apple](docs/demo/q3-apple-not-indexed.md) is not indexed, so both tools
+return `unknown_company` and the model reports that there is no evidence. Claude Code called tools
+in parallel, which exposed a race that doubled the filing list. It was fixed before these runs, and
+[the before-fix run](docs/demo/q3-before-fix.md) is kept.
+
+**Latency per tool** (`results/mcp/latency.json`, commit `5345522`): 20 sequential calls per tool
+from an MCP SDK client over stdio, measured client side from `call_tool` sent to result received.
+The 20 questions are distinct dev-split questions. Setup: gateway cache off, model server on CPU,
+Ollama `qwen2.5:7b-instruct-q4_K_M` on the RTX 3060 Laptop GPU, Turbo power plan, one warm-up call
+per tool excluded.
+
+| Tool | n | p50 | p95 | errors |
+|---|---|---|---|---|
+| `list_filings` (served from the server's cache after the first call) | 20 | 16.3 ms | 25.1 ms | 0 |
+| `search_filings` (embed, hybrid retrieve, re-rank) | 20 | 133.9 ms | 163.4 ms | 0 |
+| `answer_question` (18 of 20 abstained; every call still ran the LLM) | 20 | 6307.7 ms | 11876.8 ms | 0 |
+
+The excluded first calls took 10384.5 ms (`list_filings`, which waits for the BM25 index to build at
+startup), 194.8 ms (`search_filings`) and 6524.5 ms (`answer_question`). Reproduce with
+`GATEWAY_API_KEY=... python mcp_server/bench_latency.py`.
+
+**Security.**
+- *Read-only.* No tool writes to the database, the index or the gateway, and none takes a file
+  path, URL or SQL. The only writes are the gateway's bookkeeping for the server's own calls:
+  audit-log rows, rate-limit counters and, when the cache is on, response-cache entries.
+- *Secrets from the environment.* `GATEWAY_API_KEY` is read once from the environment. It is never
+  logged, returned or written to a config file, and the gateway compares only its hash.
+- *Filing text is untrusted.* Every result carries a `notice` that its text fields are untrusted
+  data. The server instructions tell the client never to follow instructions inside them. The
+  server strips control characters and truncates each chunk to 2,000 characters, but it cannot stop
+  a client model from obeying text it reads. That defense belongs in the client, and it was not
+  red-teamed here.
+
+**Limitations.** One local machine, with laptop latencies. Claude Code (CLI, `-p` mode) is the only
+chat client that was tested. Claude Desktop, ChatGPT and other clients are **untested**. The
+streamable-HTTP transport was tested end to end only with the MCP Python SDK client, so with real
+chat clients it is **untested**. `answer_question` inherits the best configuration's high
+abstention rate. The client model's own prose is not checked: in the Apple transcript it added an
+unverified figure from its own knowledge and said so. There is no deployment, no multi-user
+authentication on the MCP side, and no usage beyond these tests.
+
 ## Repository map
 
 | Path | What |
@@ -152,6 +246,8 @@ Reproduce the evaluation: `python -m finrag.eval.retrieval_eval --split dev`, th
 | `rag-service/src/finrag/eval/` | metrics, ablation, judge, human labels, abstention tuning, reports |
 | `llm-gateway/` | Spring Boot gateway: providers, resilience, rate limit, cache, accounting, audit |
 | `model-server/` | FastAPI host for the BGE embedder and cross-encoder |
+| `mcp_server/` | MCP server: three read-only tools over the pipeline, its tests and latency benchmark |
+| `docs/demo/` | Claude Code transcripts of the MCP tools in use |
 | `results/` | every committed number, with provenance |
 | `data/splits/`, `data/probes/`, `data/labels/` | dev/test IDs, unanswerable probes, hand labels (IDs only) |
 

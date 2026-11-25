@@ -1,0 +1,122 @@
+{
+  "created_utc": "2026-11-25T00:09:34+00:00",
+  "git": {
+    "commit": "232d8f05066f76727f77c5b1214cc4f58041f2eb",
+    "dirty": false
+  },
+  "machine": {
+    "platform": "Windows-10-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 592.00",
+    "power_plan": "Turbo",
+    "python": "3.11.9"
+  },
+  "packages": {},
+  "step": "mcp-parity-dev",
+  "latency_file_commit": "5345522f8570139ecac1a9f514a25c6ec76f5275",
+  "threshold": 0.9873569011688232,
+  "compared": 20,
+  "same_decision": 20,
+  "rows": [
+    {
+      "financebench_id": "financebench_id_00070",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00222",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00288",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00382",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00394",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00407",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00464",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00476",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00494",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00517",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00521",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00540",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00566",
+      "mcp_abstained": false,
+      "evaluated_abstained": false
+    },
+    {
+      "financebench_id": "financebench_id_00591",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00601",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00685",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00705",
+      "mcp_abstained": false,
+      "evaluated_abstained": false
+    },
+    {
+      "financebench_id": "financebench_id_00711",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00735",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    },
+    {
+      "financebench_id": "financebench_id_00746",
+      "mcp_abstained": true,
+      "evaluated_abstained": true
+    }
+  ]
+}
