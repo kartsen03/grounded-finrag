@@ -27,7 +27,7 @@ services:
     networks: [data]
 
   redis:
-    image: redis:7.2.16-alpine@sha256:29e8589c3f9ba699b5f7aa4b3c7733c58852a3626439e619aa0ee78de08c6ca0
+    image: redis:8.0.0-alpine@sha256:0779069b3c24a47a2f681855c1c01d046793e7c5f7d2b079c2aa0652c42eaf0e
     environment:
       REDIS_PASSWORD: ${REDIS_PASSWORD:-finrag-dev}
     command:
